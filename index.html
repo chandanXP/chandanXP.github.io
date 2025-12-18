@@ -309,6 +309,63 @@
             100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         }
 
+        /* --- FLOATING MESSAGES ON HERO (NEW) --- */
+        .hero-msg-bubble {
+            position: absolute;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 10px 15px;
+            max-width: 220px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            z-index: 10;
+            animation: floatBubble 6s ease-in-out infinite;
+            font-size: 0.85rem;
+            pointer-events: none;
+            opacity: 0; /* JS will animate this in */
+        }
+
+        .hero-msg-bubble strong {
+            color: var(--primary);
+            display: block;
+            font-size: 0.75rem;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-msg-bubble p {
+            margin: 0;
+            color: white;
+            line-height: 1.3;
+            font-size: 0.85rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Specific positions for 2 bubbles */
+        .hero-msg-bubble:nth-child(1) {
+            top: 15%;
+            left: -30px;
+            animation-delay: 0s;
+        }
+
+        .hero-msg-bubble:nth-child(2) {
+            bottom: 15%;
+            right: -30px;
+            animation-delay: 3s;
+            border-color: var(--secondary);
+        }
+        .hero-msg-bubble:nth-child(2) strong { color: var(--secondary); }
+
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
         /* --- SECTIONS COMMON --- */
         section { padding: 6rem 0; }
 
@@ -577,7 +634,7 @@
         }
         .link-btn:hover { text-decoration: underline; color: var(--secondary); }
 
-        /* --- DISCUSSION / MESSAGES SECTION (NEW) --- */
+        /* --- DISCUSSION / MESSAGES SECTION --- */
         #discussion {
             background: linear-gradient(to top, var(--dark), var(--darker));
             position: relative;
@@ -750,6 +807,10 @@
 
             h1 { font-size: 2.5rem; }
             .hero-badges-container { justify-content: center; }
+            
+            .hero-msg-bubble { max-width: 150px; font-size: 0.75rem; padding: 8px 12px;}
+            .hero-msg-bubble:nth-child(1) { left: 0; }
+            .hero-msg-bubble:nth-child(2) { right: 0; }
         }
 
         /* Floating UI */
@@ -953,10 +1014,13 @@
                     </div>
                 </div>
                 <div class="hero-image">
+                    <!-- Added fallback image logic -->
                     <img src="assets/img/chandan-saroj.png" 
                          onerror="this.src='https://ui-avatars.com/api/?name=Chandan+Saroj&background=00ff88&color=000&size=400&font-size=0.33'" 
                          alt="Chandan Saroj" 
                          class="profile-photo">
+                    <!-- Dynamic Messages will be inserted here -->
+                    <div id="heroMessages" class="hero-messages-overlay"></div>
                 </div>
             </div>
         </section>
@@ -1343,11 +1407,15 @@
                 const q = query(messagesRef, orderBy("timestamp", "desc"), limit(20));
                 
                 onSnapshot(q, (snapshot) => {
+                    // Update Grid
                     const grid = document.getElementById('messagesGrid');
                     grid.innerHTML = ''; // Clear current
                     
+                    const recent = [];
                     snapshot.forEach((doc) => {
                         const msg = doc.data();
+                        recent.push(msg); // Collect for hero
+                        
                         const card = document.createElement('div');
                         card.className = 'message-card';
                         card.innerHTML = `
@@ -1360,6 +1428,24 @@
 
                     if(snapshot.empty) {
                         grid.innerHTML = '<div style="text-align:center; width:100%; color:var(--text-gray);">No messages yet. Be the first!</div>';
+                    }
+
+                    // Update Hero Bubbles (Top 2)
+                    const heroContainer = document.getElementById('heroMessages');
+                    if(heroContainer) {
+                        heroContainer.innerHTML = '';
+                        // Add fade-in effect to container or bubbles
+                        recent.slice(0, 2).forEach((msg, index) => {
+                            const bubble = document.createElement('div');
+                            bubble.className = 'hero-msg-bubble';
+                            // Stagger animation delay
+                            bubble.style.animationDelay = `${index * 2}s`;
+                            // Add fade-in
+                            gsap.fromTo(bubble, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5, delay: index * 0.2});
+                            
+                            bubble.innerHTML = `<strong>${msg.name || 'Anonymous'}</strong><p>${msg.text}</p>`;
+                            heroContainer.appendChild(bubble);
+                        });
                     }
                 });
             }
