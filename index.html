@@ -1450,23 +1450,61 @@
                     const heroContainer = document.getElementById('heroMessages');
                     if(heroContainer) {
                         heroContainer.innerHTML = '';
-                        
+                        const placedPositions = []; // To track placed bubble positions
+                        const maxAttempts = 50;
+
                         // Register Draggable if available globally
                         if (typeof Draggable !== 'undefined') {
                             gsap.registerPlugin(Draggable);
+                        }
+                        
+                        // Function to get non-overlapping position
+                        function getSmartPosition() {
+                            for(let i=0; i<maxAttempts; i++) {
+                                // Generate random % (extended range to use space around image)
+                                // Container is relative to hero-image, so coordinates are relative to that container.
+                                // We'll assume container is roughly square for simplicity or just use 0-100% logic
+                                
+                                // Random left: -10% to 90%
+                                const left = Math.floor(Math.random() * 100) - 10; 
+                                // Random top: -10% to 90%
+                                const top = Math.floor(Math.random() * 100) - 10; 
+
+                                // Check collision
+                                // Assume bubble takes roughly 30% width, 20% height for collision math
+                                let collision = false;
+                                for(let pos of placedPositions) {
+                                    // Calculate distance centers? or just box overlap
+                                    // Simple box check:
+                                    const hDist = Math.abs(pos.left - left);
+                                    const vDist = Math.abs(pos.top - top);
+                                    
+                                    if (hDist < 35 && vDist < 25) { // Thresholds for overlap
+                                        collision = true;
+                                        break;
+                                    }
+                                }
+
+                                if(!collision) {
+                                    placedPositions.push({left, top});
+                                    return {left, top};
+                                }
+                            }
+                            // Fallback if we can't find a spot
+                            return {
+                                left: Math.floor(Math.random() * 90), 
+                                top: Math.floor(Math.random() * 90)
+                            };
                         }
 
                         recent.slice(0, 9).forEach((msg, index) => {
                             const bubble = document.createElement('div');
                             bubble.className = 'hero-msg-bubble';
                             
-                            // Random positioning logic to scatter them around the container
-                            // Container is relative.
-                            const randomTop = Math.floor(Math.random() * 80) + 10; // 10% to 90%
-                            const randomLeft = Math.floor(Math.random() * 90); // 0% to 90%
+                            const pos = getSmartPosition();
                             
-                            bubble.style.top = `${randomTop}%`;
-                            bubble.style.left = `${randomLeft}%`;
+                            bubble.style.top = `${pos.top}%`;
+                            bubble.style.left = `${pos.left}%`;
                             
                             bubble.innerHTML = `<strong>${msg.name || 'Anonymous'}</strong><p>${msg.text}</p>`;
                             heroContainer.appendChild(bubble);
