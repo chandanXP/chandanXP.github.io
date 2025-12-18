@@ -319,7 +319,7 @@
             100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         }
 
-        /* --- FLOATING MESSAGES ON HERO --- */
+        /* --- FLOATING MESSAGES ON HERO (NEW & DRAGGABLE) --- */
         .hero-msg-bubble {
             position: absolute;
             background: rgba(15, 15, 15, 0.9);
@@ -332,6 +332,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             z-index: 100;
             font-size: 0.8rem;
+            
             cursor: grab;
             user-select: none;
             touch-action: none; 
@@ -1568,7 +1569,10 @@
                 const today = new Date().toISOString().split('T')[0];
                 const viewKey = `viewed_${today}`;
                 if (!sessionStorage.getItem(viewKey)) {
-                    const dailyViewRef = doc(db, "stats", `daily_views/${today}`);
+                    const dailyViewRef = doc(db, "stats", `daily_views/${today}`); // Requires subcollection permission in rules
+                    // Fallback to simpler path if nested collection is issue:
+                    // const dailyViewRef = doc(db, "daily_views", today); 
+                    
                     runTransaction(db, async (transaction) => {
                         const sfDoc = await transaction.get(dailyViewRef);
                         if (!sfDoc.exists()) {
@@ -1604,12 +1608,12 @@
                 labels.push(dateStr.slice(5)); // MM-DD
                 
                 const docRef = doc(db, "stats", `daily_views/${dateStr}`);
-                const docSnap = await getDocs(query(collection(db, "stats"), where("__name__", "==", `daily_views/${dateStr}`))); // This is tricky with sub-path document names in queries, better to getDoc individually or list collection
-                // Simplification: Fetch individually since it's only 7
-                // Better approach: list collection
-                // Actually, just getDoc for specific dates is fine for small range
                 let count = 0;
                 try {
+                    // We need to read the specific document for each date
+                    // Since inside loop, not efficient but okay for 7 items
+                    // Better way: query collection "stats/daily_views" with where date >= 7 days ago
+                    // but for simplicity in this file structure:
                     const snap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m => m.getDoc(docRef));
                     if(snap.exists()) count = snap.data().views;
                 } catch(e) { console.log(e); }
