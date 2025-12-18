@@ -1568,7 +1568,9 @@
                 // 4. Initial View Count Logic (Session Based)
                 const today = new Date().toISOString().split('T')[0];
                 const viewKey = `viewed_${today}`;
-                if (!sessionStorage.getItem(viewKey)) {
+                
+                // --- MODIFIED: REMOVED SESSION CHECK ---
+                // if (!sessionStorage.getItem(viewKey)) { // Removed
                     // Changed Path to simple collection/document: page_views/{date}
                     const dailyViewRef = doc(db, "page_views", today); 
                     
@@ -1582,9 +1584,11 @@
                         }
                     }).then(() => {
                         console.log("View counted!");
-                        sessionStorage.setItem(viewKey, "true");
+                        // sessionStorage.setItem(viewKey, "true"); // Removed
+                    }).catch((error) => {
+                        console.error("View count failed: ", error); // Added error logging
                     });
-                }
+                // } // Removed
                 
                 // 5. Render Chart
                 renderTrafficChart();
