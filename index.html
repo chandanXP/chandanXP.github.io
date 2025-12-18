@@ -25,11 +25,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
+            /* Default Theme: Cyber Green */
             --primary: #00ff88;
             --primary-dim: rgba(0, 255, 136, 0.1);
             --secondary: #00ccff;
@@ -42,6 +43,8 @@
             --border: rgba(255, 255, 255, 0.08);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             --nav-height: 80px;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
         }
 
         * {
@@ -55,14 +58,14 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-main);
             line-height: 1.6;
             background-color: var(--dark);
             color: var(--text-light);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.04) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(0, 204, 255, 0.04) 0%, transparent 25%);
+                radial-gradient(circle at 15% 50%, var(--primary-dim) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 25%);
         }
 
         /* --- TYPOGRAPHY --- */
@@ -113,7 +116,7 @@
         }
 
         .btn:hover::before { width: 100%; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--primary-dim); }
 
         .btn-outline {
             background: transparent;
@@ -223,19 +226,41 @@
             flex: 1.2;
         }
 
+        /* Updated Hero Badge Container */
+        .hero-badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            background: var(--primary-dim);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 3px solid var(--primary);
             padding: 6px 16px;
-            border-radius: 30px;
+            border-radius: 4px;
             color: var(--primary);
             font-weight: 600;
             font-size: 0.85rem;
-            margin-bottom: 1.5rem;
+            transition: var(--transition);
         }
+
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .github-badge-img {
+            height: 26px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .github-badge-img:hover { transform: translateY(-2px); }
 
         .hero-title {
             margin-bottom: 1.5rem;
@@ -272,8 +297,8 @@
             aspect-ratio: 1/1;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             object-fit: cover;
-            border: 2px solid rgba(0, 255, 136, 0.5);
-            box-shadow: 0 0 60px rgba(0, 255, 136, 0.15);
+            border: 2px solid var(--primary-dim);
+            box-shadow: 0 0 60px var(--primary-dim);
             animation: morph 8s ease-in-out infinite;
             background: #111;
         }
@@ -377,7 +402,7 @@
         .skill-card:hover {
             border-color: var(--primary);
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+            box-shadow: 0 5px 15px var(--primary-dim);
         }
 
         .skill-icon {
@@ -486,7 +511,7 @@
         .project-card.featured {
             grid-column: span 1; /* Default mobile */
             border-color: var(--primary);
-            background: linear-gradient(160deg, rgba(0, 255, 136, 0.05) 0%, rgba(10,10,10,0.8) 100%);
+            background: linear-gradient(160deg, var(--primary-dim) 0%, rgba(10,10,10,0.8) 100%);
         }
         
         @media (min-width: 992px) {
@@ -590,7 +615,7 @@
         input:focus, textarea:focus {
             border-color: var(--primary);
             background: rgba(0, 255, 136, 0.02);
-            box-shadow: 0 0 10px rgba(0,255,136,0.1);
+            box-shadow: 0 0 10px var(--primary-dim);
         }
 
         textarea { min-height: 140px; resize: vertical; }
@@ -658,6 +683,7 @@
             .left .timeline-content li::before { content: '▹'; color: var(--primary); position: absolute; left: -15px; }
 
             h1 { font-size: 2.5rem; }
+            .hero-badges-container { justify-content: center; }
         }
 
         /* Floating UI */
@@ -687,6 +713,83 @@
         }
         .btn-wa { background: #25D366; color: white; }
         .btn-mail { background: var(--primary); color: var(--dark); }
+
+        /* --- THEME SWITCHER (NEW) --- */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 100px; right: 0;
+            width: 45px; height: 45px;
+            background: var(--card-bg);
+            border-radius: 8px 0 0 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            border: 1px solid var(--border);
+            border-right: none;
+            color: var(--primary);
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+        .theme-toggle-btn:hover { background: var(--darker); }
+
+        .theme-panel {
+            position: fixed;
+            top: 100px; right: -300px;
+            width: 280px;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 0 0 0 12px;
+            border: 1px solid var(--border);
+            border-right: none;
+            z-index: 998;
+            padding: 1.5rem;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .theme-panel.active { right: 0; }
+
+        .theme-section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            margin-bottom: 0.8rem;
+            margin-top: 1.2rem;
+            display: block;
+        }
+        .theme-section-title:first-child { margin-top: 0; }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-circle {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: transform 0.2s;
+        }
+        .color-circle:hover { transform: scale(1.1); }
+        .color-circle.active { border-color: white; transform: scale(1.15); }
+
+        .font-options {
+            display: flex;
+            gap: 10px;
+        }
+        .font-btn {
+            flex: 1;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        .font-btn.active { background: var(--primary); color: var(--dark); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -718,9 +821,25 @@
         <section id="home">
             <div class="container hero-wrapper">
                 <div class="hero-content">
-                    <div class="hero-badge">
-                        <i class="fas fa-trophy"></i> National Hackathon Winner
+                    
+                    <!-- Updated Badges Area -->
+                    <div class="hero-badges-container">
+                        <div class="hero-badge">
+                            <i class="fas fa-trophy"></i> National Hackathon Winner
+                        </div>
+                        
+                        <!-- GitHub Badges -->
+                        <a href="https://github.com/chandanXP" target="_blank">
+                            <img src="https://img.shields.io/github/followers/chandanXP?style=social" alt="GitHub Followers" class="github-badge-img">
+                        </a>
+                        <a href="https://github.com/chandanXP" target="_blank">
+                            <img src="https://img.shields.io/github/stars/chandanXP?style=social" alt="GitHub Stars" class="github-badge-img">
+                        </a>
+                        <div class="hero-badge" style="border-left-color: var(--secondary);">
+                            <i class="fas fa-book"></i> Springer Author
+                        </div>
                     </div>
+
                     <h1 class="hero-title">Software <span class="text-gradient">Development</span> Engineer</h1>
                     <p class="hero-description">
                         Hi, I'm Chandan. I architect scalable systems and build AI-driven solutions. With 2+ years of experience in the MERN stack and .NET, I bridge the gap between complex ML models and production-ready applications.
@@ -1009,6 +1128,41 @@
         </div>
     </div>
 
+    <!-- Theme Switcher UI -->
+    <div class="theme-toggle-btn" id="themeToggleBtn">
+        <i class="fas fa-palette"></i>
+    </div>
+    
+    <div class="theme-panel" id="themePanel">
+        <h4 style="color:white; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;">
+            Theme Settings 
+            <i class="fas fa-times" id="closeThemePanel" style="cursor:pointer; font-size:0.9rem;"></i>
+        </h4>
+        
+        <span class="theme-section-title">Major Color (Primary)</span>
+        <div class="color-options" id="primaryColors">
+            <div class="color-circle active" style="background: #00ff88;" data-color="#00ff88"></div>
+            <div class="color-circle" style="background: #ff0055;" data-color="#ff0055"></div>
+            <div class="color-circle" style="background: #0077ff;" data-color="#0077ff"></div>
+            <div class="color-circle" style="background: #bf00ff;" data-color="#bf00ff"></div>
+            <div class="color-circle" style="background: #ffcc00;" data-color="#ffcc00"></div>
+        </div>
+
+        <span class="theme-section-title">Middle Color (Secondary)</span>
+        <div class="color-options" id="secondaryColors">
+            <div class="color-circle" style="background: #00ccff;" data-color="#00ccff"></div>
+            <div class="color-circle active" style="background: #ff5f00;" data-color="#ff5f00"></div>
+            <div class="color-circle" style="background: #00ffaa;" data-color="#00ffaa"></div>
+            <div class="color-circle" style="background: #ff00cc;" data-color="#ff00cc"></div>
+        </div>
+
+        <span class="theme-section-title">Font Style</span>
+        <div class="font-options">
+            <div class="font-btn active" data-font="'Inter', sans-serif">Modern</div>
+            <div class="font-btn" data-font="'Fira Code', monospace">Coder</div>
+        </div>
+    </div>
+
     <script>
         // --- Mobile Menu ---
         const menuToggle = document.getElementById('mobile-menu');
@@ -1057,6 +1211,47 @@
         waBtn.onclick = () => modal.style.display = "flex";
         closeBtn.onclick = () => modal.style.display = "none";
         window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
+
+        // --- Theme Switcher Logic ---
+        const themeBtn = document.getElementById('themeToggleBtn');
+        const themePanel = document.getElementById('themePanel');
+        const closeThemeBtn = document.getElementById('closeThemePanel');
+        const root = document.documentElement;
+
+        themeBtn.onclick = () => themePanel.classList.toggle('active');
+        closeThemeBtn.onclick = () => themePanel.classList.remove('active');
+
+        // Primary Color
+        document.querySelectorAll('#primaryColors .color-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                // Update active state
+                document.querySelectorAll('#primaryColors .color-circle').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Set CSS Variable
+                const color = this.getAttribute('data-color');
+                root.style.setProperty('--primary', color);
+                root.style.setProperty('--primary-dim', color + '1A'); // 10% opacity
+            });
+        });
+
+        // Secondary Color
+        document.querySelectorAll('#secondaryColors .color-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                document.querySelectorAll('#secondaryColors .color-circle').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                root.style.setProperty('--secondary', this.getAttribute('data-color'));
+            });
+        });
+
+        // Font Style
+        document.querySelectorAll('.font-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                root.style.setProperty('--font-main', this.getAttribute('data-font'));
+            });
+        });
 
         // --- Form Logic ---
         document.getElementById("contactForm").addEventListener("submit", function (e) {
