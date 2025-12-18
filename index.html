@@ -1441,7 +1441,7 @@
         // Import Firebase SDKs from Google's CDN (using stable version 11.6.1)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        import { getFirestore, doc, setDoc, addDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, getDocs, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, addDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, getDocs, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         // Firebase Configuration (From User)
@@ -1569,9 +1569,8 @@
                 const today = new Date().toISOString().split('T')[0];
                 const viewKey = `viewed_${today}`;
                 if (!sessionStorage.getItem(viewKey)) {
-                    const dailyViewRef = doc(db, "stats", `daily_views/${today}`); // Requires subcollection permission in rules
-                    // Fallback to simpler path if nested collection is issue:
-                    // const dailyViewRef = doc(db, "daily_views", today); 
+                    // Changed Path to simple collection/document: page_views/{date}
+                    const dailyViewRef = doc(db, "page_views", today); 
                     
                     runTransaction(db, async (transaction) => {
                         const sfDoc = await transaction.get(dailyViewRef);
@@ -1607,14 +1606,11 @@
                 const dateStr = d.toISOString().split('T')[0];
                 labels.push(dateStr.slice(5)); // MM-DD
                 
-                const docRef = doc(db, "stats", `daily_views/${dateStr}`);
+                // Adjusted path to match new structure
+                const docRef = doc(db, "page_views", dateStr);
                 let count = 0;
                 try {
-                    // We need to read the specific document for each date
-                    // Since inside loop, not efficient but okay for 7 items
-                    // Better way: query collection "stats/daily_views" with where date >= 7 days ago
-                    // but for simplicity in this file structure:
-                    const snap = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(m => m.getDoc(docRef));
+                    const snap = await getDoc(docRef);
                     if(snap.exists()) count = snap.data().views;
                 } catch(e) { console.log(e); }
                 dataPoints.push(count);
