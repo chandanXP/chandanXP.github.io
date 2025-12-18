@@ -1194,6 +1194,7 @@
     <script type="module">
         // Import Firebase SDKs from Google's CDN
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
@@ -1210,6 +1211,7 @@
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
@@ -1275,7 +1277,12 @@
 
         // --- Save to Cloud ---
         saveBtn.addEventListener('click', async () => {
-            if (!currentUser) return; // Guard clause
+            // Guard: Must be logged in (even anonymously)
+            if (!currentUser) {
+                saveBtn.innerText = "Auth Wait...";
+                setTimeout(() => saveBtn.innerText = "Save to Cloud", 1500);
+                return; 
+            }
 
             const originalText = saveBtn.innerText;
             saveBtn.innerText = "Saving...";
@@ -1287,6 +1294,8 @@
                 saveBtn.style.background = "#25D366";
             } catch (error) {
                 console.error("Error saving theme: ", error);
+                // Alert the user if the write failed (likely permissions)
+                alert("Save Failed: " + error.message + ". Check if Firestore rules allow write.");
                 saveBtn.innerText = "Error!";
                 saveBtn.style.background = "#ff0055";
             }
