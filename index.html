@@ -332,7 +332,7 @@
             display: inline-block;
         }
 
-        /* --- ACHIEVEMENTS SECTION (NEW) --- */
+        /* --- ACHIEVEMENTS SECTION --- */
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -492,7 +492,6 @@
             list-style-type: none;
             position: relative;
         }
-        /* Custom bullet points */
         .right .timeline-content li::before {
             content: '▹'; color: var(--primary); position: absolute; left: -15px;
         }
@@ -507,7 +506,6 @@
             gap: 2rem;
         }
 
-        /* Featured Project Style */
         .project-card.featured {
             grid-column: span 1; /* Default mobile */
             border-color: var(--primary);
@@ -578,6 +576,74 @@
             gap: 5px;
         }
         .link-btn:hover { text-decoration: underline; color: var(--secondary); }
+
+        /* --- DISCUSSION / MESSAGES SECTION (NEW) --- */
+        #discussion {
+            background: linear-gradient(to top, var(--dark), var(--darker));
+            position: relative;
+        }
+
+        .discussion-input-wrapper {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .discussion-form-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .discussion-form-card input, 
+        .discussion-form-card textarea {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 0.8rem;
+        }
+
+        .discussion-form-card button {
+            width: 100%;
+        }
+
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .message-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px 12px 12px 0; /* Chat bubble look */
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .message-card strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            text-align: right;
+            display: block;
+        }
 
         /* --- CONTACT & FOOTER --- */
         #contact {
@@ -832,6 +898,7 @@
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#skills">Skills</a></li>
+                    <li><a href="#discussion">Chat</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -886,7 +953,6 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- Added fallback image logic -->
                     <img src="assets/img/chandan-saroj.png" 
                          onerror="this.src='https://ui-avatars.com/api/?name=Chandan+Saroj&background=00ff88&color=000&size=400&font-size=0.33'" 
                          alt="Chandan Saroj" 
@@ -895,7 +961,7 @@
             </div>
         </section>
 
-        <!-- Achievements Section (NEW) -->
+        <!-- Achievements Section -->
         <section id="achievements">
             <div class="container">
                 <div class="section-header">
@@ -1095,6 +1161,29 @@
             </div>
         </section>
 
+        <!-- NEW DISCUSSION SECTION -->
+        <section id="discussion">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Community</span>
+                    <h2 class="section-title">Wall of Thoughts</h2>
+                    <p>Drop a roast, a question, or just say hi. Be nice (or funny)!</p>
+                </div>
+                
+                <div class="discussion-input-wrapper">
+                    <div class="discussion-form-card">
+                        <input type="text" id="msgName" placeholder="Your Name (Optional)" maxlength="30">
+                        <textarea id="msgText" placeholder="Type your message here..." maxlength="280"></textarea>
+                        <button id="postMsgBtn" class="btn">Post Message</button>
+                    </div>
+                </div>
+
+                <div class="messages-grid" id="messagesGrid">
+                    <div style="text-align:center; width:100%; color:var(--text-gray);">Loading messages...</div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <footer id="contact">
             <div class="container footer-wrapper">
@@ -1195,7 +1284,7 @@
         // Import Firebase SDKs from Google's CDN (using stable version 11.6.1)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, addDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         // Firebase Configuration (From User)
@@ -1232,15 +1321,14 @@
             console.log("Signed in anonymously");
         }).catch((error) => {
             console.error("Auth Error", error);
-            // Optional: fallback logic could go here
         });
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                // Once authenticated, start listening to the global theme
-                const themeDocRef = doc(db, "website_state", "global_theme");
                 
+                // 1. Listen to Global Theme
+                const themeDocRef = doc(db, "website_state", "global_theme");
                 onSnapshot(themeDocRef, (doc) => {
                     if (doc.exists()) {
                         const remoteTheme = doc.data();
@@ -1249,8 +1337,71 @@
                         updateUI(currentTheme);
                     }
                 });
+
+                // 2. Listen to Messages (New Section)
+                const messagesRef = collection(db, "messages");
+                const q = query(messagesRef, orderBy("timestamp", "desc"), limit(20));
+                
+                onSnapshot(q, (snapshot) => {
+                    const grid = document.getElementById('messagesGrid');
+                    grid.innerHTML = ''; // Clear current
+                    
+                    snapshot.forEach((doc) => {
+                        const msg = doc.data();
+                        const card = document.createElement('div');
+                        card.className = 'message-card';
+                        card.innerHTML = `
+                            <strong>${msg.name || 'Anonymous'}</strong>
+                            <p>${msg.text}</p>
+                            <span class="message-time">${msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleDateString() : 'Just now'}</span>
+                        `;
+                        grid.appendChild(card);
+                    });
+
+                    if(snapshot.empty) {
+                        grid.innerHTML = '<div style="text-align:center; width:100%; color:var(--text-gray);">No messages yet. Be the first!</div>';
+                    }
+                });
             }
         });
+
+        // --- Posting Logic (New) ---
+        const postMsgBtn = document.getElementById('postMsgBtn');
+        const msgNameInput = document.getElementById('msgName');
+        const msgTextInput = document.getElementById('msgText');
+
+        postMsgBtn.addEventListener('click', async () => {
+            if(!currentUser) { alert("Connecting to server... try again in a sec."); return; }
+            const text = msgTextInput.value.trim();
+            const name = msgNameInput.value.trim();
+
+            if(!text) { alert("Please type a message!"); return; }
+
+            const originalText = postMsgBtn.innerText;
+            postMsgBtn.innerText = "Posting...";
+            postMsgBtn.disabled = true;
+
+            try {
+                await addDoc(collection(db, "messages"), {
+                    name: name || "Anonymous",
+                    text: text,
+                    timestamp: serverTimestamp()
+                });
+                msgTextInput.value = '';
+                postMsgBtn.innerText = "Posted!";
+                postMsgBtn.style.background = "#25D366";
+            } catch(e) {
+                console.error(e);
+                alert("Failed to post. Check Database Rules!");
+            }
+
+            setTimeout(() => {
+                postMsgBtn.innerText = originalText;
+                postMsgBtn.disabled = false;
+                postMsgBtn.style.background = "";
+            }, 2000);
+        });
+
 
         // Apply theme to CSS variables
         function applyTheme(theme) {
