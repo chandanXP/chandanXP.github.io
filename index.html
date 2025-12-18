@@ -790,6 +790,28 @@
             transition: var(--transition);
         }
         .font-btn.active { background: var(--primary); color: var(--dark); font-weight: 600; }
+
+        .theme-actions {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+        }
+        .theme-action-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-save { background: var(--primary); color: var(--dark); }
+        .btn-save:hover { background: var(--secondary); }
+        .btn-reset { background: rgba(255,255,255,0.1); color: var(--text-light); }
+        .btn-reset:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
@@ -1161,33 +1183,195 @@
             <div class="font-btn active" data-font="'Inter', sans-serif">Modern</div>
             <div class="font-btn" data-font="'Fira Code', monospace">Coder</div>
         </div>
+
+        <div class="theme-actions">
+            <button class="theme-action-btn btn-save" id="saveThemeBtn">Save to Cloud</button>
+            <button class="theme-action-btn btn-reset" id="resetThemeBtn">Reset</button>
+        </div>
     </div>
 
-    <script>
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase SDKs from Google's CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // Firebase Configuration (From User)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDnSz2NJQZovT3WKjyak9IcVlfYbQBmlVM",
+            authDomain: "chandan-saroj-portfolio.firebaseapp.com",
+            projectId: "chandan-saroj-portfolio",
+            storageBucket: "chandan-saroj-portfolio.firebasestorage.app",
+            messagingSenderId: "673240575610",
+            appId: "1:673240575610:web:c199ae38e28a41c33715c3",
+            measurementId: "G-WVQXG2QM1T"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // --- Auth & State Logic ---
+        const root = document.documentElement;
+        const saveBtn = document.getElementById('saveThemeBtn');
+        const resetBtn = document.getElementById('resetThemeBtn');
+        
+        let currentUser = null;
+        let currentTheme = {
+            primary: '#00ff88',
+            secondary: '#00ccff',
+            font: "'Inter', sans-serif"
+        };
+
+        // Authenticate Anonymously (Best practice even for open data)
+        signInAnonymously(auth).then(() => {
+            console.log("Signed in anonymously");
+        }).catch((error) => {
+            console.error("Auth Error", error);
+        });
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                // Once authenticated, start listening to the global theme
+                const themeDocRef = doc(db, "website_state", "global_theme");
+                
+                onSnapshot(themeDocRef, (doc) => {
+                    if (doc.exists()) {
+                        const remoteTheme = doc.data();
+                        currentTheme = remoteTheme;
+                        applyTheme(currentTheme);
+                        updateUI(currentTheme);
+                    }
+                });
+            }
+        });
+
+        // Apply theme to CSS variables
+        function applyTheme(theme) {
+            root.style.setProperty('--primary', theme.primary);
+            root.style.setProperty('--primary-dim', theme.primary + '1A');
+            root.style.setProperty('--secondary', theme.secondary);
+            root.style.setProperty('--font-main', theme.font);
+        }
+
+        // Update UI (Active States)
+        function updateUI(theme) {
+            document.querySelectorAll('#primaryColors .color-circle').forEach(c => {
+                c.classList.toggle('active', c.getAttribute('data-color') === theme.primary);
+            });
+            document.querySelectorAll('#secondaryColors .color-circle').forEach(c => {
+                c.classList.toggle('active', c.getAttribute('data-color') === theme.secondary);
+            });
+            document.querySelectorAll('.font-btn').forEach(b => {
+                // Approximate match handling for fonts with quotes
+                const btnFont = b.getAttribute('data-font').replace(/'/g, "");
+                const currentFont = theme.font.replace(/'/g, "");
+                b.classList.toggle('active', btnFont === currentFont);
+            });
+        }
+
+        // --- Save to Cloud ---
+        saveBtn.addEventListener('click', async () => {
+            if (!currentUser) return; // Guard clause
+
+            const originalText = saveBtn.innerText;
+            saveBtn.innerText = "Saving...";
+            
+            try {
+                // Write to: website_state/global_theme
+                await setDoc(doc(db, "website_state", "global_theme"), currentTheme);
+                saveBtn.innerText = "Saved Global!";
+                saveBtn.style.background = "#25D366";
+            } catch (error) {
+                console.error("Error saving theme: ", error);
+                saveBtn.innerText = "Error!";
+                saveBtn.style.background = "#ff0055";
+            }
+
+            setTimeout(() => {
+                saveBtn.innerText = originalText;
+                saveBtn.style.background = "";
+            }, 2000);
+        });
+
+        // --- Reset (Sets cloud to default) ---
+        resetBtn.addEventListener('click', async () => {
+            if (!currentUser) return;
+
+            const defaultTheme = {
+                primary: '#00ff88',
+                secondary: '#00ccff',
+                font: "'Inter', sans-serif"
+            };
+            await setDoc(doc(db, "website_state", "global_theme"), defaultTheme);
+        });
+
+        // --- UI Interactions (Local Previews) ---
+        // Theme Panel Toggle
+        const themeBtn = document.getElementById('themeToggleBtn');
+        const themePanel = document.getElementById('themePanel');
+        const closeThemeBtn = document.getElementById('closeThemePanel');
+
+        if(themeBtn) themeBtn.onclick = () => themePanel.classList.toggle('active');
+        if(closeThemeBtn) closeThemeBtn.onclick = () => themePanel.classList.remove('active');
+
+        // Color Click Handlers
+        document.querySelectorAll('#primaryColors .color-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                currentTheme.primary = color;
+                applyTheme(currentTheme);
+                updateUI(currentTheme);
+            });
+        });
+
+        document.querySelectorAll('#secondaryColors .color-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                currentTheme.secondary = color;
+                applyTheme(currentTheme);
+                updateUI(currentTheme);
+            });
+        });
+
+        document.querySelectorAll('.font-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const font = this.getAttribute('data-font');
+                currentTheme.font = font;
+                applyTheme(currentTheme);
+                updateUI(currentTheme);
+            });
+        });
+
         // --- Mobile Menu ---
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.navbar-menu');
         const navLinks = document.querySelectorAll('.navbar-menu a');
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.innerHTML = navMenu.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        if(menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
             });
-        });
+        }
+
+        if(navLinks) {
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
 
         // --- Animations ---
         gsap.registerPlugin(ScrollTrigger);
-
         gsap.from("#header", { y: -100, duration: 1, ease: "power4.out" });
-        
         const tl = gsap.timeline();
         tl.from(".hero-content > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" })
           .from(".hero-image", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6");
@@ -1208,73 +1392,32 @@
         const waBtn = document.getElementById('whatsappBtn');
         const closeBtn = document.getElementById('closeModal');
 
-        waBtn.onclick = () => modal.style.display = "flex";
-        closeBtn.onclick = () => modal.style.display = "none";
+        if(waBtn) waBtn.onclick = () => modal.style.display = "flex";
+        if(closeBtn) closeBtn.onclick = () => modal.style.display = "none";
         window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
 
-        // --- Theme Switcher Logic ---
-        const themeBtn = document.getElementById('themeToggleBtn');
-        const themePanel = document.getElementById('themePanel');
-        const closeThemeBtn = document.getElementById('closeThemePanel');
-        const root = document.documentElement;
-
-        themeBtn.onclick = () => themePanel.classList.toggle('active');
-        closeThemeBtn.onclick = () => themePanel.classList.remove('active');
-
-        // Primary Color
-        document.querySelectorAll('#primaryColors .color-circle').forEach(circle => {
-            circle.addEventListener('click', function() {
-                // Update active state
-                document.querySelectorAll('#primaryColors .color-circle').forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Set CSS Variable
-                const color = this.getAttribute('data-color');
-                root.style.setProperty('--primary', color);
-                root.style.setProperty('--primary-dim', color + '1A'); // 10% opacity
-            });
-        });
-
-        // Secondary Color
-        document.querySelectorAll('#secondaryColors .color-circle').forEach(circle => {
-            circle.addEventListener('click', function() {
-                document.querySelectorAll('#secondaryColors .color-circle').forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-                root.style.setProperty('--secondary', this.getAttribute('data-color'));
-            });
-        });
-
-        // Font Style
-        document.querySelectorAll('.font-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                root.style.setProperty('--font-main', this.getAttribute('data-font'));
-            });
-        });
-
         // --- Form Logic ---
-        document.getElementById("contactForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            const originalText = btn.innerText;
-            
-            btn.innerText = "Sending...";
-            
-            setTimeout(() => {
-                const name = this.querySelector('[name="name"]').value;
-                const message = this.querySelector('[name="message"]').value;
-                window.open(`https://wa.me/919315632708?text=Hi Chandan, I am ${name}. ${message}`, '_blank');
-                
-                btn.innerText = "Sent!";
-                btn.style.background = "#25D366";
+        const contactForm = document.getElementById("contactForm");
+        if(contactForm) {
+            contactForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const btn = this.querySelector('button');
+                const originalText = btn.innerText;
+                btn.innerText = "Sending...";
                 setTimeout(() => {
-                    this.reset();
-                    btn.innerText = originalText;
-                    btn.style.background = "";
-                }, 3000);
-            }, 1000);
-        });
+                    const name = this.querySelector('[name="name"]').value;
+                    const message = this.querySelector('[name="message"]').value;
+                    window.open(`https://wa.me/919315632708?text=Hi Chandan, I am ${name}. ${message}`, '_blank');
+                    btn.innerText = "Sent!";
+                    btn.style.background = "#25D366";
+                    setTimeout(() => {
+                        this.reset();
+                        btn.innerText = originalText;
+                        btn.style.background = "";
+                    }, 3000);
+                }, 1000);
+            });
+        }
     </script>
 </body>
 </html>
