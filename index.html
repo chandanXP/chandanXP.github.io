@@ -1192,7 +1192,7 @@
 
     <!-- Firebase SDKs -->
     <script type="module">
-        // Import Firebase SDKs from Google's CDN
+        // Import Firebase SDKs from Google's CDN (using stable version 11.6.1)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -1232,6 +1232,7 @@
             console.log("Signed in anonymously");
         }).catch((error) => {
             console.error("Auth Error", error);
+            // Optional: fallback logic could go here
         });
 
         onAuthStateChanged(auth, (user) => {
@@ -1295,7 +1296,7 @@
             } catch (error) {
                 console.error("Error saving theme: ", error);
                 // Alert the user if the write failed (likely permissions)
-                alert("Save Failed: " + error.message + ". Check if Firestore rules allow write.");
+                alert("Save Failed: " + error.message + "\nCheck if: \n1. Firestore is created in Console.\n2. Anonymous Auth is ENABLED.\n3. Rules allow write.");
                 saveBtn.innerText = "Error!";
                 saveBtn.style.background = "#ff0055";
             }
