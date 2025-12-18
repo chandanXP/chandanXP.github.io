@@ -27,8 +27,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Updated Fonts: Added Rubik Glitch for Cybertron Mode -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Orbitron:wght@400;500;700;900&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <!-- Updated Fonts: Added Rubik Glitch (Cybertron), Noto Sans JP (Japanese), Zen Tokyo Zoo (Anime Title) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Orbitron:wght@400;500;700;900&family=Rubik+Glitch&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 
     <style>
         /* --- RESET & VARIABLES --- */
@@ -300,6 +300,10 @@
             aspect-ratio: 1/1;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             object-fit: cover;
+            /* Positioning adjustment */
+            object-position: top center;
+            transform: translateY(-20px); /* Moved up as requested */
+            
             border: 2px solid var(--primary-dim);
             box-shadow: 0 0 60px var(--primary-dim);
             animation: morph 8s ease-in-out infinite;
@@ -1315,6 +1319,12 @@
             <div class="color-circle" style="background: #0077ff;" data-color="#0077ff"></div>
             <div class="color-circle" style="background: #bf00ff;" data-color="#bf00ff"></div>
             <div class="color-circle" style="background: #ffcc00;" data-color="#ffcc00"></div>
+            <!-- Added New Colors -->
+            <div class="color-circle" style="background: #00ffff;" data-color="#00ffff"></div>
+            <div class="color-circle" style="background: #ffaa00;" data-color="#ffaa00"></div>
+            <div class="color-circle" style="background: #ffffff;" data-color="#ffffff"></div>
+            <div class="color-circle" style="background: #ccff00;" data-color="#ccff00"></div>
+            <div class="color-circle" style="background: #dc143c;" data-color="#dc143c"></div>
         </div>
 
         <span class="theme-section-title">Middle Color (Secondary)</span>
@@ -1323,6 +1333,11 @@
             <div class="color-circle active" style="background: #ff5f00;" data-color="#ff5f00"></div>
             <div class="color-circle" style="background: #00ffaa;" data-color="#00ffaa"></div>
             <div class="color-circle" style="background: #ff00cc;" data-color="#ff00cc"></div>
+            <!-- Added New Colors -->
+            <div class="color-circle" style="background: #4b0082;" data-color="#4b0082"></div>
+            <div class="color-circle" style="background: #ffd700;" data-color="#ffd700"></div>
+            <div class="color-circle" style="background: #ee82ee;" data-color="#ee82ee"></div>
+            <div class="color-circle" style="background: #98ff98;" data-color="#98ff98"></div>
         </div>
 
         <span class="theme-section-title">Font Style</span>
@@ -1330,6 +1345,10 @@
             <div class="font-btn active" data-font="'Inter', sans-serif">Modern</div>
             <div class="font-btn" data-font="'Fira Code', monospace">Coder</div>
             <div class="font-btn" data-font="'Orbitron', sans-serif">Manga</div>
+            <!-- ADDED: Japanese Mode -->
+            <div class="font-btn" data-font="'Noto Sans JP', sans-serif" style="font-family: 'Noto Sans JP', sans-serif;">Japanese</div>
+            <!-- ADDED: Anime Title Mode -->
+            <div class="font-btn" data-font="'Zen Tokyo Zoo', cursive" style="font-family: 'Zen Tokyo Zoo', cursive;">Anime</div>
             <!-- ADDED: Cybertron Button -->
             <div class="font-btn" data-font="'Rubik Glitch', cursive">Cybertron</div>
         </div>
