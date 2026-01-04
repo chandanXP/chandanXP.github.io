@@ -1223,8 +1223,8 @@
 
         .theme-panel {
             position: fixed;
-            top: 100px; right: -300px;
-            width: 280px;
+            top: 100px; right: -360px; /* Updated from -300px */
+            width: 340px; /* Updated from 280px */
             background: var(--darker); /* Variable based */
             backdrop-filter: blur(15px);
             border-radius: 0 0 0 12px;
@@ -1233,6 +1233,8 @@
             z-index: 998;
             padding: 1.5rem;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 85vh; /* Added to ensure buttons are reachable if content is long */
+            overflow-y: auto; /* Scroll if needed */
         }
         .theme-panel.active { right: 0; }
 
