@@ -492,12 +492,16 @@
             width: 50%;
         }
 
+        /* Desktop specific positions */
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
+
+        /* Circle for desktop */
         .timeline-item::after {
             content: '';
             position: absolute;
             width: 14px;
             height: 14px;
-            right: -7px;
             background: var(--dark);
             border: 3px solid var(--primary);
             top: 28px;
@@ -505,9 +509,8 @@
             z-index: 2;
             box-shadow: 0 0 10px var(--primary);
         }
-
-        .left { left: 0; text-align: right; }
-        .right { left: 50%; text-align: left; }
+        
+        .left::after { right: -7px; }
         .right::after { left: -7px; }
 
         .timeline-content {
@@ -522,6 +525,7 @@
         .timeline-content:hover {
             border-color: var(--secondary);
             transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .timeline-date {
@@ -538,6 +542,8 @@
             padding-left: 15px;
             margin-top: 10px;
         }
+        
+        /* Desktop List styling specific to sides */
         .left .timeline-content ul { direction: rtl; text-align: right; padding-right: 15px; padding-left: 0; }
         
         .timeline-content li { 
@@ -547,6 +553,7 @@
             list-style-type: none;
             position: relative;
         }
+        
         .right .timeline-content li::before {
             content: '▹'; color: var(--primary); position: absolute; left: -15px;
         }
@@ -817,14 +824,53 @@
             }
             .navbar-menu.active { left: 0; }
             
-            /* Timeline Mobile */
-            .timeline::after { left: 20px; }
-            .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; }
-            .timeline-item::after { left: 11px; }
+            /* --- FIXED TIMELINE FOR MOBILE --- */
+            /* Move line to left side */
+            .timeline::after { left: 31px; } 
+
+            .timeline-item { 
+                width: 100%; 
+                padding-left: 70px; /* Space for line and dot */
+                padding-right: 20px; 
+                margin-bottom: 20px; /* Better spacing between cards */
+            }
+
+            /* Reset the Right item position so it doesn't fly off screen */
+            .right { left: 0; } 
+            
+            /* Align the dot to the left line for ALL items */
+            .timeline-item::after { 
+                left: 24px; /* Center on line (31px - 7px) */
+                right: auto;
+            }
+
+            /* Reset alignment for desktop Left/Right classes */
             .left, .right { text-align: left; }
-            .left .timeline-content ul { direction: ltr; text-align: left; padding-left: 15px; }
-            .left .timeline-content li::after { content: ''; }
-            .left .timeline-content li::before { content: '▹'; color: var(--primary); position: absolute; left: -15px; }
+            
+            /* Reset UL padding/direction for desktop Left items */
+            .left .timeline-content ul { 
+                direction: ltr; 
+                text-align: left; 
+                padding-left: 15px; 
+                padding-right: 0;
+            }
+
+            /* Remove the left arrow from desktop Left items */
+            .left .timeline-content li::after { content: none; }
+            
+            /* Add the right arrow style to desktop Left items so they match */
+            .left .timeline-content li::before { 
+                content: '▹'; 
+                color: var(--primary); 
+                position: absolute; 
+                left: -15px; 
+            }
+            
+            /* Improve Content Visibility */
+            .timeline-content {
+                padding: 20px; /* Slightly less padding on mobile */
+                background: rgba(30,30,30,0.8); /* Slightly lighter bg for contrast */
+            }
 
             h1 { font-size: 2.5rem; }
             .hero-badges-container { justify-content: center; }
