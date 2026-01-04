@@ -315,6 +315,45 @@
         }
         .github-badge-img:hover { transform: translateY(-2px); }
 
+        /* --- WEATHER WIDGET --- */
+        .weather-widget {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .weather-location {
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 1px solid var(--border);
+            padding-left: 12px;
+        }
+
+        .weather-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .hero-title {
             margin-bottom: 1.5rem;
         }
@@ -1356,6 +1395,25 @@
                             <i class="fas fa-book"></i> Springer Author
                         </div>
                     </div>
+                    
+                    <!-- WEATHER WIDGET START -->
+                    <div id="weather-widget" class="weather-widget" style="display:none;">
+                        <span class="weather-location" id="weatherLocation">
+                            <i class="fas fa-map-marker-alt"></i> <span>...</span>
+                        </span>
+                        <div class="weather-info">
+                            <span class="weather-item" id="weatherTemp">
+                                <i class="fas fa-thermometer-half"></i> <span>--°C</span>
+                            </span>
+                            <span class="weather-item" id="weatherCondition">
+                                <i class="fas fa-cloud"></i> <span>--</span>
+                            </span>
+                             <span class="weather-item" id="weatherAQI" style="border-left:1px solid var(--border); padding-left:10px; margin-left:5px;">
+                                <i class="fas fa-wind"></i> <span>AQI: --</span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- WEATHER WIDGET END -->
 
                     <h1 class="hero-title">Software <span class="text-gradient">Development</span> Engineer</h1>
                     <p class="hero-description">
@@ -1918,6 +1976,91 @@
            tmp.innerHTML = html;
            return tmp.textContent || tmp.innerText || "";
         }
+        
+        // --- WEATHER LOGIC START ---
+        const DELHI_COORDS = { lat: 28.6139, lon: 77.2090 };
+
+        async function fetchWeatherData(lat, lon) {
+            try {
+                // Fetch Weather & AQI from Open-Meteo (Free, No Key)
+                const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`;
+                const aqiUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi&timezone=auto`;
+
+                const [weatherRes, aqiRes] = await Promise.all([
+                    fetch(weatherUrl),
+                    fetch(aqiUrl)
+                ]);
+
+                if(!weatherRes.ok || !aqiRes.ok) throw new Error("Weather API failed");
+
+                const weatherData = await weatherRes.json();
+                const aqiData = await aqiRes.json();
+
+                updateWeatherUI(weatherData, aqiData);
+
+            } catch (error) {
+                console.error("Weather fetch failed:", error);
+                document.getElementById('weather-widget').style.display = 'none'; // Hide if failed
+            }
+        }
+
+        function updateWeatherUI(weather, aqi) {
+             const temp = Math.round(weather.current.temperature_2m);
+             const code = weather.current.weather_code;
+             const aqiVal = aqi.current.us_aqi;
+             
+             // Simple WMO Code mapping to Icon & Text
+             let icon = 'fa-sun';
+             let text = 'Clear';
+             
+             if (code > 0 && code <= 3) { icon = 'fa-cloud-sun'; text = 'Cloudy'; }
+             else if (code >= 45 && code <= 48) { icon = 'fa-smog'; text = 'Fog'; }
+             else if (code >= 51 && code <= 67) { icon = 'fa-cloud-rain'; text = 'Rain'; }
+             else if (code >= 71 && code <= 77) { icon = 'fa-snowflake'; text = 'Snow'; }
+             else if (code >= 80 && code <= 99) { icon = 'fa-bolt'; text = 'Storm'; }
+
+             // Update DOM
+             document.getElementById('weatherTemp').innerHTML = `<i class="fas fa-thermometer-half"></i> <span>${temp}°C</span>`;
+             document.getElementById('weatherCondition').innerHTML = `<i class="fas ${icon}"></i> <span>${text}</span>`;
+             document.getElementById('weatherAQI').innerHTML = `<i class="fas fa-wind"></i> <span>AQI: ${aqiVal}</span>`;
+             
+             // Try to get city name via reverse geocoding (using a free API or just coordinates display)
+             // For privacy/simplicity in this demo without API keys, we'll just show "Local Weather" or similar if not Delhi
+             // But if we used the fallback, we know it's Delhi.
+             
+             // Logic to update location text check
+             // Since Open-Meteo doesn't give city names, we can check if coords match Delhi roughly
+             const isDelhi = Math.abs(weather.latitude - DELHI_COORDS.lat) < 0.1;
+             
+             document.getElementById('weatherLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> <span>${isDelhi ? 'Delhi' : 'Local'}</span>`;
+
+             document.getElementById('weather-widget').style.display = 'inline-flex';
+        }
+
+        function initWeather() {
+             // 1. Try Geolocation
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(
+                     (position) => {
+                         // Success: User allowed location
+                         fetchWeatherData(position.coords.latitude, position.coords.longitude);
+                     },
+                     (error) => {
+                         // Error/Denied: Fallback to Delhi
+                         console.warn("Location denied, using Delhi fallback.");
+                         fetchWeatherData(DELHI_COORDS.lat, DELHI_COORDS.lon);
+                     }
+                 );
+             } else {
+                 // No support: Fallback to Delhi
+                 fetchWeatherData(DELHI_COORDS.lat, DELHI_COORDS.lon);
+             }
+        }
+
+        // Call init
+        initWeather();
+        // --- WEATHER LOGIC END ---
+
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
