@@ -1396,10 +1396,19 @@
                 <div class="copyright">
                     &copy; 2025 Chandan Saroj. Built with React logic & HTML5.
                 </div>
-                <!-- View Counter Badge -->
-                <div class="view-counter">
-                    <i class="fas fa-eye"></i> 
-                    <span id="globalViewCount" style="margin: 0 4px; font-weight:700;">...</span> Views
+                
+                <div style="display: flex; gap: 15px; margin-top: 10px;">
+                    <!-- Global View Counter Badge -->
+                    <div class="view-counter">
+                        <i class="fas fa-globe"></i> 
+                        <span id="globalViewCount" style="margin: 0 4px; font-weight:700;">...</span> Total
+                    </div>
+
+                    <!-- Daily View Counter Badge -->
+                    <div class="view-counter">
+                        <i class="fas fa-eye"></i> 
+                        <span id="todayViewCount" style="margin: 0 4px; font-weight:700;">...</span> Today
+                    </div>
                 </div>
             </div>
         </footer>
@@ -1630,7 +1639,16 @@
                     }
                 });
 
-                // 5. Initial View Count Logic (Increment both daily and global)
+                // 5. Daily View Counter Listener (NEW)
+                const todayStr = new Date().toISOString().split('T')[0];
+                const todayDocRef = doc(db, "page_views", todayStr);
+                onSnapshot(todayDocRef, (docSnapshot) => {
+                     const val = docSnapshot.exists() ? docSnapshot.data().views : 0;
+                     const el = document.getElementById('todayViewCount');
+                     if(el) el.innerText = val;
+                });
+
+                // 6. Initial View Count Logic (Increment both daily and global)
                 const today = new Date().toISOString().split('T')[0];
                 const dailyViewRef = doc(db, "page_views", today); 
                 const globalViewRef = doc(db, "stats", "global_views");
