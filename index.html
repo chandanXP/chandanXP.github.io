@@ -2047,7 +2047,11 @@
                 document.getElementById('blogPassword').value = "";
             } catch(e) {
                 console.error(e);
-                alert("Error publishing post: " + e.message);
+                if (e.code === 'permission-denied') {
+                    alert("Permission Denied! \n\nPlease go to your Firebase Console > Firestore Database > Rules and add:\n\nmatch /blogs/{document=**} {\n  allow read, write: if true;\n}");
+                } else {
+                    alert("Error publishing post: " + e.message);
+                }
             }
             submitPostBtn.innerText = "Publish Post";
         });
