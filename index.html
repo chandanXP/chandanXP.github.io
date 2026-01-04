@@ -1713,7 +1713,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
         import { getFirestore, doc, setDoc, getDoc, addDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         // Firebase Configuration (From User)
         const firebaseConfig = {
@@ -1737,9 +1737,6 @@
         const saveBtn = document.getElementById('saveThemeBtn');
         const resetBtn = document.getElementById('resetThemeBtn');
         
-        // Define appId using global variable or fallback
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        
         let currentUser = null;
         let currentTheme = {
             primary: '#00ff88',
@@ -1747,22 +1744,20 @@
             font: "'Inter', sans-serif"
         };
 
-        // --- AUTHENTICATION FLOW ---
-        const initAuth = async () => {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
-            }
-        };
-        initAuth();
+        // Authenticate Anonymously (Best practice even for open data)
+        signInAnonymously(auth).then(() => {
+            console.log("Signed in anonymously");
+        }).catch((error) => {
+            console.error("Auth Error", error);
+        });
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
                 
                 // 1. Listen to Global Theme
-                const themeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'website_state', 'global_theme');
+                // REVERTED: Using root path for personal project config
+                const themeDocRef = doc(db, "website_state", "global_theme");
                 onSnapshot(themeDocRef, (doc) => {
                     if (doc.exists()) {
                         const remoteTheme = doc.data();
@@ -1772,27 +1767,27 @@
                     }
                 });
 
-                // 2. Listen to Messages (Query fixed: NO orderBy/limit in query)
-                const messagesRef = collection(db, 'artifacts', appId, 'public', 'data', 'messages');
+                // 2. Listen to Messages
+                // REVERTED: Root path
+                // KEPT: Simple query (no orderBy/limit in query) to avoid index errors
+                const messagesRef = collection(db, "messages");
                 
                 onSnapshot(messagesRef, (snapshot) => {
                     const grid = document.getElementById('messagesGrid');
                     grid.innerHTML = ''; 
                     let recent = [];
-                    
                     snapshot.forEach((doc) => {
                         const msg = doc.data();
-                        // Add JS timestamp for sorting if needed, though Firestore timestamps work
                         recent.push(msg);
                     });
 
-                    // Sort in memory
+                    // Sort in memory (descending)
                     recent.sort((a, b) => {
                         const tA = a.timestamp ? a.timestamp.seconds : 0;
                         const tB = b.timestamp ? b.timestamp.seconds : 0;
-                        return tB - tA; // Descending
+                        return tB - tA;
                     });
-
+                    
                     // Limit in memory
                     recent = recent.slice(0, 20);
 
@@ -1807,7 +1802,7 @@
                         grid.appendChild(card);
                     });
 
-                    if(recent.length === 0) grid.innerHTML = '<div style="text-align:center; width:100%; color:var(--text-gray);">No messages yet. Be the first!</div>';
+                    if(snapshot.empty) grid.innerHTML = '<div style="text-align:center; width:100%; color:var(--text-gray);">No messages yet. Be the first!</div>';
 
                     // Update Hero Bubbles (Draggable)
                     const heroContainer = document.getElementById('heroMessages');
@@ -1829,6 +1824,7 @@
                         }
 
                         const placed = [];
+                        // Use the top 9 most recent for bubbles
                         recent.slice(0, 9).forEach((msg) => {
                             const bubble = document.createElement('div');
                             bubble.className = 'hero-msg-bubble';
@@ -1845,12 +1841,12 @@
                             }
                         });
                     }
-                }, (error) => {
-                    console.error("Messages Listener Error:", error);
                 });
 
-                // 3. Blog Feed Listener (Query Fixed: NO orderBy/limit in query)
-                const blogsRef = collection(db, 'artifacts', appId, 'public', 'data', 'blogs');
+                // 3. Blog Feed Listener (New)
+                // REVERTED: Root path
+                // KEPT: Simple query to avoid index errors
+                const blogsRef = collection(db, "blogs");
                 
                 onSnapshot(blogsRef, (snapshot) => {
                     const blogGrid = document.getElementById('blog-feed');
@@ -1858,19 +1854,16 @@
                     
                     let posts = [];
                     snapshot.forEach((docSnapshot) => {
-                        posts.push({
-                            id: docSnapshot.id,
-                            ...docSnapshot.data()
-                        });
+                        posts.push({ id: docSnapshot.id, ...docSnapshot.data() });
                     });
 
                     // Sort in memory
                     posts.sort((a, b) => {
                         const tA = a.timestamp ? a.timestamp.seconds : 0;
                         const tB = b.timestamp ? b.timestamp.seconds : 0;
-                        return tB - tA; // Descending
+                        return tB - tA;
                     });
-
+                    
                     // Limit in memory
                     posts = posts.slice(0, 10);
 
@@ -1880,6 +1873,7 @@
 
                     posts.forEach((post) => {
                         const score = (post.score || 0);
+                        
                         const card = document.createElement('div');
                         card.className = 'blog-card';
                         
@@ -1921,40 +1915,41 @@
                             handleVote(id, isUp);
                         });
                     });
-                }, (error) => {
-                    console.error("Blogs Listener Error:", error);
                 });
 
                 // 3. Like Counter Listener
-                const likeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'likes');
+                // REVERTED: Root path
+                const likeDocRef = doc(db, "stats", "likes");
                 onSnapshot(likeDocRef, (doc) => {
                     if (doc.exists()) {
                         const data = doc.data();
                         document.getElementById('likeCount').innerText = data.count || 0;
                     }
-                }, (error) => console.error("Like Listener Error:", error));
+                });
 
                 // 4. Global View Counter Listener
-                const globalViewsRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'global_views');
+                // REVERTED: Root path
+                const globalViewsRef = doc(db, "stats", "global_views");
                 onSnapshot(globalViewsRef, (doc) => {
                     if (doc.exists()) {
                         document.getElementById('globalViewCount').innerText = doc.data().count || 0;
                     }
-                }, (error) => console.error("Global View Listener Error:", error));
+                });
 
-                // 5. Daily View Counter Listener
+                // 5. Daily View Counter Listener (NEW)
+                // REVERTED: Root path
                 const todayStr = new Date().toISOString().split('T')[0];
-                const todayDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'page_views', todayStr);
+                const todayDocRef = doc(db, "page_views", todayStr);
                 onSnapshot(todayDocRef, (docSnapshot) => {
                      const val = docSnapshot.exists() ? docSnapshot.data().views : 0;
                      const el = document.getElementById('todayViewCount');
                      if(el) el.innerText = val;
-                }, (error) => console.error("Daily View Listener Error:", error));
+                });
 
-                // 6. Initial View Count Logic
+                // 6. Initial View Count Logic (Increment both daily and global)
                 const today = new Date().toISOString().split('T')[0];
-                const dailyViewRef = doc(db, 'artifacts', appId, 'public', 'data', 'page_views', today); 
-                const globalViewRefStats = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'global_views');
+                const dailyViewRef = doc(db, "page_views", today); 
+                const globalViewRef = doc(db, "stats", "global_views");
 
                 runTransaction(db, async (transaction) => {
                     // Daily
@@ -1967,12 +1962,12 @@
                     }
 
                     // Global
-                    const globalDoc = await transaction.get(globalViewRefStats);
+                    const globalDoc = await transaction.get(globalViewRef);
                     if (!globalDoc.exists()) {
-                        transaction.set(globalViewRefStats, { count: 1 });
+                        transaction.set(globalViewRef, { count: 1 });
                     } else {
                         const newGlobal = (globalDoc.data().count || 0) + 1;
-                        transaction.update(globalViewRefStats, { count: newGlobal });
+                        transaction.update(globalViewRef, { count: newGlobal });
                     }
 
                 }).then(() => {
@@ -1986,7 +1981,8 @@
         // --- Voting Logic ---
         async function handleVote(postId, isUpvote) {
             if(!currentUser) return;
-            const postRef = doc(db, 'artifacts', appId, 'public', 'data', 'blogs', postId);
+            // REVERTED: Root path
+            const postRef = doc(db, "blogs", postId);
             const change = isUpvote ? 1 : -1;
             
             try {
@@ -2014,7 +2010,6 @@
 
         // --- Submit Blog Post ---
         submitPostBtn.addEventListener('click', async () => {
-            if(!currentUser) { alert("Auth not ready"); return; }
             const title = document.getElementById('blogTitle').value;
             const subtitle = document.getElementById('blogSubtitle').value;
             const image = document.getElementById('blogImage').value;
@@ -2032,8 +2027,8 @@
             submitPostBtn.innerText = "Publishing...";
             
             try {
-                // Path updated
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'blogs'), {
+                // REVERTED: Root path
+                await addDoc(collection(db, "blogs"), {
                     title: title,
                     subtitle: subtitle,
                     image: image,
@@ -2067,7 +2062,9 @@
             likeBtn.classList.add('liked');
             setTimeout(() => likeBtn.classList.remove('liked'), 400);
 
-            const likeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'likes');
+            // Debounce local storage check (optional, but good for UX)
+            // We allow multiple likes for fun like Medium/TikTok live
+            const likeDocRef = doc(db, "stats", "likes");
             
             runTransaction(db, async (transaction) => {
                 const sfDoc = await transaction.get(likeDocRef);
@@ -2097,8 +2094,8 @@
             postMsgBtn.disabled = true;
 
             try {
-                // Path updated
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'messages'), {
+                // REVERTED: Root path
+                await addDoc(collection(db, "messages"), {
                     name: name || "Anonymous",
                     text: text,
                     timestamp: serverTimestamp()
@@ -2154,8 +2151,8 @@
             saveBtn.innerText = "Saving...";
             
             try {
-                // Path updated
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'website_state', 'global_theme'), currentTheme);
+                // REVERTED: Root path
+                await setDoc(doc(db, "website_state", "global_theme"), currentTheme);
                 saveBtn.innerText = "Saved Global!";
                 saveBtn.style.background = "#25D366";
             } catch (error) {
@@ -2179,8 +2176,8 @@
                 secondary: '#00ccff',
                 font: "'Inter', sans-serif"
             };
-            // Path updated
-            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'website_state', 'global_theme'), defaultTheme);
+            // REVERTED: Root path
+            await setDoc(doc(db, "website_state", "global_theme"), defaultTheme);
         });
 
         // --- UI Interactions ---
