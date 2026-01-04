@@ -426,7 +426,7 @@
             display: inline-block;
         }
 
-        /* --- BLOG SECTION (REDDIT STYLE) --- */
+        /* --- BLOG SECTION (Compact Cards + Full Screen Read Modal) --- */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -439,8 +439,9 @@
             border-radius: 12px;
             overflow: hidden;
             display: flex;
-            flex-direction: row; /* Desktop: Vote left, content right */
+            flex-direction: row; /* Desktop default */
             transition: var(--transition);
+            cursor: pointer; /* Indicates clickability */
         }
 
         .blog-card:hover {
@@ -470,8 +471,8 @@
         }
 
         .vote-btn:hover { color: var(--primary); background: rgba(255,255,255,0.05); border-radius: 4px; }
-        .vote-btn.upvoted { color: #ff4500; } /* Reddit Orange */
-        .vote-btn.downvoted { color: #7193ff; } /* Reddit Blue */
+        .vote-btn.upvoted { color: #ff4500; } 
+        .vote-btn.downvoted { color: #7193ff; }
 
         .vote-count {
             font-weight: 700;
@@ -485,6 +486,8 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            /* For pointer feedback on hover */
+            position: relative; 
         }
 
         .blog-meta {
@@ -509,9 +512,10 @@
             font-weight: 500;
         }
 
+        /* Preview Image in Card */
         .blog-image {
             width: 100%;
-            height: 200px;
+            height: 150px; /* Limit height for card */
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1rem;
@@ -519,20 +523,58 @@
             background: #111;
         }
 
-        .blog-text {
+        /* Preview Text in Card (Shrinked) */
+        .blog-text-preview {
             font-size: 0.95rem;
-            color: #ddd;
+            color: #ccc;
             line-height: 1.6;
-            flex-grow: 1;
-            white-space: pre-wrap; /* Preserve line breaks */
+            
+            /* Line Clamping for "Shrinked" look */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* --- READ FULL POST MODAL --- */
+        #readPostModal .modal-content {
+            width: 95%;
+            max-width: 900px;
+            height: 90vh; /* Cover almost full screen */
+            padding: 0;   /* Let inner content handle padding */
+            overflow: hidden; /* Scroll inner container */
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .read-modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .read-modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .read-modal-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #eee;
         }
         
-        /* Render HTML content correctly in blog */
-        .blog-text p { margin-bottom: 0.5rem; }
-        .blog-text ul, .blog-text ol { margin-left: 1.5rem; margin-bottom: 0.5rem; }
-        .blog-text strong { color: var(--primary); }
-        .blog-text em { color: var(--secondary); }
-        .blog-text h1, .blog-text h2 { margin-top: 0.5rem; margin-bottom: 0.5rem; color: white; }
+        .read-modal-text img { max-width: 100%; height: auto; border-radius: 8px; }
+        .read-modal-text h1, .read-modal-text h2 { color: white; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+        .read-modal-text ul, .read-modal-text ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .read-modal-text p { margin-bottom: 1rem; }
+        .read-modal-text pre { background: #111; padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); }
 
         /* --- QUILL EDITOR DARK MODE OVERRIDES --- */
         .ql-toolbar.ql-snow {
@@ -1668,6 +1710,16 @@
         </div>
     </div>
 
+    <!-- READ POST MODAL (NEW) -->
+    <div class="modal" id="readPostModal">
+        <div class="modal-content read-modal-content">
+            <span class="close-modal" id="closeReadModal">&times;</span>
+            <div id="readModalBody" class="read-modal-body">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- Create Post Modal -->
     <div class="modal" id="blogModal">
         <div class="modal-content">
@@ -1773,6 +1825,9 @@
         const saveBtn = document.getElementById('saveThemeBtn');
         const resetBtn = document.getElementById('resetThemeBtn');
         
+        // Define appId using global variable or fallback
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
         let currentUser = null;
         let currentTheme = {
             primary: '#00ff88',
@@ -1786,6 +1841,16 @@
         }).catch((error) => {
             console.error("Auth Error", error);
         });
+
+        // Store loaded posts to access them for modal
+        let loadedPosts = {};
+
+        // Helper to strip HTML for preview
+        function stripHtml(html) {
+           let tmp = document.createElement("DIV");
+           tmp.innerHTML = html;
+           return tmp.textContent || tmp.innerText || "";
+        }
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -1889,8 +1954,12 @@
                     blogGrid.innerHTML = '';
                     
                     let posts = [];
+                    loadedPosts = {}; // Clear cache
+
                     snapshot.forEach((docSnapshot) => {
-                        posts.push({ id: docSnapshot.id, ...docSnapshot.data() });
+                        const data = docSnapshot.data();
+                        posts.push({ id: docSnapshot.id, ...data });
+                        loadedPosts[docSnapshot.id] = data; // Store for modal
                     });
 
                     // Sort in memory
@@ -1922,20 +1991,23 @@
                             </div>
                         `;
                         
-                        // Content Section
+                        // Content Section (Preview Only)
                         const imageSection = post.image ? `<img src="${post.image}" class="blog-image" alt="Post Image">` : '';
                         const subTitle = post.subtitle ? `<div class="blog-subtitle">${post.subtitle}</div>` : '';
                         const date = post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString() : 'Just now';
                         
+                        // Strip HTML for preview text
+                        const previewText = stripHtml(post.content);
+
                         const contentSection = `
-                            <div class="blog-content">
+                            <div class="blog-content" onclick="openReadPost('${post.id}')">
                                 <div class="blog-meta">
                                     <span><i class="far fa-clock"></i> ${date}</span>
                                 </div>
                                 <h3 class="blog-title">${post.title}</h3>
                                 ${subTitle}
                                 ${imageSection}
-                                <div class="blog-text">${post.content}</div>
+                                <div class="blog-text-preview">${previewText}</div>
                             </div>
                         `;
 
@@ -1946,6 +2018,7 @@
                     // Add Event Listeners for Voting
                     document.querySelectorAll('.vote-btn').forEach(btn => {
                         btn.addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent modal from opening
                             const id = btn.getAttribute('data-id');
                             const isUp = btn.classList.contains('upvote');
                             handleVote(id, isUp);
@@ -2032,16 +2105,43 @@
 
         // --- Blog Modal Logic & Quill Editor ---
         const blogModal = document.getElementById('blogModal');
+        const readPostModal = document.getElementById('readPostModal');
         const createPostBtn = document.getElementById('createPostBtn');
         const closeBlogBtn = document.getElementById('closeBlogModal');
+        const closeReadBtn = document.getElementById('closeReadModal');
         const submitPostBtn = document.getElementById('submitPostBtn');
 
         if(createPostBtn) createPostBtn.onclick = () => blogModal.style.display = "flex";
         if(closeBlogBtn) closeBlogBtn.onclick = () => blogModal.style.display = "none";
+        if(closeReadBtn) closeReadBtn.onclick = () => readPostModal.style.display = "none";
         
+        // Open Read Modal Function (Made Global)
+        window.openReadPost = function(postId) {
+            const post = loadedPosts[postId];
+            if(!post) return;
+
+            const modalBody = document.getElementById('readModalBody');
+            const date = post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString() : 'Just now';
+            const subTitle = post.subtitle ? `<h3 style="color:var(--secondary); margin-bottom:1rem;">${post.subtitle}</h3>` : '';
+            const image = post.image ? `<img src="${post.image}" class="read-modal-image" alt="Post Image">` : '';
+
+            modalBody.innerHTML = `
+                <div style="font-size:0.9rem; color:var(--text-gray); margin-bottom:0.5rem;">
+                    <i class="far fa-clock"></i> ${date}
+                </div>
+                <h1 style="font-size:2rem; line-height:1.2; margin-bottom:0.5rem; color:var(--primary);">${post.title}</h1>
+                ${subTitle}
+                ${image}
+                <div class="read-modal-text">${post.content}</div>
+            `;
+            
+            readPostModal.style.display = "flex";
+        };
+
         // Close modal when clicking outside
         window.addEventListener('click', (e) => {
             if(e.target == blogModal) blogModal.style.display = "none";
+            if(e.target == readPostModal) readPostModal.style.display = "none";
         });
 
         // Initialize Quill
