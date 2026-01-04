@@ -26,6 +26,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
     
+    <!-- Quill.js Editor (Rich Text) -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Fonts: Inter, Fira Code, Orbitron, Rubik Glitch, Noto Sans JP, Zen Tokyo Zoo -->
@@ -521,6 +525,35 @@
             line-height: 1.6;
             flex-grow: 1;
             white-space: pre-wrap; /* Preserve line breaks */
+        }
+        
+        /* Render HTML content correctly in blog */
+        .blog-text p { margin-bottom: 0.5rem; }
+        .blog-text ul, .blog-text ol { margin-left: 1.5rem; margin-bottom: 0.5rem; }
+        .blog-text strong { color: var(--primary); }
+        .blog-text em { color: var(--secondary); }
+        .blog-text h1, .blog-text h2 { margin-top: 0.5rem; margin-bottom: 0.5rem; color: white; }
+
+        /* --- QUILL EDITOR DARK MODE OVERRIDES --- */
+        .ql-toolbar.ql-snow {
+            background: #e0e0e0;
+            border-color: var(--border) !important;
+            border-radius: 8px 8px 0 0;
+        }
+        .ql-container.ql-snow {
+            border-color: var(--border) !important;
+            border-radius: 0 0 8px 8px;
+            background: rgba(0,0,0,0.3);
+            color: var(--text-light);
+            font-family: var(--font-main);
+            font-size: 1rem;
+        }
+        .ql-editor {
+            min-height: 150px;
+        }
+        .ql-editor.ql-blank::before {
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
         }
 
         /* --- ACHIEVEMENTS SECTION --- */
@@ -1643,7 +1676,10 @@
             <input type="text" id="blogTitle" placeholder="Main Heading" required />
             <input type="text" id="blogSubtitle" placeholder="Sub Heading (Optional)" />
             <input type="text" id="blogImage" placeholder="Image URL (Optional)" />
-            <textarea id="blogContent" placeholder="Post Description/Content" style="min-height: 120px;" required></textarea>
+            
+            <!-- Quill Editor Container -->
+            <div id="editor-container" style="height: 200px; background: rgba(0,0,0,0.2); border: 1px solid var(--border); color: #ddd; margin-bottom: 1rem;"></div>
+            
             <input type="password" id="blogPassword" placeholder="Admin Password" required />
             <button id="submitPostBtn" class="btn" style="width: 100%;">Publish Post</button>
         </div>
@@ -1713,7 +1749,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
         import { getFirestore, doc, setDoc, getDoc, addDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         // Firebase Configuration (From User)
         const firebaseConfig = {
@@ -1994,7 +2030,7 @@
             }
         }
 
-        // --- Blog Modal Logic ---
+        // --- Blog Modal Logic & Quill Editor ---
         const blogModal = document.getElementById('blogModal');
         const createPostBtn = document.getElementById('createPostBtn');
         const closeBlogBtn = document.getElementById('closeBlogModal');
@@ -2008,15 +2044,35 @@
             if(e.target == blogModal) blogModal.style.display = "none";
         });
 
+        // Initialize Quill
+        var quill = new Quill('#editor-container', {
+          theme: 'snow',
+          placeholder: 'Post Description/Content...',
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+              ['blockquote', 'code-block'],
+              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+              ['clean']                                         // remove formatting button
+            ]
+          }
+        });
+
         // --- Submit Blog Post ---
         submitPostBtn.addEventListener('click', async () => {
             const title = document.getElementById('blogTitle').value;
             const subtitle = document.getElementById('blogSubtitle').value;
             const image = document.getElementById('blogImage').value;
-            const content = document.getElementById('blogContent').value;
+            
+            // Get content from Quill
+            const content = quill.root.innerHTML;
+            const rawText = quill.getText().trim(); // check if empty
+
             const password = document.getElementById('blogPassword').value;
 
-            if(!title || !content) { alert("Title and Content are required!"); return; }
+            if(!title || !rawText) { alert("Title and Content are required!"); return; }
             
             // Password Check (Client-side for portfolio demo)
             if(password !== "220919") {
@@ -2032,7 +2088,7 @@
                     title: title,
                     subtitle: subtitle,
                     image: image,
-                    content: content,
+                    content: content, // Saving HTML content
                     score: 0,
                     timestamp: serverTimestamp()
                 });
@@ -2043,12 +2099,12 @@
                 document.getElementById('blogTitle').value = "";
                 document.getElementById('blogSubtitle').value = "";
                 document.getElementById('blogImage').value = "";
-                document.getElementById('blogContent').value = "";
+                quill.setContents([]); // Clear editor
                 document.getElementById('blogPassword').value = "";
             } catch(e) {
                 console.error(e);
                 if (e.code === 'permission-denied') {
-                    alert("Permission Denied! \n\nPlease go to your Firebase Console > Firestore Database > Rules and add:\n\nmatch /blogs/{document=**} {\n  allow read, write: if true;\n}");
+                    alert("Permission Denied! \n\nPlease go to your Firebase Console > Firestore Database > Rules and add the rules provided.");
                 } else {
                     alert("Error publishing post: " + e.message);
                 }
