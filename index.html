@@ -422,6 +422,107 @@
             display: inline-block;
         }
 
+        /* --- BLOG SECTION (REDDIT STYLE) --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row; /* Desktop: Vote left, content right */
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .vote-section {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-width: 50px;
+            border-right: 1px solid var(--border);
+        }
+
+        .vote-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: 0.2s;
+        }
+
+        .vote-btn:hover { color: var(--primary); background: rgba(255,255,255,0.05); border-radius: 4px; }
+        .vote-btn.upvoted { color: #ff4500; } /* Reddit Orange */
+        .vote-btn.downvoted { color: #7193ff; } /* Reddit Blue */
+
+        .vote-count {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 5px 0;
+            color: var(--text-light);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-meta {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.3;
+        }
+
+        .blog-subtitle {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            background: #111;
+        }
+
+        .blog-text {
+            font-size: 0.95rem;
+            color: #ddd;
+            line-height: 1.6;
+            flex-grow: 1;
+            white-space: pre-wrap; /* Preserve line breaks */
+        }
+
         /* --- ACHIEVEMENTS SECTION --- */
         .achievements-grid {
             display: grid;
@@ -866,6 +967,28 @@
                 bottom: 90px !important;
             }
             
+            /* --- REDDIT STYLE MOBILE BLOG --- */
+            .blog-card {
+                flex-direction: column; /* Stack vertically on mobile */
+            }
+            
+            .vote-section {
+                flex-direction: row; /* Horizontal voting bar */
+                border-right: none;
+                border-top: 1px solid var(--border);
+                justify-content: space-around;
+                width: 100%;
+                padding: 8px 0;
+            }
+            
+            .vote-count {
+                margin: 0 15px;
+            }
+
+            .blog-image {
+                max-height: 250px;
+            }
+
             /* --- FIXED TIMELINE FOR MOBILE --- */
             /* Move line to left side */
             .timeline::after { left: 31px; } 
@@ -1114,6 +1237,7 @@
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#skills">Skills</a></li>
+                    <li><a href="#blog">Blog</a></li>
                     <li><a href="#discussion">Chat</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -1380,6 +1504,21 @@
             </div>
         </section>
 
+        <!-- BLOG SECTION (NEW) -->
+        <section id="blog">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Insights & Updates</span>
+                    <h2 class="section-title">Latest Posts</h2>
+                    <button id="createPostBtn" class="btn" style="margin-top:20px; display:block; margin-left:auto; margin-right:auto;">+ New Post</button>
+                </div>
+                
+                <div id="blog-feed" class="blog-grid">
+                    <div style="text-align:center; width:100%; color:var(--text-gray);">Loading posts...</div>
+                </div>
+            </div>
+        </section>
+
         <!-- COMMUNITY STATS & DISCUSSION (UPDATED) -->
         <section id="community-stats">
             <div class="container">
@@ -1461,6 +1600,7 @@
         <a href="#home" class="nav-item"><i class="fas fa-home"></i></a>
         <a href="#experience" class="nav-item"><i class="fas fa-briefcase"></i></a>
         <a href="#projects" class="nav-item"><i class="fas fa-layer-group"></i></a>
+        <a href="#blog" class="nav-item"><i class="fas fa-newspaper"></i></a>
         <a href="#community-stats" class="nav-item"><i class="fas fa-comment-alt"></i></a>
         <div class="nav-item" id="mobileThemeBtn"><i class="fas fa-cog"></i></div>
     </nav>
@@ -1492,6 +1632,20 @@
                     <i class="fas fa-envelope"></i> Send Email
                 </a>
             </div>
+        </div>
+    </div>
+
+    <!-- Create Post Modal -->
+    <div class="modal" id="blogModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeBlogModal">&times;</span>
+            <h3 style="color:var(--primary); margin-bottom: 1rem;">New Blog Post</h3>
+            <input type="text" id="blogTitle" placeholder="Main Heading" required />
+            <input type="text" id="blogSubtitle" placeholder="Sub Heading (Optional)" />
+            <input type="text" id="blogImage" placeholder="Image URL (Optional)" />
+            <textarea id="blogContent" placeholder="Post Description/Content" style="min-height: 120px;" required></textarea>
+            <input type="password" id="blogPassword" placeholder="Admin Password" required />
+            <button id="submitPostBtn" class="btn" style="width: 100%;">Publish Post</button>
         </div>
     </div>
 
@@ -1558,7 +1712,7 @@
         // Import Firebase SDKs from Google's CDN (using stable version 11.6.1)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        import { getFirestore, doc, setDoc, getDoc, addDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, getDocs, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, addDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         // Firebase Configuration (From User)
@@ -1673,6 +1827,66 @@
                     }
                 });
 
+                // 3. Blog Feed Listener (New)
+                const blogsRef = collection(db, "blogs");
+                const blogQuery = query(blogsRef, orderBy("timestamp", "desc"), limit(10));
+                
+                onSnapshot(blogQuery, (snapshot) => {
+                    const blogGrid = document.getElementById('blog-feed');
+                    blogGrid.innerHTML = '';
+                    
+                    if(snapshot.empty) {
+                        blogGrid.innerHTML = '<div style="text-align:center; width:100%; color:var(--text-gray);">No posts yet.</div>';
+                    }
+
+                    snapshot.forEach((docSnapshot) => {
+                        const post = docSnapshot.data();
+                        const postId = docSnapshot.id;
+                        const score = (post.score || 0);
+                        
+                        const card = document.createElement('div');
+                        card.className = 'blog-card';
+                        
+                        // Creating the Voting Section HTML
+                        const voteSection = `
+                            <div class="vote-section">
+                                <button class="vote-btn upvote" data-id="${postId}"><i class="fas fa-arrow-up"></i></button>
+                                <span class="vote-count">${score}</span>
+                                <button class="vote-btn downvote" data-id="${postId}"><i class="fas fa-arrow-down"></i></button>
+                            </div>
+                        `;
+                        
+                        // Content Section
+                        const imageSection = post.image ? `<img src="${post.image}" class="blog-image" alt="Post Image">` : '';
+                        const subTitle = post.subtitle ? `<div class="blog-subtitle">${post.subtitle}</div>` : '';
+                        const date = post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString() : 'Just now';
+                        
+                        const contentSection = `
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-clock"></i> ${date}</span>
+                                </div>
+                                <h3 class="blog-title">${post.title}</h3>
+                                ${subTitle}
+                                ${imageSection}
+                                <div class="blog-text">${post.content}</div>
+                            </div>
+                        `;
+
+                        card.innerHTML = voteSection + contentSection;
+                        blogGrid.appendChild(card);
+                    });
+
+                    // Add Event Listeners for Voting
+                    document.querySelectorAll('.vote-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const id = btn.getAttribute('data-id');
+                            const isUp = btn.classList.contains('upvote');
+                            handleVote(id, isUp);
+                        });
+                    });
+                });
+
                 // 3. Like Counter Listener
                 const likeDocRef = doc(db, "stats", "likes");
                 onSnapshot(likeDocRef, (doc) => {
@@ -1731,6 +1945,79 @@
             }
         });
 
+        // --- Voting Logic ---
+        async function handleVote(postId, isUpvote) {
+            if(!currentUser) return;
+            const postRef = doc(db, "blogs", postId);
+            const change = isUpvote ? 1 : -1;
+            
+            try {
+                await updateDoc(postRef, {
+                    score: increment(change)
+                });
+            } catch(e) {
+                console.error("Vote failed", e);
+            }
+        }
+
+        // --- Blog Modal Logic ---
+        const blogModal = document.getElementById('blogModal');
+        const createPostBtn = document.getElementById('createPostBtn');
+        const closeBlogBtn = document.getElementById('closeBlogModal');
+        const submitPostBtn = document.getElementById('submitPostBtn');
+
+        if(createPostBtn) createPostBtn.onclick = () => blogModal.style.display = "flex";
+        if(closeBlogBtn) closeBlogBtn.onclick = () => blogModal.style.display = "none";
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if(e.target == blogModal) blogModal.style.display = "none";
+        });
+
+        // --- Submit Blog Post ---
+        submitPostBtn.addEventListener('click', async () => {
+            const title = document.getElementById('blogTitle').value;
+            const subtitle = document.getElementById('blogSubtitle').value;
+            const image = document.getElementById('blogImage').value;
+            const content = document.getElementById('blogContent').value;
+            const password = document.getElementById('blogPassword').value;
+
+            if(!title || !content) { alert("Title and Content are required!"); return; }
+            
+            // Password Check (Client-side for portfolio demo)
+            if(password !== "220919") {
+                alert("Incorrect Admin Password!");
+                return;
+            }
+
+            submitPostBtn.innerText = "Publishing...";
+            
+            try {
+                await addDoc(collection(db, "blogs"), {
+                    title: title,
+                    subtitle: subtitle,
+                    image: image,
+                    content: content,
+                    score: 0,
+                    timestamp: serverTimestamp()
+                });
+                
+                alert("Post Published!");
+                blogModal.style.display = "none";
+                // Reset form
+                document.getElementById('blogTitle').value = "";
+                document.getElementById('blogSubtitle').value = "";
+                document.getElementById('blogImage').value = "";
+                document.getElementById('blogContent').value = "";
+                document.getElementById('blogPassword').value = "";
+            } catch(e) {
+                console.error(e);
+                alert("Error publishing post: " + e.message);
+            }
+            submitPostBtn.innerText = "Publish Post";
+        });
+
+
         // --- Like Button Logic ---
         const likeBtn = document.getElementById('likeBtn');
         likeBtn.addEventListener('click', () => {
@@ -1755,7 +2042,7 @@
             }).catch(e => console.error("Like failed", e));
         });
 
-        // --- Posting Logic ---
+        // --- Posting Logic (Chat) ---
         const postMsgBtn = document.getElementById('postMsgBtn');
         const msgNameInput = document.getElementById('msgName');
         const msgTextInput = document.getElementById('msgText');
