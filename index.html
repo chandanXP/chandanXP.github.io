@@ -38,17 +38,20 @@
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            /* Default Theme: Cyber Green */
+            /* Default Theme Variables - will be overwritten by JS */
             --primary: #00ff88;
             --primary-dim: rgba(0, 255, 136, 0.1);
             --secondary: #00ccff;
             --accent: #7000ff;
+            
+            /* Background/Mode Variables */
             --dark: #0a0a0a;
             --darker: #050505;
             --card-bg: rgba(20, 20, 20, 0.7);
             --text-light: #f0f0f0;
             --text-gray: #a0a0a0;
             --border: rgba(255, 255, 255, 0.08);
+            
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             --nav-height: 80px;
             --font-main: 'Inter', sans-serif;
@@ -74,13 +77,14 @@
             background-image: 
                 radial-gradient(circle at 15% 50%, var(--primary-dim) 0%, transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 25%);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* --- TYPOGRAPHY --- */
         h1, h2, h3, h4 {
             font-weight: 700;
             line-height: 1.2;
-            color: white;
+            color: var(--text-light); /* Changed to variable */
         }
 
         h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -1px; }
@@ -150,13 +154,16 @@
             top: 0;
             width: 100%;
             height: var(--nav-height);
-            background: rgba(5, 5, 5, 0.85);
+            background: rgba(5, 5, 5, 0.85); /* Slightly translucent for glassmorphism */
             backdrop-filter: blur(15px);
             z-index: 1000;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
         }
+        
+        /* Adjust header bg for light mode dynamically via var override or specific class if needed, 
+           but glassmorphism usually looks okay. We might refine this in JS styles. */
 
         .nav-container {
             display: flex;
@@ -177,7 +184,7 @@
             gap: 5px;
         }
         .logo span:first-child { color: var(--primary); }
-        .logo span:last-child { color: white; }
+        .logo span:last-child { color: var(--text-light); }
 
         .navbar-menu {
             display: flex;
@@ -189,6 +196,7 @@
             font-size: 0.95rem;
             position: relative;
             opacity: 0.8;
+            color: var(--text-light);
         }
 
         .navbar-menu a::after {
@@ -221,7 +229,7 @@
             left: 0;
             width: 100%;
             height: 65px;
-            background: rgba(10, 10, 10, 0.95);
+            background: var(--darker); /* Use variable for theme adaptation */
             backdrop-filter: blur(15px);
             border-top: 1px solid var(--border);
             z-index: 1001; /* Above everything */
@@ -526,7 +534,7 @@
         /* Preview Text in Card (Shrinked) */
         .blog-text-preview {
             font-size: 0.95rem;
-            color: #ccc;
+            color: var(--text-gray);
             line-height: 1.6;
             
             /* Line Clamping for "Shrinked" look */
@@ -547,6 +555,7 @@
             display: flex;
             flex-direction: column;
             text-align: left;
+            background: var(--darker);
         }
 
         .read-modal-body {
@@ -567,14 +576,14 @@
         .read-modal-text {
             font-size: 1rem;
             line-height: 1.8;
-            color: #eee;
+            color: var(--text-light);
         }
         
         .read-modal-text img { max-width: 100%; height: auto; border-radius: 8px; }
-        .read-modal-text h1, .read-modal-text h2 { color: white; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+        .read-modal-text h1, .read-modal-text h2 { color: var(--text-light); margin-top: 1.5rem; margin-bottom: 0.5rem; }
         .read-modal-text ul, .read-modal-text ol { margin-left: 1.5rem; margin-bottom: 1rem; }
         .read-modal-text p { margin-bottom: 1rem; }
-        .read-modal-text pre { background: #111; padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); }
+        .read-modal-text pre { background: var(--dark); padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); }
 
         /* --- QUILL EDITOR DARK MODE OVERRIDES --- */
         .ql-toolbar.ql-snow {
@@ -1109,7 +1118,7 @@
             /* Improve Content Visibility */
             .timeline-content {
                 padding: 20px; /* Slightly less padding on mobile */
-                background: rgba(30,30,30,0.8); /* Slightly lighter bg for contrast */
+                background: var(--card-bg); /* Use var for theme */
             }
 
             h1 { font-size: 2.5rem; }
@@ -1136,7 +1145,7 @@
             bottom: 30px; left: 30px;
             display: flex; align-items: center; gap: 10px;
             z-index: 900;
-            background: rgba(10,10,10,0.8);
+            background: var(--card-bg);
             backdrop-filter: blur(5px);
             padding: 8px 16px 8px 8px;
             border-radius: 50px;
@@ -1214,7 +1223,7 @@
             position: fixed;
             top: 100px; right: -300px;
             width: 280px;
-            background: rgba(10,10,10,0.95);
+            background: var(--darker); /* Variable based */
             backdrop-filter: blur(15px);
             border-radius: 0 0 0 12px;
             border: 1px solid var(--border);
@@ -1789,6 +1798,15 @@
             <div class="font-btn" data-font="'Rubik Glitch', cursive">Cybertron</div>
         </div>
 
+        <span class="theme-section-title">Background Mode</span>
+        <div class="font-options" style="margin-bottom: 1rem;">
+            <div class="font-btn mode-btn active" data-mode="dark">Dark</div>
+            <div class="font-btn mode-btn" data-mode="light">Light</div>
+            <div class="font-btn mode-btn" data-mode="minimalist">Minimalist</div>
+            <div class="font-btn mode-btn" data-mode="vibrant">Vibrant</div>
+            <div class="font-btn mode-btn" data-mode="thematic">Thematic</div>
+        </div>
+
         <div class="theme-actions">
             <button class="theme-action-btn btn-save" id="saveThemeBtn">Save to Cloud</button>
             <button class="theme-action-btn btn-reset" id="resetThemeBtn">Reset</button>
@@ -1832,7 +1850,52 @@
         let currentTheme = {
             primary: '#00ff88',
             secondary: '#00ccff',
-            font: "'Inter', sans-serif"
+            font: "'Inter', sans-serif",
+            mode: 'dark' // default mode
+        };
+
+        // Theme Definitions
+        const themeModes = {
+            'dark': {
+                '--dark': '#0a0a0a',
+                '--darker': '#050505',
+                '--card-bg': 'rgba(20, 20, 20, 0.7)',
+                '--text-light': '#f0f0f0',
+                '--text-gray': '#a0a0a0',
+                '--border': 'rgba(255, 255, 255, 0.08)'
+            },
+            'light': {
+                '--dark': '#ffffff',
+                '--darker': '#f3f4f6',
+                '--card-bg': 'rgba(255, 255, 255, 0.8)',
+                '--text-light': '#111827',
+                '--text-gray': '#4b5563',
+                '--border': 'rgba(0, 0, 0, 0.1)'
+            },
+            'minimalist': {
+                '--dark': '#f5f5f5',
+                '--darker': '#eaeaea',
+                '--card-bg': 'rgba(255, 255, 255, 0.6)',
+                '--text-light': '#222',
+                '--text-gray': '#666',
+                '--border': 'rgba(0, 0, 0, 0.05)'
+            },
+            'vibrant': {
+                '--dark': '#1a0033', // Deep purple
+                '--darker': '#0d001a',
+                '--card-bg': 'rgba(40, 0, 60, 0.6)',
+                '--text-light': '#fff',
+                '--text-gray': '#d1d5db',
+                '--border': 'rgba(255, 0, 255, 0.2)'
+            },
+            'thematic': { // Retro/Cyber
+                '--dark': '#001a1a', // Deep teal
+                '--darker': '#000d0d',
+                '--card-bg': 'rgba(0, 40, 40, 0.6)',
+                '--text-light': '#e0f7fa',
+                '--text-gray': '#80deea',
+                '--border': 'rgba(0, 255, 255, 0.15)'
+            }
         };
 
         // Authenticate Anonymously (Best practice even for open data)
@@ -1862,7 +1925,7 @@
                 onSnapshot(themeDocRef, (doc) => {
                     if (doc.exists()) {
                         const remoteTheme = doc.data();
-                        currentTheme = remoteTheme;
+                        currentTheme = { ...currentTheme, ...remoteTheme }; // Merge to keep defaults
                         applyTheme(currentTheme);
                         updateUI(currentTheme);
                     }
@@ -2278,10 +2341,25 @@
 
         // Apply theme to CSS variables
         function applyTheme(theme) {
+            // Apply Colors
             root.style.setProperty('--primary', theme.primary);
             root.style.setProperty('--primary-dim', theme.primary + '1A');
             root.style.setProperty('--secondary', theme.secondary);
             root.style.setProperty('--font-main', theme.font);
+
+            // Apply Mode Variables if they exist
+            if(theme.mode && themeModes[theme.mode]) {
+                const modeVars = themeModes[theme.mode];
+                for (const [key, value] of Object.entries(modeVars)) {
+                    root.style.setProperty(key, value);
+                }
+            } else {
+                // Fallback to dark mode defaults if undefined
+                const defaultMode = themeModes['dark'];
+                for (const [key, value] of Object.entries(defaultMode)) {
+                    root.style.setProperty(key, value);
+                }
+            }
         }
 
         // Update UI (Active States)
@@ -2292,10 +2370,15 @@
             document.querySelectorAll('#secondaryColors .color-circle').forEach(c => {
                 c.classList.toggle('active', c.getAttribute('data-color') === theme.secondary);
             });
-            document.querySelectorAll('.font-btn').forEach(b => {
+            document.querySelectorAll('.font-btn:not(.mode-btn)').forEach(b => {
                 const btnFont = b.getAttribute('data-font').replace(/'/g, "");
                 const currentFont = theme.font.replace(/'/g, "");
                 b.classList.toggle('active', btnFont === currentFont);
+            });
+            // Update Mode Buttons
+            document.querySelectorAll('.mode-btn').forEach(b => {
+                const btnMode = b.getAttribute('data-mode');
+                b.classList.toggle('active', btnMode === (theme.mode || 'dark'));
             });
         }
 
@@ -2334,7 +2417,8 @@
             const defaultTheme = {
                 primary: '#00ff88',
                 secondary: '#00ccff',
-                font: "'Inter', sans-serif"
+                font: "'Inter', sans-serif",
+                mode: 'dark'
             };
             // REVERTED: Root path
             await setDoc(doc(db, "website_state", "global_theme"), defaultTheme);
@@ -2372,10 +2456,20 @@
             });
         });
 
-        document.querySelectorAll('.font-btn').forEach(btn => {
+        document.querySelectorAll('.font-btn:not(.mode-btn)').forEach(btn => {
             btn.addEventListener('click', function() {
                 const font = this.getAttribute('data-font');
                 currentTheme.font = font;
+                applyTheme(currentTheme);
+                updateUI(currentTheme);
+            });
+        });
+
+        // Mode Button Listeners
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const mode = this.getAttribute('data-mode');
+                currentTheme.mode = mode;
                 applyTheme(currentTheme);
                 updateUI(currentTheme);
             });
