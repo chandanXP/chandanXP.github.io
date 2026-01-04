@@ -1737,6 +1737,9 @@
         const saveBtn = document.getElementById('saveThemeBtn');
         const resetBtn = document.getElementById('resetThemeBtn');
         
+        // Define appId using global variable or fallback
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
         let currentUser = null;
         let currentTheme = {
             primary: '#00ff88',
@@ -1756,7 +1759,8 @@
                 currentUser = user;
                 
                 // 1. Listen to Global Theme
-                const themeDocRef = doc(db, "website_state", "global_theme");
+                // Path updated: /artifacts/{appId}/public/data/website_state/global_theme
+                const themeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'website_state', 'global_theme');
                 onSnapshot(themeDocRef, (doc) => {
                     if (doc.exists()) {
                         const remoteTheme = doc.data();
@@ -1767,7 +1771,8 @@
                 });
 
                 // 2. Listen to Messages
-                const messagesRef = collection(db, "messages");
+                // Path updated: /artifacts/{appId}/public/data/messages
+                const messagesRef = collection(db, 'artifacts', appId, 'public', 'data', 'messages');
                 const q = query(messagesRef, orderBy("timestamp", "desc"), limit(20));
                 
                 onSnapshot(q, (snapshot) => {
@@ -1828,7 +1833,8 @@
                 });
 
                 // 3. Blog Feed Listener (New)
-                const blogsRef = collection(db, "blogs");
+                // Path updated: /artifacts/{appId}/public/data/blogs
+                const blogsRef = collection(db, 'artifacts', appId, 'public', 'data', 'blogs');
                 const blogQuery = query(blogsRef, orderBy("timestamp", "desc"), limit(10));
                 
                 onSnapshot(blogQuery, (snapshot) => {
@@ -1888,7 +1894,8 @@
                 });
 
                 // 3. Like Counter Listener
-                const likeDocRef = doc(db, "stats", "likes");
+                // Path updated: /artifacts/{appId}/public/data/stats/likes
+                const likeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'likes');
                 onSnapshot(likeDocRef, (doc) => {
                     if (doc.exists()) {
                         const data = doc.data();
@@ -1897,7 +1904,8 @@
                 });
 
                 // 4. Global View Counter Listener
-                const globalViewsRef = doc(db, "stats", "global_views");
+                // Path updated: /artifacts/{appId}/public/data/stats/global_views
+                const globalViewsRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'global_views');
                 onSnapshot(globalViewsRef, (doc) => {
                     if (doc.exists()) {
                         document.getElementById('globalViewCount').innerText = doc.data().count || 0;
@@ -1905,8 +1913,9 @@
                 });
 
                 // 5. Daily View Counter Listener (NEW)
+                // Path updated: /artifacts/{appId}/public/data/page_views/{todayStr}
                 const todayStr = new Date().toISOString().split('T')[0];
-                const todayDocRef = doc(db, "page_views", todayStr);
+                const todayDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'page_views', todayStr);
                 onSnapshot(todayDocRef, (docSnapshot) => {
                      const val = docSnapshot.exists() ? docSnapshot.data().views : 0;
                      const el = document.getElementById('todayViewCount');
@@ -1915,8 +1924,9 @@
 
                 // 6. Initial View Count Logic (Increment both daily and global)
                 const today = new Date().toISOString().split('T')[0];
-                const dailyViewRef = doc(db, "page_views", today); 
-                const globalViewRef = doc(db, "stats", "global_views");
+                // Paths updated
+                const dailyViewRef = doc(db, 'artifacts', appId, 'public', 'data', 'page_views', today); 
+                const globalViewRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'global_views');
 
                 runTransaction(db, async (transaction) => {
                     // Daily
@@ -1948,7 +1958,8 @@
         // --- Voting Logic ---
         async function handleVote(postId, isUpvote) {
             if(!currentUser) return;
-            const postRef = doc(db, "blogs", postId);
+            // Path updated
+            const postRef = doc(db, 'artifacts', appId, 'public', 'data', 'blogs', postId);
             const change = isUpvote ? 1 : -1;
             
             try {
@@ -1993,7 +2004,8 @@
             submitPostBtn.innerText = "Publishing...";
             
             try {
-                await addDoc(collection(db, "blogs"), {
+                // Path updated
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'blogs'), {
                     title: title,
                     subtitle: subtitle,
                     image: image,
@@ -2029,7 +2041,8 @@
 
             // Debounce local storage check (optional, but good for UX)
             // We allow multiple likes for fun like Medium/TikTok live
-            const likeDocRef = doc(db, "stats", "likes");
+            // Path updated
+            const likeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'stats', 'likes');
             
             runTransaction(db, async (transaction) => {
                 const sfDoc = await transaction.get(likeDocRef);
@@ -2059,7 +2072,8 @@
             postMsgBtn.disabled = true;
 
             try {
-                await addDoc(collection(db, "messages"), {
+                // Path updated
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'messages'), {
                     name: name || "Anonymous",
                     text: text,
                     timestamp: serverTimestamp()
@@ -2115,7 +2129,8 @@
             saveBtn.innerText = "Saving...";
             
             try {
-                await setDoc(doc(db, "website_state", "global_theme"), currentTheme);
+                // Path updated
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'website_state', 'global_theme'), currentTheme);
                 saveBtn.innerText = "Saved Global!";
                 saveBtn.style.background = "#25D366";
             } catch (error) {
@@ -2139,7 +2154,8 @@
                 secondary: '#00ccff',
                 font: "'Inter', sans-serif"
             };
-            await setDoc(doc(db, "website_state", "global_theme"), defaultTheme);
+            // Path updated
+            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'website_state', 'global_theme'), defaultTheme);
         });
 
         // --- UI Interactions ---
