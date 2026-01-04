@@ -648,6 +648,51 @@
             font-style: italic;
         }
 
+        /* --- SPOTIFY SECTION (NEW) --- */
+        .spotify-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .spotify-card {
+            background: rgba(29, 185, 84, 0.05);
+            border: 1px solid rgba(29, 185, 84, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+        }
+        .spotify-card:hover {
+            background: rgba(29, 185, 84, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.2);
+        }
+        .track-art {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .track-name {
+            font-weight: 700;
+            color: var(--text-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 3px;
+        }
+        .track-artist {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
         /* --- ACHIEVEMENTS SECTION --- */
         .achievements-grid {
             display: grid;
@@ -1661,6 +1706,19 @@
                 
                 <div id="blog-feed" class="blog-grid">
                     <div style="text-align:center; width:100%; color:var(--text-gray);">Loading posts...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPOTIFY SECTION (NEW) -->
+        <section id="spotify">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <span class="section-subtitle" style="color:#1DB954;">My Vibe</span>
+                    <h2 class="section-title">Recently Played <i class="fab fa-spotify" style="color:#1DB954;"></i></h2>
+                </div>
+                <div class="spotify-grid" id="spotifyTracks">
+                    <!-- Tracks injected via JS -->
                 </div>
             </div>
         </section>
@@ -2694,6 +2752,39 @@
                 }, 1000);
             });
         }
+        
+        // --- Spotify Mock Data Logic ---
+        const spotifyTracks = [
+            { title: "Dreaming", artist: "Metro Boomin, A$AP Rocky, Roisee", art: "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd" },
+            { title: "Starboy", artist: "The Weeknd, Daft Punk", art: "https://i.scdn.co/image/ab67616d0000b2734718e28d244851e9e87d1920" },
+            { title: "FE!N (feat. Playboi Carti)", artist: "Travis Scott", art: "https://i.scdn.co/image/ab67616d0000b273881d8d8378cd01099babcd44" },
+            { title: "Glimpse of Us", artist: "Joji", art: "https://i.scdn.co/image/ab67616d0000b273a4b95f2d6c6e7a2c7c7a7b8a" },
+            { title: "Popular", artist: "The Weeknd, Playboi Carti, Madonna", art: "https://i.scdn.co/image/ab67616d0000b273b5f9e28219c169fd4b9e8379" },
+            { title: "Paint The Town Red", artist: "Doja Cat", art: "https://i.scdn.co/image/ab67616d0000b27376c117367332349e52e50529" }
+        ];
+
+        function renderSpotify() {
+            const container = document.getElementById('spotifyTracks');
+            if(!container) return;
+            
+            // Limit to 4 for clean layout
+            const tracksToShow = spotifyTracks.slice(0, 4);
+            
+            container.innerHTML = tracksToShow.map(track => `
+                <div class="spotify-card">
+                    <img src="${track.art}" class="track-art" alt="${track.title}">
+                    <div class="track-info">
+                        <span class="track-name" title="${track.title}">${track.title}</span>
+                        <span class="track-artist">${track.artist}</span>
+                    </div>
+                    <i class="fab fa-spotify" style="margin-left:auto; color:#1DB954; font-size:1.5rem;"></i>
+                </div>
+            `).join('');
+        }
+        
+        // Initial render
+        renderSpotify();
+        
     </script>
 </body>
 </html>
