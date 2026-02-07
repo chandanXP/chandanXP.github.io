@@ -2,9 +2,8 @@ name: Portfolio Sync & Backup
 
 on:
   schedule:
-    # Run every 24 hours (at midnight UTC)
     - cron: '0 0 * * *'
-  workflow_dispatch: # Allows manual trigger button
+  workflow_dispatch:
 
 jobs:
   sync-state:
@@ -16,43 +15,64 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ==========================================
+      # START OF RANDOM SKIP LOGIC
+      # ==========================================
+      - name: Check Random Skip Status
+        id: check_skip
+        run: |
+          # Initialize file if it doesn't exist
+          if [ ! -f skip_state.txt ]; then echo "0" > skip_state.txt; fi
+          
+          SKIP_REMAINING=$(cat skip_state.txt)
+          
+          if [ "$SKIP_REMAINING" -gt 0 ]; then
+            NEW_SKIP=$((SKIP_REMAINING - 1))
+            echo "$NEW_SKIP" > skip_state.txt
+            echo "STILL_SKIPPING=true" >> $GITHUB_ENV
+            echo "Remaining skip days: $NEW_SKIP"
+          else
+            # Time to run! But first, pick the NEXT skip interval (1-4)
+            NEXT_SKIP=$(( ( RANDOM % 4 ) + 1 ))
+            echo "$NEXT_SKIP" > skip_state.txt
+            echo "STILL_SKIPPING=false" >> $GITHUB_ENV
+            echo "Running today. Next skip interval set to: $NEXT_SKIP days."
+          fi
+
+      - name: Commit Skip State
+        if: always() # Ensure we update the counter even if we skip the rest
+        run: |
+          git config --global user.name "chandanXP"
+          git config --global user.email "imjunior471@gmail.com"
+          git add skip_state.txt
+          git commit -m "Update skip counter [skip ci]" || exit 0
+          git push
+      # ==========================================
+      # END OF RANDOM SKIP LOGIC
+      # ==========================================
+
       - name: Fetch Real-Time Data from Firestore
+        if: env.STILL_SKIPPING == 'false'
         id: fetch_data
         env:
-          # Uses the secret you created to bypass domain restrictions
           API_KEY: ${{ secrets.FIREBASE_API_KEY }} 
           PROJECT_ID: "chandan-saroj-portfolio"
         run: |
-          # Get Today's Date
           TODAY=$(date +%Y-%m-%d)
-          
           echo "Fetching data for $TODAY..."
 
-          # 1. Fetch Global Likes
-          # Firestore REST API endpoint for the 'stats/likes' document
           LIKES_JSON=$(curl -s "https://firestore.googleapis.com/v1/projects/$PROJECT_ID/databases/(default)/documents/stats/likes?key=$API_KEY")
-          # Extract integer value using grep/sed (simple parsing) to avoid external jq dependency issues if env varies, though ubuntu-latest usually has jq.
-          # Using jq for reliability:
           LIKES=$(echo "$LIKES_JSON" | jq -r '.fields.count.integerValue // 0')
 
-          # 2. Fetch Current Theme
           THEME_JSON=$(curl -s "https://firestore.googleapis.com/v1/projects/$PROJECT_ID/databases/(default)/documents/website_state/global_theme?key=$API_KEY")
           COLOR=$(echo "$THEME_JSON" | jq -r '.fields.primary.stringValue // "Unknown"')
-          FONT=$(echo "$THEME_JSON" | jq -r '.fields.font.stringValue // "Inter"')
-
-          # 3. Fetch Today's Page Views
+          
           VIEWS_JSON=$(curl -s "https://firestore.googleapis.com/v1/projects/$PROJECT_ID/databases/(default)/documents/page_views/$TODAY?key=$API_KEY")
           VIEWS=$(echo "$VIEWS_JSON" | jq -r '.fields.views.integerValue // 0')
 
-          # 4. Count Total Messages (Listing documents in collection)
-          # Note: Firestore list endpoint returns a page of docs. This counts the first page (up to 300).
           MSG_JSON=$(curl -s "https://firestore.googleapis.com/v1/projects/$PROJECT_ID/databases/(default)/documents/messages?key=$API_KEY&pageSize=300")
-          # Count the number of "name" fields found in the response to estimate message count
           MSG_COUNT=$(echo "$MSG_JSON" | grep -o '"name":' | wc -l)
 
-          echo "Data Fetched -> Likes: $LIKES, Views: $VIEWS, Msgs: $MSG_COUNT, Theme: $COLOR"
-
-          # Export variables for the next step
           echo "LIKES=$LIKES" >> $GITHUB_ENV
           echo "VIEWS=$VIEWS" >> $GITHUB_ENV
           echo "MSG_COUNT=$MSG_COUNT" >> $GITHUB_ENV
@@ -60,8 +80,8 @@ jobs:
           echo "TODAY=$TODAY" >> $GITHUB_ENV
 
       - name: Update State Logs
+        if: env.STILL_SKIPPING == 'false'
         run: |
-          # 1. Update a Markdown Dashboard
           echo "# 📊 Live Portfolio Status" > STATE.md
           echo "Last Synced: $(date)" >> STATE.md
           echo "" >> STATE.md
@@ -74,28 +94,17 @@ jobs:
           echo "" >> STATE.md
           echo "![Chart](https://quickchart.io/chart?c={type:'bar',data:{labels:['Likes','Messages','DailyViews'],datasets:[{label:'Stats',data:[$LIKES,$MSG_COUNT,$VIEWS]}]}})" >> STATE.md
 
-          # 2. Append to a JSON History File (Database Backup)
-          # Create file if not exists
           if [ ! -f history.jsonl ]; then touch history.jsonl; fi
-          
-          # Create JSON object
           JSON_DATA="{\"date\": \"$TODAY\", \"likes\": $LIKES, \"daily_views\": $VIEWS, \"total_messages\": $MSG_COUNT, \"theme\": \"$THEME_COLOR\"}"
-          
-          # Append to file
           echo "$JSON_DATA" >> history.jsonl
 
-      - name: Commit and Push
+      - name: Commit and Push Data
+        if: env.STILL_SKIPPING == 'false'
         run: |
-          git config --global user.name "chandanXP"
-          git config --global user.email "imjunior471@gmail.com"
-          
           git add STATE.md history.jsonl
-          
-          # Check if there are changes before committing to avoid empty commit errors
           if git diff --staged --quiet; then
             echo "No changes in stats today."
           else
-            # Dynamic Commit Message
             git commit -m "Sync: $VIEWS views, $LIKES likes, $MSG_COUNT msgs ($TODAY)"
             git push
           fi
