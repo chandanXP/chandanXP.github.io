@@ -157,9 +157,6 @@
             transition: background 0.3s;
         }
         
-        /* Adjust header bg for light mode dynamically via var override or specific class if needed, 
-           but glassmorphism usually looks okay. We might refine this in JS styles. */
-
         .nav-container {
             display: flex;
             justify-content: space-between;
@@ -1905,7 +1902,6 @@
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        // Analytics is optional, wrap in try-catch if needed, usually fine
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
         const auth = getAuth(app);
@@ -1989,7 +1985,6 @@
 
         async function fetchWeatherData(lat, lon) {
             try {
-                // Fetch Weather & AQI from Open-Meteo (Free, No Key)
                 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`;
                 const aqiUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi&timezone=auto`;
 
@@ -2016,7 +2011,6 @@
              const code = weather.current.weather_code;
              const aqiVal = aqi.current.us_aqi;
              
-             // Simple WMO Code mapping to Icon & Text
              let icon = 'fa-sun';
              let text = 'Clear';
              
@@ -2026,13 +2020,10 @@
              else if (code >= 71 && code <= 77) { icon = 'fa-snowflake'; text = 'Snow'; }
              else if (code >= 80 && code <= 99) { icon = 'fa-bolt'; text = 'Storm'; }
 
-             // Update DOM
              document.getElementById('weatherTemp').innerHTML = `<i class="fas fa-thermometer-half"></i> <span>${temp}°C</span>`;
              document.getElementById('weatherCondition').innerHTML = `<i class="fas ${icon}"></i> <span>${text}</span>`;
              document.getElementById('weatherAQI').innerHTML = `<i class="fas fa-wind"></i> <span>AQI: ${aqiVal}</span>`;
              
-             // Logic to update location text check
-             // Since Open-Meteo doesn't give city names, we can check if coords match Delhi roughly
              const isDelhi = Math.abs(weather.latitude - DELHI_COORDS.lat) < 0.1;
              
              document.getElementById('weatherLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> <span>${isDelhi ? 'Delhi' : 'Local'}</span>`;
@@ -2041,21 +2032,17 @@
         }
 
         function initWeather() {
-             // 1. Try Geolocation
              if (navigator.geolocation) {
                  navigator.geolocation.getCurrentPosition(
                      (position) => {
-                         // Success: User allowed location
                          fetchWeatherData(position.coords.latitude, position.coords.longitude);
                      },
                      (error) => {
-                         // Error/Denied: Fallback to Delhi
                          console.warn("Location denied, using Delhi fallback.");
                          fetchWeatherData(DELHI_COORDS.lat, DELHI_COORDS.lon);
                      }
                  );
              } else {
-                 // No support: Fallback to Delhi
                  fetchWeatherData(DELHI_COORDS.lat, DELHI_COORDS.lon);
              }
         }
@@ -2074,7 +2061,7 @@
                 onSnapshot(themeDocRef, (doc) => {
                     if (doc.exists()) {
                         const remoteTheme = doc.data();
-                        currentTheme = { ...currentTheme, ...remoteTheme }; // Merge to keep defaults
+                        currentTheme = { ...currentTheme, ...remoteTheme };
                         applyTheme(currentTheme);
                         updateUI(currentTheme);
                     }
@@ -2092,14 +2079,12 @@
                         recent.push(msg);
                     });
 
-                    // Sort in memory (descending)
                     recent.sort((a, b) => {
                         const tA = a.timestamp ? a.timestamp.seconds : 0;
                         const tB = b.timestamp ? b.timestamp.seconds : 0;
                         return tB - tA;
                     });
                     
-                    // Limit in memory
                     recent = recent.slice(0, 20);
 
                     recent.forEach((msg) => {
@@ -2135,7 +2120,6 @@
                         }
 
                         const placed = [];
-                        // Use the top 9 most recent for bubbles
                         recent.slice(0, 9).forEach((msg) => {
                             const bubble = document.createElement('div');
                             bubble.className = 'hero-msg-bubble';
@@ -2162,22 +2146,20 @@
                     blogGrid.innerHTML = '';
                     
                     let posts = [];
-                    loadedPosts = {}; // Clear cache
+                    loadedPosts = {}; 
 
                     snapshot.forEach((docSnapshot) => {
                         const data = docSnapshot.data();
                         posts.push({ id: docSnapshot.id, ...data });
-                        loadedPosts[docSnapshot.id] = data; // Store for modal
+                        loadedPosts[docSnapshot.id] = data; 
                     });
 
-                    // Sort in memory
                     posts.sort((a, b) => {
                         const tA = a.timestamp ? a.timestamp.seconds : 0;
                         const tB = b.timestamp ? b.timestamp.seconds : 0;
                         return tB - tA;
                     });
                     
-                    // Limit in memory
                     posts = posts.slice(0, 10);
 
                     if(posts.length === 0) {
@@ -2186,11 +2168,9 @@
 
                     posts.forEach((post) => {
                         const score = (post.score || 0);
-                        
                         const card = document.createElement('div');
                         card.className = 'blog-card';
                         
-                        // Creating the Voting Section HTML
                         const voteSection = `
                             <div class="vote-section">
                                 <button class="vote-btn upvote" data-id="${post.id}"><i class="fas fa-arrow-up"></i></button>
@@ -2199,12 +2179,9 @@
                             </div>
                         `;
                         
-                        // Content Section (Preview Only)
                         const imageSection = post.image ? `<img src="${post.image}" class="blog-image" alt="Post Image">` : '';
                         const subTitle = post.subtitle ? `<div class="blog-subtitle">${post.subtitle}</div>` : '';
                         const date = post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString() : 'Just now';
-                        
-                        // Strip HTML for preview text
                         const previewText = stripHtml(post.content);
 
                         const contentSection = `
@@ -2223,10 +2200,9 @@
                         blogGrid.appendChild(card);
                     });
 
-                    // Add Event Listeners for Voting
                     document.querySelectorAll('.vote-btn').forEach(btn => {
                         btn.addEventListener('click', (e) => {
-                            e.stopPropagation(); // Prevent modal from opening
+                            e.stopPropagation(); 
                             const id = btn.getAttribute('data-id');
                             const isUp = btn.classList.contains('upvote');
                             window.handleVote(id, isUp);
@@ -2251,7 +2227,7 @@
                     }
                 });
 
-                // 5. Daily View Counter Listener (NEW)
+                // 5. Daily View Counter Listener
                 const todayStr = new Date().toISOString().split('T')[0];
                 const todayDocRef = doc(db, "page_views", todayStr);
                 onSnapshot(todayDocRef, (docSnapshot) => {
@@ -2260,13 +2236,12 @@
                      if(el) el.innerText = val;
                 });
 
-                // 6. Initial View Count Logic (Increment both daily and global)
+                // 6. Initial View Count Logic
                 const today = new Date().toISOString().split('T')[0];
                 const dailyViewRef = doc(db, "page_views", today); 
                 const globalViewRef = doc(db, "stats", "global_views");
 
                 runTransaction(db, async (transaction) => {
-                    // Daily
                     const dailyDoc = await transaction.get(dailyViewRef);
                     if (!dailyDoc.exists()) {
                         transaction.set(dailyViewRef, { views: 1 });
@@ -2275,7 +2250,6 @@
                         transaction.update(dailyViewRef, { views: newViews });
                     }
 
-                    // Global
                     const globalDoc = await transaction.get(globalViewRef);
                     if (!globalDoc.exists()) {
                         transaction.set(globalViewRef, { count: 1 });
@@ -2319,7 +2293,6 @@
         if(closeBlogBtn) closeBlogBtn.onclick = () => blogModal.style.display = "none";
         if(closeReadBtn) closeReadBtn.onclick = () => readPostModal.style.display = "none";
         
-        // Open Read Modal Function (Made Global)
         window.openReadPost = function(postId) {
             const post = loadedPosts[postId];
             if(!post) return;
@@ -2342,7 +2315,6 @@
             readPostModal.style.display = "flex";
         };
 
-        // Close modal when clicking outside
         window.addEventListener('click', (e) => {
             if(e.target == blogModal) blogModal.style.display = "none";
             if(e.target == readPostModal) readPostModal.style.display = "none";
@@ -2354,12 +2326,12 @@
           placeholder: 'Post Description/Content...',
           modules: {
             toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+              ['bold', 'italic', 'underline', 'strike'],
               ['blockquote', 'code-block'],
-              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'header': 1 }, { 'header': 2 }],
               [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-              ['clean']                                         // remove formatting button
+              [{ 'color': [] }, { 'background': [] }],
+              ['clean']
             ]
           }
         });
@@ -2369,20 +2341,12 @@
             const title = document.getElementById('blogTitle').value;
             const subtitle = document.getElementById('blogSubtitle').value;
             const image = document.getElementById('blogImage').value;
-            
-            // Get content from Quill
             const content = quill.root.innerHTML;
-            const rawText = quill.getText().trim(); // check if empty
-
+            const rawText = quill.getText().trim();
             const password = document.getElementById('blogPassword').value;
 
             if(!title || !rawText) { alert("Title and Content are required!"); return; }
-            
-            // Password Check (Client-side for portfolio demo)
-            if(password !== "220919") {
-                alert("Incorrect Admin Password!");
-                return;
-            }
+            if(password !== "220919") { alert("Incorrect Admin Password!"); return; }
 
             submitPostBtn.innerText = "Publishing...";
             
@@ -2391,42 +2355,31 @@
                     title: title,
                     subtitle: subtitle,
                     image: image,
-                    content: content, // Saving HTML content
+                    content: content, 
                     score: 0,
                     timestamp: serverTimestamp()
                 });
                 
                 alert("Post Published!");
                 blogModal.style.display = "none";
-                // Reset form
                 document.getElementById('blogTitle').value = "";
                 document.getElementById('blogSubtitle').value = "";
                 document.getElementById('blogImage').value = "";
-                quill.setContents([]); // Clear editor
+                quill.setContents([]); 
                 document.getElementById('blogPassword').value = "";
             } catch(e) {
                 console.error(e);
-                if (e.code === 'permission-denied') {
-                    alert("Permission Denied! \n\nPlease go to your Firebase Console > Firestore Database > Rules and add the rules provided.");
-                } else {
-                    alert("Error publishing post: " + e.message);
-                }
+                alert("Error publishing post: " + e.message);
             }
             submitPostBtn.innerText = "Publish Post";
         });
-
 
         // --- Like Button Logic ---
         const likeBtn = document.getElementById('likeBtn');
         likeBtn.addEventListener('click', () => {
             if(!currentUser) return;
-            
-            // Visual feedback immediately
             likeBtn.classList.add('liked');
             setTimeout(() => likeBtn.classList.remove('liked'), 400);
-
-            // Debounce local storage check (optional, but good for UX)
-            // We allow multiple likes for fun like Medium/TikTok live
             const likeDocRef = doc(db, "stats", "likes");
             
             runTransaction(db, async (transaction) => {
@@ -2477,23 +2430,19 @@
             }, 2000);
         });
 
-
         // Apply theme to CSS variables
         function applyTheme(theme) {
-            // Apply Colors
             root.style.setProperty('--primary', theme.primary);
             root.style.setProperty('--primary-dim', theme.primary + '1A');
             root.style.setProperty('--secondary', theme.secondary);
             root.style.setProperty('--font-main', theme.font);
 
-            // Apply Mode Variables if they exist
             if(theme.mode && themeModes[theme.mode]) {
                 const modeVars = themeModes[theme.mode];
                 for (const [key, value] of Object.entries(modeVars)) {
                     root.style.setProperty(key, value);
                 }
             } else {
-                // Fallback to dark mode defaults if undefined
                 const defaultMode = themeModes['dark'];
                 for (const [key, value] of Object.entries(defaultMode)) {
                     root.style.setProperty(key, value);
@@ -2514,25 +2463,62 @@
                 const currentFont = theme.font.replace(/'/g, "");
                 b.classList.toggle('active', btnFont === currentFont);
             });
-            // Update Mode Buttons
             document.querySelectorAll('.mode-btn').forEach(b => {
                 const btnMode = b.getAttribute('data-mode');
                 b.classList.toggle('active', btnMode === (theme.mode || 'dark'));
             });
         }
 
+        // --- Save to Cloud ---
+        saveBtn.addEventListener('click', async () => {
+            if (!currentUser) {
+                saveBtn.innerText = "Auth Wait...";
+                setTimeout(() => saveBtn.innerText = "Save to Cloud", 1500);
+                return; 
+            }
+
+            const originalText = saveBtn.innerText;
+            saveBtn.innerText = "Saving...";
+            
+            try {
+                await setDoc(doc(db, "website_state", "global_theme"), currentTheme);
+                saveBtn.innerText = "Saved Global!";
+                saveBtn.style.background = "#25D366";
+            } catch (error) {
+                console.error("Error saving theme: ", error);
+                alert("Save Failed: " + error.message);
+                saveBtn.innerText = "Error!";
+                saveBtn.style.background = "#ff0055";
+            }
+
+            setTimeout(() => {
+                saveBtn.innerText = originalText;
+                saveBtn.style.background = "";
+            }, 2000);
+        });
+
+        // --- Reset ---
+        resetBtn.addEventListener('click', async () => {
+            if (!currentUser) return;
+            const defaultTheme = {
+                primary: '#00ff88',
+                secondary: '#00ccff',
+                font: "'Inter', sans-serif",
+                mode: 'dark'
+            };
+            await setDoc(doc(db, "website_state", "global_theme"), defaultTheme);
+        });
+
         // --- UI Interactions ---
         const themeBtn = document.getElementById('themeToggleBtn');
         const themePanel = document.getElementById('themePanel');
         const closeThemeBtn = document.getElementById('closeThemePanel');
-        // New Mobile Theme Trigger
         const mobileThemeBtn = document.getElementById('mobileThemeBtn');
 
         const togglePanel = () => themePanel.classList.toggle('active');
         
         if(themeBtn) themeBtn.onclick = togglePanel;
-        if(mobileThemeBtn) mobileThemeBtn.onclick = togglePanel; // Hook up mobile btn
-        
+        if(mobileThemeBtn) mobileThemeBtn.onclick = togglePanel; 
         if(closeThemeBtn) closeThemeBtn.onclick = () => themePanel.classList.remove('active');
 
         document.querySelectorAll('#primaryColors .color-circle').forEach(circle => {
@@ -2562,7 +2548,6 @@
             });
         });
 
-        // Mode Button Listeners
         document.querySelectorAll('.mode-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const mode = this.getAttribute('data-mode');
@@ -2572,7 +2557,7 @@
             });
         });
 
-        // --- Mobile Menu (Original Toggle - kept for safety, but hidden via CSS) ---
+        // --- Mobile Menu ---
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.navbar-menu');
         const navLinks = document.querySelectorAll('.navbar-menu a');
@@ -2580,9 +2565,7 @@
         if(menuToggle) {
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
-                menuToggle.innerHTML = navMenu.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
+                menuToggle.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
         }
 
@@ -2658,10 +2641,7 @@
         function renderSpotify() {
             const container = document.getElementById('spotifyTracks');
             if(!container) return;
-            
-            // Limit to 4 for clean layout
             const tracksToShow = spotifyTracks.slice(0, 4);
-            
             container.innerHTML = tracksToShow.map(track => `
                 <div class="spotify-card">
                     <img src="${track.art}" class="track-art" alt="${track.title}">
@@ -2673,10 +2653,7 @@
                 </div>
             `).join('');
         }
-        
-        // Initial renders
         renderSpotify();
-        
     </script>
 </body>
 </html>
