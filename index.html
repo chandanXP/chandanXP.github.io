@@ -7,21 +7,20 @@
     
     <!-- Primary Meta Tags -->
     <title>Chandan Saroj - Senior MERN Stack Developer | DevOps & AI Expert</title>
-    <meta name="title" content="Chandan Saroj - Senior MERN Stack Developer">
-    <meta name="description" content="Senior MERN Developer shipping live industry projects (Hidout, SimpleBit). Expert in React, Node.js, Jenkins CI/CD. National Hackathon Winner.">
-    <meta name="keywords" content="Chandan Saroj, Senior MERN Developer, React, Node.js, Jenkins, WebC, AI/ML, Chandigarh">
+    <meta name="title" content="Chandan Saroj - Senior MERN Stack Developer | DevOps & AI Expert">
+    <meta name="description" content="Senior MERN Stack Developer shipping live industry projects (Hidout, SimpleBit). Expert in React, Node.js, Jenkins CI/CD, and Secure Architecture. National Hackathon Winner.">
+    <meta name="keywords" content="Chandan Saroj, Senior MERN Developer, React Developer, Node.js, ASP.NET Core, AI/ML, YOLOv8, Computer Vision, Hackathon Winner, NIELIT, Delhi">
     <meta name="author" content="Chandan Saroj">
     
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chandansaroj.in/">
     <meta property="og:title" content="Chandan Saroj - Senior MERN Stack Developer">
-    <meta property="og:description" content="Shipping scalable production systems. Expert in Booking Engines, Fintech Dashboards, and DevOps.">
+    <meta property="og:description" content="Building scalable systems at WebC. National Hackathon Winner. Specialist in Secure APIs and Live Deployments.">
     <meta property="og:image" content="assets/img/chandan-saroj.png">
 
     <!-- Fonts & Icons -->
     <script src="https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous"></script>
-    
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -31,18 +30,19 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     
-    <!-- Google Fonts (All requested fonts restored) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Orbitron:wght@400;500;700;900&family=Rubik+Glitch&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            /* Dynamic Theme Variables */
+            /* Default Theme Variables */
             --primary: #00ff88;
             --primary-dim: rgba(0, 255, 136, 0.1);
             --secondary: #00ccff;
+            --accent: #7000ff;
             
             /* Background/Mode Variables */
             --dark: #0a0a0a;
@@ -73,7 +73,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* --- TYPOGRAPHY --- */
         h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; color: var(--text-light); }
         h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -1px; }
         h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.5px; }
@@ -82,7 +81,6 @@
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
 
-        /* --- UTILITY CLASSES --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         .btn {
@@ -116,6 +114,7 @@
         .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; display: flex; align-items: center; gap: 5px; }
         .logo span:first-child { color: var(--primary); }
+        .logo span:last-child { color: var(--text-light); }
         .navbar-menu { display: flex; gap: 2.5rem; }
         .navbar-menu a { font-weight: 500; font-size: 0.95rem; position: relative; opacity: 0.8; color: var(--text-light); }
         .navbar-menu a:hover { opacity: 1; color: var(--primary); }
@@ -165,7 +164,7 @@
             100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         }
 
-        /* Floating Hero Messages */
+        /* Floating Messages */
         .hero-msg-bubble {
             position: absolute; background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-left: 3px solid var(--primary); border-radius: 8px;
@@ -181,15 +180,6 @@
         .section-header { text-align: center; margin-bottom: 4rem; }
         .section-subtitle { color: var(--primary); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem; }
         .section-title { position: relative; display: inline-block; }
-
-        /* --- ACHIEVEMENTS --- */
-        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .achievement-card { background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid var(--border); padding: 2rem; border-radius: 16px; position: relative; transition: var(--transition); }
-        .achievement-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary); border-radius: 4px 0 0 4px; }
-        .achievement-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); border-color: var(--primary); }
-        .achievement-icon { font-size: 2rem; color: var(--secondary); margin-bottom: 1rem; }
-        .achievement-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-        .achievement-highlight { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
 
         /* --- EXPERIENCE TIMELINE --- */
         .timeline { position: relative; max-width: 900px; margin: 0 auto; }
@@ -227,14 +217,22 @@
         .link-btn { font-size: 0.9rem; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 5px; }
         .link-btn:hover { text-decoration: underline; color: var(--secondary); }
 
-        /* --- SKILLS --- */
+        /* --- SKILLS & ACHIEVEMENTS --- */
         .skills-content { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1.2rem; }
         .skill-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.2rem; border-radius: 12px; text-align: center; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 120px; }
         .skill-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 5px 15px var(--primary-dim); }
         .skill-icon { font-size: 2rem; margin-bottom: 0.8rem; background: -webkit-linear-gradient(var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .achievement-card { background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid var(--border); padding: 2rem; border-radius: 16px; position: relative; transition: var(--transition); }
+        .achievement-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary); border-radius: 4px 0 0 4px; }
+        .achievement-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); border-color: var(--primary); }
+        .achievement-icon { font-size: 2rem; color: var(--secondary); margin-bottom: 1rem; }
+        .achievement-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .achievement-highlight { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
 
-        /* --- BLOG SECTION --- */
+        /* --- BLOG --- */
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .blog-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: row; transition: var(--transition); cursor: pointer; }
         .blog-card:hover { border-color: var(--secondary); transform: translateY(-5px); }
@@ -249,28 +247,7 @@
         .blog-image { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; border: 1px solid var(--border); background: #111; }
         .blog-text-preview { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
 
-        /* Read Post Modal */
-        #readPostModal .modal-content { width: 95%; max-width: 900px; height: 90vh; padding: 0; overflow: hidden; display: flex; flex-direction: column; text-align: left; background: var(--darker); }
-        .read-modal-body { padding: 2rem; overflow-y: auto; height: 100%; }
-        .read-modal-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin: 1rem 0; border: 1px solid var(--border); }
-        .read-modal-text { font-size: 1rem; line-height: 1.8; color: var(--text-light); }
-        .read-modal-text img { max-width: 100%; height: auto; border-radius: 8px; }
-
-        /* Quill Editor overrides */
-        .ql-toolbar.ql-snow { background: #e0e0e0; border-color: var(--border) !important; border-radius: 8px 8px 0 0; }
-        .ql-container.ql-snow { border-color: var(--border) !important; border-radius: 0 0 8px 8px; background: rgba(0,0,0,0.3); color: var(--text-light); font-family: var(--font-main); font-size: 1rem; }
-        .ql-editor { min-height: 150px; }
-
-        /* --- SPOTIFY --- */
-        .spotify-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-        .spotify-card { background: rgba(29, 185, 84, 0.05); border: 1px solid rgba(29, 185, 84, 0.2); padding: 1rem; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: var(--transition); }
-        .spotify-card:hover { background: rgba(29, 185, 84, 0.15); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(29, 185, 84, 0.2); }
-        .track-art { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
-        .track-info { display: flex; flex-direction: column; overflow: hidden; }
-        .track-name { font-weight: 700; color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
-        .track-artist { font-size: 0.85rem; color: var(--text-gray); }
-
-        /* --- COMMUNITY STATS & CHAT --- */
+        /* --- COMMUNITY STATS & DISCUSSION --- */
         #community-stats { background: linear-gradient(to top, var(--dark), var(--darker)); position: relative; padding-bottom: 0; }
         .stats-wrapper { max-width: 800px; margin: 0 auto; }
         .discussion-form-card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 2rem; }
@@ -281,6 +258,15 @@
         .message-card strong { display: block; color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
         .message-card p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 0.5rem; line-height: 1.5; }
         .message-time { font-size: 0.75rem; color: var(--text-gray); text-align: right; display: block; }
+
+        /* --- SPOTIFY --- */
+        .spotify-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+        .spotify-card { background: rgba(29, 185, 84, 0.05); border: 1px solid rgba(29, 185, 84, 0.2); padding: 1rem; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: var(--transition); }
+        .spotify-card:hover { background: rgba(29, 185, 84, 0.15); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(29, 185, 84, 0.2); }
+        .track-art { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+        .track-info { display: flex; flex-direction: column; overflow: hidden; }
+        .track-name { font-weight: 700; color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
+        .track-artist { font-size: 0.85rem; color: var(--text-gray); }
 
         /* --- CONTACT & FOOTER --- */
         #contact { background: linear-gradient(to top, var(--darker), var(--dark)); padding: 6rem 0 2rem; border-top: 1px solid var(--border); }
@@ -295,25 +281,28 @@
         .footer-bottom { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; text-align: center; }
         .view-counter { font-size: 0.9rem; color: var(--text-light); background: rgba(255,255,255,0.05); padding: 6px 15px; border-radius: 20px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); }
 
-        /* --- THEME SWITCHER UI --- */
+        /* --- THEME PANEL --- */
         .theme-toggle-btn { position: fixed; top: 100px; right: 0; width: 45px; height: 45px; background: var(--card-bg); border-radius: 8px 0 0 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; border: 1px solid var(--border); border-right: none; color: var(--primary); box-shadow: -5px 5px 15px rgba(0,0,0,0.2); transition: var(--transition); }
         .theme-toggle-btn:hover { background: var(--darker); }
         
         .theme-panel { position: fixed; top: 100px; right: -360px; width: 340px; background: var(--darker); backdrop-filter: blur(15px); border-radius: 0 0 0 12px; border: 1px solid var(--border); border-right: none; z-index: 998; padding: 1.5rem; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 85vh; overflow-y: auto; }
         .theme-panel.active { right: 0; }
-        
         .theme-section-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-gray); margin-bottom: 0.8rem; margin-top: 1.2rem; display: block; }
         
-        .mode-options, .font-options { display: flex; gap: 10px; flex-wrap: wrap; }
-        .option-btn { flex: 1 1 30%; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-light); font-size: 0.85rem; text-align: center; transition: var(--transition); }
-        .option-btn.active { background: var(--primary); color: var(--dark); font-weight: 600; }
-        
-        /* Custom Color Picker Styling */
-        .color-picker-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .color-input-wrapper { flex: 1; display: flex; align-items: center; background: rgba(255,255,255,0.05); padding: 5px; border-radius: 6px; border: 1px solid var(--border); }
-        input[type="color"] { border: none; width: 30px; height: 30px; cursor: pointer; background: none; margin-right: 10px; }
+        /* Custom Color Pickers */
+        .color-input-wrapper { display: flex; align-items: center; background: rgba(255,255,255,0.05); padding: 5px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 10px; }
+        input[type="color"] { border: none; width: 40px; height: 30px; cursor: pointer; background: none; margin-right: 10px; }
         .hex-display { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-light); opacity: 0.8; }
 
+        /* Theme Options */
+        .color-options, .mode-options, .font-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        .color-circle { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.1); transition: transform 0.2s; }
+        .color-circle:hover { transform: scale(1.1); }
+        .color-circle.active { border-color: white; transform: scale(1.15); }
+        
+        .option-btn { flex: 1 1 30%; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-light); font-size: 0.85rem; transition: var(--transition); text-align: center; }
+        .option-btn.active { background: var(--primary); color: var(--dark); font-weight: 600; }
+        
         .theme-actions { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 10px; }
         .theme-action-btn { flex: 1; padding: 8px; border-radius: 6px; border: none; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--transition); }
         .btn-save { background: var(--primary); color: var(--dark); }
@@ -330,14 +319,25 @@
         @keyframes popHeart { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
         .like-count-text { color: var(--text-light); font-weight: 700; font-size: 0.9rem; }
 
+        /* Modals & Quill */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
         .modal-content { background: var(--darker); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 400px; border: 1px solid var(--border); text-align: center; position: relative; }
         .close-modal { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; color: var(--text-gray); }
         .action-btn { padding: 1rem; border-radius: 8px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 1rem; }
         .btn-wa { background: #25D366; color: white; }
         .btn-mail { background: var(--primary); color: var(--dark); }
+        
+        #readPostModal .modal-content { width: 95%; max-width: 900px; height: 90vh; padding: 0; overflow: hidden; display: flex; flex-direction: column; text-align: left; background: var(--darker); }
+        .read-modal-body { padding: 2rem; overflow-y: auto; height: 100%; }
+        .read-modal-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin: 1rem 0; border: 1px solid var(--border); }
+        .read-modal-text { font-size: 1rem; line-height: 1.8; color: var(--text-light); }
+        .read-modal-text img { max-width: 100%; height: auto; border-radius: 8px; }
+        
+        .ql-toolbar.ql-snow { background: #e0e0e0; border-color: var(--border) !important; border-radius: 8px 8px 0 0; }
+        .ql-container.ql-snow { border-color: var(--border) !important; border-radius: 0 0 8px 8px; background: rgba(0,0,0,0.3); color: var(--text-light); font-family: var(--font-main); font-size: 1rem; }
+        .ql-editor { min-height: 150px; }
 
-        /* Mobile Bottom Nav */
+        /* Mobile */
         .mobile-bottom-nav {
             display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: 65px;
             background: var(--card-bg); backdrop-filter: blur(15px); border-top: 1px solid var(--border);
@@ -350,18 +350,8 @@
         }
         .mobile-bottom-nav .nav-item:hover, .mobile-bottom-nav .nav-item.active { color: var(--primary); }
 
-        /* Responsive */
-        @media screen and (max-width: 992px) {
-            .hero-wrapper { flex-direction: column-reverse; text-align: center; gap: 3rem; }
-            .hero-stats { justify-content: center; }
-            .skills-content { grid-template-columns: 1fr; text-align: center; }
-            .skills-grid { justify-content: center; }
-            .footer-wrapper { grid-template-columns: 1fr; gap: 3rem; }
-            .stats-wrapper { max-width: 100%; }
-        }
         @media screen and (max-width: 768px) {
             .menu-toggle { display: block; }
-            .nav-container nav { display: none; }
             .navbar-menu { display: none; }
             .mobile-bottom-nav { display: flex; }
             #contact { padding-bottom: 6rem; }
@@ -407,7 +397,7 @@
     <!-- Theme Toggle Button -->
     <div class="theme-toggle-btn" id="themeToggleBtn"><i class="fas fa-palette"></i></div>
 
-    <!-- THEME PANEL -->
+    <!-- THEME PANEL (RESTORED & UPGRADED) -->
     <div class="theme-panel" id="themePanel">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
             <h4 style="color:white;">Theme Settings</h4>
@@ -429,15 +419,29 @@
             <input type="color" id="primaryColorInput" value="#00ff88">
             <span class="hex-display" id="primaryHex">#00ff88</span>
         </div>
+        <!-- Preset Circles -->
+        <div class="color-options" id="primaryColors" style="margin-bottom:1rem;">
+            <div class="color-circle active" style="background: #00ff88;" data-color="#00ff88"></div>
+            <div class="color-circle" style="background: #ff0055;" data-color="#ff0055"></div>
+            <div class="color-circle" style="background: #0077ff;" data-color="#0077ff"></div>
+            <div class="color-circle" style="background: #bf00ff;" data-color="#bf00ff"></div>
+            <div class="color-circle" style="background: #ffcc00;" data-color="#ffcc00"></div>
+        </div>
 
         <span class="theme-section-title">Secondary Color</span>
         <div class="color-input-wrapper">
             <input type="color" id="secondaryColorInput" value="#00ccff">
             <span class="hex-display" id="secondaryHex">#00ccff</span>
         </div>
+        <div class="color-options" id="secondaryColors">
+            <div class="color-circle" style="background: #00ccff;" data-color="#00ccff"></div>
+            <div class="color-circle active" style="background: #ff5f00;" data-color="#ff5f00"></div>
+            <div class="color-circle" style="background: #00ffaa;" data-color="#00ffaa"></div>
+            <div class="color-circle" style="background: #ff00cc;" data-color="#ff00cc"></div>
+        </div>
 
         <!-- 3. Fonts -->
-        <span class="theme-section-title">Typography</span>
+        <span class="theme-section-title" style="margin-top:1.5rem;">Typography</span>
         <div class="font-options">
             <div class="option-btn font-btn active" data-font="'Inter', sans-serif">Modern</div>
             <div class="option-btn font-btn" data-font="'Fira Code', monospace">Coder</div>
@@ -533,7 +537,7 @@
                     <h2 class="section-title">Professional Journey</h2>
                 </div>
                 <div class="timeline">
-                    <!-- WebC -->
+                    <!-- Job 1: WebC (Left) -->
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <span class="timeline-date">Jan 2026 - Present</span>
@@ -547,7 +551,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- NIELIT SDE -->
+                    <!-- Job 2: NIELIT SDE (Right) -->
                     <div class="timeline-item right">
                         <div class="timeline-content">
                             <span class="timeline-date">May 2024 - Dec 2025</span>
@@ -560,7 +564,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- NIELIT Intern -->
+                    <!-- Job 3: NIELIT Intern (Left) -->
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <span class="timeline-date">Jan 2023 - Apr 2024</span>
@@ -569,6 +573,18 @@
                             <ul>
                                 <li>Developed full-stack LMS using Django & React.</li>
                                 <li>Led the Identity Card Automation project using Python & MongoDB.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Education (Right) -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2019 - 2023</span>
+                            <h3>B.Tech - Computer Science</h3>
+                            <h4>BPIT, Delhi</h4>
+                            <ul>
+                                <li><strong>CGPA: 8.7/10</strong></li>
+                                <li>Specialization in Data Structures & DBMS.</li>
                             </ul>
                         </div>
                     </div>
@@ -586,38 +602,59 @@
                 <div class="projects-grid">
                     <!-- Project 1: SmartLane AI (FEATURED) -->
                     <div class="project-card featured">
-                        <div class="project-visual"><i class="fas fa-traffic-light"></i></div>
+                        <div class="project-visual">
+                            <i class="fas fa-traffic-light"></i>
+                        </div>
                         <div class="project-content">
                             <div class="hero-badge" style="margin-bottom: 10px; padding: 4px 12px; font-size: 0.7rem;">Winning Project</div>
                             <h3>SmartLane AI</h3>
                             <p>An Intelligent Traffic Management System using YOLOv8 and Custom CNNs (99.2% Accuracy) to prioritize emergency vehicles.</p>
-                            <div class="tech-tags"><span>YOLOv8</span><span>TensorFlow</span><span>Python</span><span>OpenCV</span></div>
-                            <div class="project-links"><a href="https://paranox-sourcecode.hf.space" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a></div>
+                            <div class="tech-tags">
+                                <span>YOLOv8</span><span>TensorFlow</span><span>Python</span><span>OpenCV</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://paranox-sourcecode.hf.space" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Project 2: Hidout -->
                     <div class="project-card">
                         <i class="fas fa-hotel project-icon"></i>
                         <h3>The Hidout</h3>
                         <p>Comprehensive Booking Platform with a complex reservation engine, secure Merchant Panel (JWT), and CMS. Live production build.</p>
-                        <div class="tech-tags"><span>React</span><span>Node.js</span><span>JWT</span><span>MongoDB</span></div>
-                        <div class="project-links"><a href="https://dev.thehidout.com/" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Site</a></div>
+                        <div class="tech-tags">
+                            <span>React</span><span>Node.js</span><span>JWT</span><span>MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://dev.thehidout.com/" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Site</a>
+                        </div>
                     </div>
+
                     <!-- Project 3: SimpleBit -->
                     <div class="project-card">
                         <i class="fas fa-chart-line project-icon"></i>
                         <h3>SimpleBit Dashboard</h3>
                         <p>High-performance Fintech dashboard integrating live financial APIs for real-time crypto tracking and data visualization.</p>
-                        <div class="tech-tags"><span>TypeScript</span><span>React</span><span>Fintech API</span></div>
-                        <div class="project-links"><a href="https://app.simple-bit.com/login" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Site</a></div>
+                        <div class="tech-tags">
+                            <span>TypeScript</span><span>React</span><span>Fintech API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://app.simple-bit.com/login" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Site</a>
+                        </div>
                     </div>
+
                     <!-- Project 4: AksumBase -->
                     <div class="project-card">
                         <i class="fas fa-server project-icon"></i>
                         <h3>AksumBase</h3>
                         <p>Resource management backend deployed on private Ubuntu VPS. Configured Nginx Reverse Proxy for 99.9% uptime.</p>
-                        <div class="tech-tags"><span>VPS</span><span>Nginx</span><span>DevOps</span><span>Express</span></div>
-                        <div class="project-links"><a href="https://aksumbase.com/" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Site</a></div>
+                        <div class="tech-tags">
+                            <span>VPS</span><span>Nginx</span><span>DevOps</span><span>Express</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://aksumbase.com/" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Live Site</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -629,23 +666,49 @@
                 <div class="skills-text">
                     <span class="section-subtitle">Technical Arsenal</span>
                     <h2 class="section-title">Skills & Expertise</h2>
-                    <p style="margin-top: 1.5rem;">I combine strong backend engineering with modern frontend frameworks and DevOps capabilities (Jenkins/Docker).</p>
+                    <p style="margin-top: 1.5rem;">
+                        I combine strong backend engineering with modern frontend frameworks and DevOps capabilities. My focus is on writing clean, scalable code and automating deployments.
+                    </p>
                     <a href="assets/resume.pdf" target="_blank" class="btn" style="margin-top: 1rem;"><i class="fas fa-download"></i> Download Resume</a>
                 </div>
                 <div class="skills-grid">
-                    <div class="skill-card"><i class="fab fa-js skill-icon"></i><span>JavaScript</span></div>
-                    <div class="skill-card"><i class="fab fa-react skill-icon"></i><span>React / Redux</span></div>
-                    <div class="skill-card"><i class="fab fa-node skill-icon"></i><span>Node.js</span></div>
-                    <div class="skill-card"><i class="fas fa-code skill-icon"></i><span>TypeScript</span></div>
-                    <div class="skill-card"><i class="fas fa-database skill-icon"></i><span>MongoDB</span></div>
-                    <div class="skill-card"><i class="fab fa-jenkins skill-icon"></i><span>Jenkins CI/CD</span></div>
-                    <div class="skill-card"><i class="fab fa-docker skill-icon"></i><span>Docker</span></div>
-                    <div class="skill-card"><i class="fas fa-server skill-icon"></i><span>Nginx / VPS</span></div>
+                    <div class="skill-card">
+                        <i class="fab fa-js skill-icon"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-react skill-icon"></i>
+                        <span>React / Redux</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-node skill-icon"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-code skill-icon"></i>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-database skill-icon"></i>
+                        <span>MongoDB / SQL</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-jenkins skill-icon"></i>
+                        <span>Jenkins CI/CD</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-docker skill-icon"></i>
+                        <span>Docker</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-server skill-icon"></i>
+                        <span>Nginx / VPS</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- BLOG SECTION -->
+        <!-- BLOG SECTION (RESTORED) -->
         <section id="blog">
             <div class="container">
                 <div class="section-header">
@@ -653,45 +716,60 @@
                     <h2 class="section-title">Latest Posts</h2>
                     <button id="createPostBtn" class="btn" style="margin-top:20px; display:block; margin-left:auto; margin-right:auto;">+ New Post</button>
                 </div>
-                <div id="blog-feed" class="blog-grid"><div style="text-align:center; width:100%; color:var(--text-gray);">Loading posts...</div></div>
+                
+                <div id="blog-feed" class="blog-grid">
+                    <div style="text-align:center; width:100%; color:var(--text-gray);">Loading posts...</div>
+                </div>
             </div>
         </section>
 
-        <!-- SPOTIFY SECTION -->
+        <!-- SPOTIFY SECTION (RESTORED) -->
         <section id="spotify">
             <div class="container">
                 <div class="section-header" style="margin-bottom: 2rem;">
                     <span class="section-subtitle" style="color:#1DB954;">My Vibe</span>
                     <h2 class="section-title">Recently Played <i class="fab fa-spotify" style="color:#1DB954;"></i></h2>
                 </div>
-                <div class="spotify-grid" id="spotifyTracks"><!-- Tracks injected via JS --></div>
+                <div class="spotify-grid" id="spotifyTracks">
+                    <!-- Tracks injected via JS -->
+                </div>
             </div>
         </section>
 
-        <!-- COMMUNITY CHAT -->
+        <!-- COMMUNITY STATS & DISCUSSION (RESTORED) -->
         <section id="community-stats">
             <div class="container">
                 <div class="section-header">
                     <span class="section-subtitle">Community & Stats</span>
                     <h2 class="section-title">Traffic & Thoughts</h2>
+                    <p>See who's visiting and what they're saying.</p>
                 </div>
+                
                 <div class="stats-wrapper">
-                     <div class="discussion-form-card">
-                        <input type="text" id="msgName" placeholder="Your Name (Optional)" maxlength="30">
-                        <textarea id="msgText" placeholder="Type your message here..." maxlength="280"></textarea>
-                        <button id="postMsgBtn" class="btn">Post Message</button>
+                    <!-- Message Board -->
+                    <div class="discussion-wrapper" style="margin:0 auto; width:100%; max-width:600px;">
+                         <div class="discussion-form-card">
+                            <input type="text" id="msgName" placeholder="Your Name (Optional)" maxlength="30">
+                            <textarea id="msgText" placeholder="Type your message here..." maxlength="280"></textarea>
+                            <button id="postMsgBtn" class="btn">Post Message</button>
+                        </div>
                     </div>
                 </div>
-                <div class="messages-grid" id="messagesGrid"><div style="text-align:center; width:100%; color:var(--text-gray);">Loading messages...</div></div>
+
+                <div class="messages-grid" id="messagesGrid">
+                    <div style="text-align:center; width:100%; color:var(--text-gray);">Loading messages...</div>
+                </div>
             </div>
         </section>
 
-        <!-- CONTACT -->
+        <!-- Contact Section -->
         <footer id="contact">
             <div class="container footer-wrapper">
                 <div class="footer-info">
                     <h2 style="font-size: 2.5rem;">Let's Build Something Amazing</h2>
-                    <p style="margin-top: 1rem; max-width: 400px;">I'm open to freelance projects and full-time roles.</p>
+                    <p style="margin-top: 1rem; max-width: 400px;">
+                        I'm currently open to full-time opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                    </p>
                     <div class="social-links">
                         <a href="https://linkedin.com/in/chandan-saroj" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
                         <a href="https://github.com/chandanXP" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
@@ -710,17 +788,30 @@
                     </form>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <div class="copyright">&copy; 2026 Chandan Saroj. Built with React logic & HTML5.</div>
+                <div class="copyright">
+                    &copy; 2026 Chandan Saroj. Built with React logic & HTML5.
+                </div>
+                
                 <div style="display: flex; gap: 15px; margin-top: 10px;">
-                    <div class="view-counter"><i class="fas fa-globe"></i> <span id="globalViewCount" style="margin: 0 4px; font-weight:700;">...</span> Total</div>
-                    <div class="view-counter"><i class="fas fa-eye"></i> <span id="todayViewCount" style="margin: 0 4px; font-weight:700;">...</span> Today</div>
+                    <!-- Global View Counter Badge -->
+                    <div class="view-counter">
+                        <i class="fas fa-globe"></i> 
+                        <span id="globalViewCount" style="margin: 0 4px; font-weight:700;">...</span> Total
+                    </div>
+
+                    <!-- Daily View Counter Badge -->
+                    <div class="view-counter">
+                        <i class="fas fa-eye"></i> 
+                        <span id="todayViewCount" style="margin: 0 4px; font-weight:700;">...</span> Today
+                    </div>
                 </div>
             </div>
         </footer>
     </main>
 
-    <!-- Floating Elements -->
+    <!-- NEW MOBILE BOTTOM NAV -->
     <nav class="mobile-bottom-nav">
         <a href="#home" class="nav-item"><i class="fas fa-home"></i></a>
         <a href="#experience" class="nav-item"><i class="fas fa-briefcase"></i></a>
@@ -729,23 +820,48 @@
         <a href="#community-stats" class="nav-item"><i class="fas fa-comment-alt"></i></a>
         <div class="nav-item" id="mobileThemeBtn"><i class="fas fa-cog"></i></div>
     </nav>
-    <div class="whatsapp-float" id="whatsappBtn"><i class="fab fa-whatsapp"></i></div>
-    <div class="like-float-btn" id="likeBtn"><div class="like-icon-circle"><i class="fas fa-heart"></i></div><span class="like-count-text" id="likeCount">0</span></div>
 
-    <!-- Modals -->
+    <!-- Floating WhatsApp -->
+    <div class="whatsapp-float" id="whatsappBtn">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Instagram-Style Like Button (NEW) -->
+    <div class="like-float-btn" id="likeBtn">
+        <div class="like-icon-circle">
+            <i class="fas fa-heart"></i>
+        </div>
+        <span class="like-count-text" id="likeCount">0</span>
+    </div>
+
+    <!-- Contact Modal -->
     <div class="modal" id="contactModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
             <h3 style="color:var(--primary); margin-bottom: 0.5rem;">Quick Connect</h3>
+            <p>Choose your preferred platform:</p>
             <div style="margin-top: 1.5rem;">
-                <a href="https://wa.me/919315632708" target="_blank" class="action-btn btn-wa"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
-                <a href="mailto:imjunior471@gmail.com" class="action-btn btn-mail"><i class="fas fa-envelope"></i> Send Email</a>
+                <a href="https://wa.me/919315632708" target="_blank" class="action-btn btn-wa">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <a href="mailto:imjunior471@gmail.com" class="action-btn btn-mail">
+                    <i class="fas fa-envelope"></i> Send Email
+                </a>
             </div>
         </div>
     </div>
+
+    <!-- READ POST MODAL (NEW) -->
     <div class="modal" id="readPostModal">
-        <div class="modal-content read-modal-content"><span class="close-modal" id="closeReadModal">&times;</span><div id="readModalBody" class="read-modal-body"></div></div>
+        <div class="modal-content read-modal-content">
+            <span class="close-modal" id="closeReadModal">&times;</span>
+            <div id="readModalBody" class="read-modal-body">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
     </div>
+
+    <!-- Create Post Modal -->
     <div class="modal" id="blogModal">
         <div class="modal-content">
             <span class="close-modal" id="closeBlogModal">&times;</span>
@@ -753,36 +869,102 @@
             <input type="text" id="blogTitle" placeholder="Main Heading" required />
             <input type="text" id="blogSubtitle" placeholder="Sub Heading (Optional)" />
             <input type="text" id="blogImage" placeholder="Image URL (Optional)" />
+            
+            <!-- Quill Editor Container -->
             <div id="editor-container" style="height: 200px; background: rgba(0,0,0,0.2); border: 1px solid var(--border); color: #ddd; margin-bottom: 1rem;"></div>
+            
             <input type="password" id="blogPassword" placeholder="Admin Password" required />
             <button id="submitPostBtn" class="btn" style="width: 100%;">Publish Post</button>
         </div>
     </div>
 
-    <!-- FIREBASE & JS LOGIC -->
+    <!-- Theme Switcher UI -->
+    <div class="theme-toggle-btn" id="themeToggleBtn">
+        <i class="fas fa-palette"></i>
+    </div>
+    
+    <div class="theme-panel" id="themePanel">
+        <h4 style="color:white; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;">
+            Theme Settings 
+            <i class="fas fa-times" id="closeThemePanel" style="cursor:pointer; font-size:0.9rem;"></i>
+        </h4>
+        
+        <span class="theme-section-title">Background Mode</span>
+        <div class="mode-options">
+            <div class="option-btn mode-btn active" data-mode="dark">Dark</div>
+            <div class="option-btn mode-btn" data-mode="light">Light</div>
+            <div class="option-btn mode-btn" data-mode="vscode">VS Code</div>
+            <div class="option-btn mode-btn" data-mode="midnight">Midnight</div>
+        </div>
+
+        <span class="theme-section-title">Primary Color</span>
+        <div class="color-input-wrapper">
+            <input type="color" id="primaryColorInput" value="#00ff88">
+            <span class="hex-display" id="primaryHex">#00ff88</span>
+        </div>
+        <div class="color-options" id="primaryColors">
+            <div class="color-circle active" style="background: #00ff88;" data-color="#00ff88"></div>
+            <div class="color-circle" style="background: #ff0055;" data-color="#ff0055"></div>
+            <div class="color-circle" style="background: #0077ff;" data-color="#0077ff"></div>
+            <div class="color-circle" style="background: #bf00ff;" data-color="#bf00ff"></div>
+            <div class="color-circle" style="background: #ffcc00;" data-color="#ffcc00"></div>
+        </div>
+
+        <span class="theme-section-title">Secondary Color</span>
+        <div class="color-input-wrapper">
+            <input type="color" id="secondaryColorInput" value="#00ccff">
+            <span class="hex-display" id="secondaryHex">#00ccff</span>
+        </div>
+        <div class="color-options" id="secondaryColors">
+            <div class="color-circle" style="background: #00ccff;" data-color="#00ccff"></div>
+            <div class="color-circle active" style="background: #ff5f00;" data-color="#ff5f00"></div>
+            <div class="color-circle" style="background: #00ffaa;" data-color="#00ffaa"></div>
+            <div class="color-circle" style="background: #ff00cc;" data-color="#ff00cc"></div>
+        </div>
+
+        <span class="theme-section-title">Typography</span>
+        <div class="font-options">
+            <div class="option-btn font-btn active" data-font="'Inter', sans-serif">Modern</div>
+            <div class="option-btn font-btn" data-font="'Fira Code', monospace">Coder</div>
+            <div class="option-btn font-btn" data-font="'Orbitron', sans-serif">Sci-Fi</div>
+            <div class="option-btn font-btn" data-font="'Noto Sans JP', sans-serif">JP</div>
+            <div class="option-btn font-btn" data-font="'Zen Tokyo Zoo', cursive">Anime</div>
+        </div>
+
+        <div class="theme-actions">
+            <button class="theme-action-btn btn-save" id="saveThemeBtn">Save to Cloud</button>
+            <button class="theme-action-btn btn-reset" id="resetThemeBtn">Reset</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs & Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
         import { getFirestore, doc, setDoc, getDoc, addDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyDnSz2NJQZovT3WKjyak9IcVlfYbQBmlVM", authDomain: "chandan-saroj-portfolio.firebaseapp.com",
-            projectId: "chandan-saroj-portfolio", storageBucket: "chandan-saroj-portfolio.firebasestorage.app",
-            messagingSenderId: "673240575610", appId: "1:673240575610:web:c199ae38e28a41c33715c3", measurementId: "G-WVQXG2QM1T"
+            apiKey: "AIzaSyDnSz2NJQZovT3WKjyak9IcVlfYbQBmlVM",
+            authDomain: "chandan-saroj-portfolio.firebaseapp.com",
+            projectId: "chandan-saroj-portfolio",
+            storageBucket: "chandan-saroj-portfolio.firebasestorage.app",
+            messagingSenderId: "673240575610",
+            appId: "1:673240575610:web:c199ae38e28a41c33715c3",
+            measurementId: "G-WVQXG2QM1T"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
-        
+
+        const root = document.documentElement;
         let currentUser = null;
         let currentTheme = { primary: '#00ff88', secondary: '#00ccff', font: "'Inter', sans-serif", mode: 'dark' };
-        
+
         signInAnonymously(auth).then(() => console.log("Auth OK"));
 
         // --- THEME LOGIC (Includes VS Code & Color Picker) ---
-        const root = document.documentElement;
         const themeBtn = document.getElementById('themeToggleBtn');
         const themePanel = document.getElementById('themePanel');
         const closeTheme = document.getElementById('closeThemePanel');
@@ -805,6 +987,8 @@
             root.style.setProperty('--primary-dim', color + '1A');
             pHex.innerText = color;
             currentTheme.primary = color;
+            // Update active state of presets
+            document.querySelectorAll('#primaryColors .color-circle').forEach(c => c.classList.remove('active'));
         });
 
         sInput.addEventListener('input', (e) => {
@@ -812,6 +996,7 @@
             root.style.setProperty('--secondary', color);
             sHex.innerText = color;
             currentTheme.secondary = color;
+            document.querySelectorAll('#secondaryColors .color-circle').forEach(c => c.classList.remove('active'));
         });
 
         // Mode Switching
@@ -836,9 +1021,11 @@
                     root.style.setProperty('--text-light', '#d4d4d4');
                     root.style.setProperty('--text-gray', '#858585');
                     root.style.setProperty('--border', '#3e3e42');
+                    // Set Accents
                     root.style.setProperty('--primary', '#007acc');
                     root.style.setProperty('--primary-dim', 'rgba(0, 122, 204, 0.1)');
                     root.style.setProperty('--secondary', '#c586c0');
+                    // Update pickers
                     pInput.value = '#007acc'; pHex.innerText = '#007acc';
                     sInput.value = '#c586c0'; sHex.innerText = '#c586c0';
                 } else if (mode === 'midnight') {
@@ -870,6 +1057,30 @@
             });
         });
 
+        // Preset Circles Logic (Restored)
+        document.querySelectorAll('#primaryColors .color-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                root.style.setProperty('--primary', color);
+                root.style.setProperty('--primary-dim', color + '1A');
+                currentTheme.primary = color;
+                pInput.value = color; pHex.innerText = color;
+                document.querySelectorAll('#primaryColors .color-circle').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('#secondaryColors .color-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                root.style.setProperty('--secondary', color);
+                currentTheme.secondary = color;
+                sInput.value = color; sHex.innerText = color;
+                document.querySelectorAll('#secondaryColors .color-circle').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
         // Save & Reset
         document.getElementById('saveThemeBtn').addEventListener('click', async () => {
             if(!currentUser) return;
@@ -879,11 +1090,11 @@
                 await setDoc(doc(db, "website_state", "global_theme"), currentTheme);
                 btn.innerText = "Saved!";
                 btn.style.background = "#25D366";
-            } catch(e) { console.error(e); }
+            } catch(e) { console.error(e); btn.innerText = "Error"; }
             setTimeout(() => { btn.innerText = "Save to Cloud"; btn.style.background = ""; }, 2000);
         });
 
-        document.getElementById('resetTheme').addEventListener('click', () => location.reload());
+        document.getElementById('resetThemeBtn').addEventListener('click', () => location.reload());
 
         // --- WEATHER LOGIC ---
         const DELHI_COORDS = { lat: 28.6139, lon: 77.2090 };
@@ -895,8 +1106,16 @@
                 const aData = await aRes.json();
                 
                 const temp = Math.round(wData.current.temperature_2m);
+                const code = wData.current.weather_code;
                 const aqi = aData.current.us_aqi;
+                
+                let icon = 'fa-sun'; let text = 'Clear';
+                if (code > 0 && code <= 3) { icon = 'fa-cloud-sun'; text = 'Cloudy'; }
+                else if (code >= 45 && code <= 48) { icon = 'fa-smog'; text = 'Fog'; }
+                else if (code >= 51) { icon = 'fa-cloud-rain'; text = 'Rain'; }
+
                 document.getElementById('weatherTemp').innerHTML = `<i class="fas fa-thermometer-half"></i> ${temp}°C`;
+                document.getElementById('weatherCondition').innerHTML = `<i class="fas ${icon}"></i> ${text}`;
                 document.getElementById('weatherAQI').innerHTML = `<i class="fas fa-wind"></i> AQI: ${aqi}`;
                 document.getElementById('weather-widget').style.display = 'inline-flex';
             } catch(e) { console.error(e); }
@@ -909,14 +1128,6 @@
         onAuthStateChanged(auth, (user) => {
             if(user) {
                 currentUser = user;
-                // Theme Listener
-                onSnapshot(doc(db, "website_state", "global_theme"), (doc) => {
-                    if(doc.exists()) {
-                        const t = doc.data();
-                        // Apply saved theme logic here if needed, or rely on user interaction
-                    }
-                });
-                
                 // Chat Listener
                 onSnapshot(collection(db, "messages"), (snap) => {
                     const grid = document.getElementById('messagesGrid');
@@ -927,7 +1138,7 @@
                     msgs.slice(0, 20).forEach(m => {
                         const div = document.createElement('div');
                         div.className = 'message-card';
-                        div.innerHTML = `<strong>${m.name}</strong><p>${m.text}</p>`;
+                        div.innerHTML = `<strong>${m.name}</strong><p>${m.text}</p><span class="message-time">${m.timestamp ? new Date(m.timestamp.toDate()).toLocaleDateString() : 'Just now'}</span>`;
                         grid.appendChild(div);
                     });
                     
@@ -955,11 +1166,18 @@
                     let posts = [];
                     snap.forEach(d => { posts.push({id: d.id, ...d.data()}); loadedPosts[d.id] = d.data(); });
                     posts.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-                    posts.forEach(p => {
+                    posts.slice(0,10).forEach(p => {
                         const div = document.createElement('div');
                         div.className = 'blog-card';
-                        div.innerHTML = `<div class="vote-section"><button class="vote-btn">▲</button><span>${p.score||0}</span><button class="vote-btn">▼</button></div>
-                        <div class="blog-content" onclick="window.openReadPost('${p.id}')"><h3>${p.title}</h3><div class="blog-text-preview">${p.subtitle || 'Read more...'}</div></div>`;
+                        // Simple strip HTML helper inside loop for brevity
+                        const tmp = document.createElement("DIV"); tmp.innerHTML = p.content; const txt = tmp.textContent || "";
+                        div.innerHTML = `
+                            <div class="vote-section"><button class="vote-btn">▲</button><span class="vote-count">${p.score||0}</span><button class="vote-btn">▼</button></div>
+                            <div class="blog-content" onclick="window.openReadPost('${p.id}')">
+                                <div class="blog-meta"><span>${p.timestamp ? new Date(p.timestamp.toDate()).toLocaleDateString() : ''}</span></div>
+                                <h3 class="blog-title">${p.title}</h3>
+                                <div class="blog-text-preview">${txt}</div>
+                            </div>`;
                         grid.appendChild(div);
                     });
                 });
