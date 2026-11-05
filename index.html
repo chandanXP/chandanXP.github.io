@@ -26,72 +26,67 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- SPENCER GABOR STUDIO / EDITORIAL DESIGN TOKENS --- */
+        /* --- EXACT SPENCER GABOR (spencergabor.work) DESIGN TOKENS --- */
         :root {
-            --primary: #141413;          /* Deep Studio Ink */
-            --accent: #ff4d29;           /* Gabor Vibrant Vermilion */
-            --accent-soft: #fff0eb;      /* Warm Coral Tint */
-            --accent-border: #141413;
-            --secondary: #3d3d3a;        /* Warm Charcoal */
+            --primary: #2b2b2b;          /* Gabor Charcoal Display */
+            --accent: #2563eb;           /* Interactive Accent */
+            --accent-soft: #eff6ff;
+            --accent-border: #e5e7eb;
+            --secondary: #cbcbcb;        /* Gabor Muted Display Gray */
             
-            --bg-main: #f6f3ec;          /* Spencer Gabor Warm Cream Paper */
-            --bg-surface: #ffffff;       /* Crisp Gallery Card */
-            --bg-subtle: #ebe6db;        /* Tactile Warm Stone */
+            --bg-main: #ffffff;          /* Pure White Studio Canvas */
+            --bg-surface: #ffffff;       /* Borderless Card Surface */
+            --bg-subtle: #f4f4f5;        /* Soft Pill / Secondary Surface */
             
-            --text-main: #141413;        /* Bold Ink */
-            --text-muted: #3d3d3a;       /* Editorial Body */
-            --text-light: #6e6c64;       /* Caption Stone */
+            --text-main: #2b2b2b;        /* Deep Charcoal */
+            --text-muted: #52525b;       /* Clean Body Gray */
+            --text-light: #a1a1aa;       /* Subtle Muted Gray */
             
-            --border: #141413;           /* Bold Studio Ink Border */
-            --border-strong: #141413;
+            --border: rgba(0, 0, 0, 0.07); /* Borderless / Hairline only */
+            --border-strong: rgba(0, 0, 0, 0.12);
             
-            --shadow-sm: 3px 3px 0px #141413;
-            --shadow-md: 5px 5px 0px #141413;
-            --shadow-lg: 8px 8px 0px #141413;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 20px 40px -12px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 28px 60px -15px rgba(0, 0, 0, 0.14);
             
-            --radius-sm: 10px;
-            --radius-md: 18px;
-            --radius-lg: 24px;
+            --radius-sm: 14px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
             
-            --header-h: 66px;
-            --sidebar-expanded-w: 295px;
+            --header-h: 64px;
+            --sidebar-expanded-w: 285px;
             --sidebar-collapsed-w: 72px;
             
             --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
-            --font-display: 'Syne', 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Antonio', Impact, sans-serif;
             --font-code: 'Fira Code', monospace;
-            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Data Science Mode shifts the Gabor pop accent to Electric Cobalt */
         body[data-profession="datascience"] {
-            --accent: #2563eb;
-            --accent-soft: #e0e7ff;
+            --accent: #6d28d9;
+            --accent-soft: #f3e8ff;
         }
 
-        /* Spencer Gabor Interactive Palette Themes */
+        /* Spencer Gabor Bottom-Right Palette Themes */
         body[data-palette="mint"] {
-            --bg-main: #e6f4ea;
-            --bg-subtle: #d1e9d8;
-            --accent: #0f9d58;
+            --bg-main: #f2fbf5;
+            --bg-subtle: #e1f5e8;
         }
         body[data-palette="butter"] {
-            --bg-main: #fef6d8;
-            --bg-subtle: #f5e8b8;
-            --accent: #d946ef;
+            --bg-main: #fffdf0;
+            --bg-subtle: #faf3ce;
         }
         body[data-palette="lavender"] {
-            --bg-main: #f1ecfe;
-            --bg-subtle: #e2d8fc;
-            --accent: #6d28d9;
+            --bg-main: #f8f5ff;
+            --bg-subtle: #ede5ff;
         }
         body[data-palette="coral"] {
-            --bg-main: #ffeae5;
-            --bg-subtle: #fad5cc;
-            --accent: #e11d48;
+            --bg-main: #fff6f4;
+            --bg-subtle: #fde6e1;
         }
 
         * {
@@ -118,15 +113,16 @@
         h1, h2, h3, h4 {
             font-family: var(--font-display);
             color: var(--text-main);
-            letter-spacing: -0.03em;
-            line-height: 1.12;
-            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            line-height: 0.96;
+            font-weight: 700;
         }
 
         p {
             color: var(--text-muted);
-            line-height: 1.65;
-            font-size: 0.96rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
             font-weight: 500;
         }
 
@@ -146,8 +142,8 @@
             width: var(--sidebar-expanded-w);
             flex: 0 0 var(--sidebar-expanded-w);
             height: 100vh;
-            background: var(--bg-subtle);
-            border-right: 2px solid var(--border);
+            background: #fafafa;
+            border-right: 1px solid var(--border);
             z-index: 1200;
             transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1), flex-basis 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s ease;
             display: flex;
@@ -156,7 +152,6 @@
             user-select: none;
         }
 
-        /* Minimal Icon Rail State (Gemini Collapsed Mode) */
         body.sidebar-collapsed .app-sidebar {
             width: var(--sidebar-collapsed-w);
             flex: 0 0 var(--sidebar-collapsed-w);
@@ -168,7 +163,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 1px solid var(--border);
             flex-shrink: 0;
         }
 
@@ -176,8 +171,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            border: 2px solid var(--border);
-            background: var(--bg-surface);
+            border: none;
+            background: #e4e4e7;
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -186,21 +181,19 @@
             font-size: 0.95rem;
             transition: var(--transition);
             flex-shrink: 0;
-            box-shadow: 2px 2px 0px var(--border);
         }
         .sidebar-trigger-btn:hover {
-            background: var(--accent);
+            background: var(--text-main);
             color: #fff;
-            transform: translate(-1px, -1px);
-            box-shadow: 3px 3px 0px var(--border);
+            transform: scale(1.06);
         }
 
         .sidebar-brand-text {
             font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.02rem;
+            font-weight: 700;
+            font-size: 1.2rem;
             text-transform: uppercase;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.02em;
             color: var(--text-main);
             white-space: nowrap;
             overflow: hidden;
@@ -216,9 +209,9 @@
         .sidebar-profile-showcase {
             margin: 10px 12px 6px;
             padding: 12px;
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
             box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
@@ -230,15 +223,14 @@
         }
 
         .sidebar-photo-box {
-            width: 108px;
-            height: 108px;
-            border-radius: 16px;
+            width: 104px;
+            height: 104px;
+            border-radius: 18px;
             overflow: hidden;
             position: relative;
-            border: 2px solid var(--border);
-            background: #ffcf40;
+            background: #f4f4f5;
             margin-bottom: 8px;
-            box-shadow: 3px 3px 0px var(--border);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
         }
 
@@ -256,8 +248,9 @@
         }
 
         .sidebar-profile-details h4 {
-            font-size: 1rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            letter-spacing: 0.01em;
             margin-bottom: 2px;
             color: var(--text-main);
         }
@@ -273,8 +266,7 @@
 
         .sidebar-mini-banner {
             width: 100%;
-            border: 2px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             background: var(--bg-subtle);
             text-align: left;
@@ -285,11 +277,10 @@
             height: 40px;
             object-fit: cover;
             display: block;
-            border-bottom: 1.5px solid var(--border);
         }
 
         .sidebar-mini-banner-foot {
-            padding: 4px 8px;
+            padding: 5px 8px;
             font-size: 0.65rem;
             color: var(--text-main);
             display: flex;
@@ -298,7 +289,6 @@
             font-weight: 700;
         }
 
-        /* Collapsed Sidebar State for Profile Panel */
         body.sidebar-collapsed .sidebar-profile-showcase {
             padding: 0;
             margin: 10px auto 6px;
@@ -314,7 +304,6 @@
             height: 42px;
             border-radius: 50%;
             margin-bottom: 0;
-            box-shadow: 2px 2px 0px var(--border);
         }
         body.sidebar-collapsed .sidebar-profile-details,
         body.sidebar-collapsed #heroMessages {
@@ -328,19 +317,19 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
 
         .sidebar-nav-btn {
             width: 100%;
-            border: 2px solid transparent;
+            border: none;
             background: transparent;
             padding: 9px 12px;
             border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: var(--text-main);
+            color: var(--text-muted);
             font-family: var(--font-main);
             font-size: 0.82rem;
             font-weight: 700;
@@ -348,7 +337,6 @@
             transition: var(--transition);
             text-align: left;
             white-space: nowrap;
-            position: relative;
         }
         body.sidebar-collapsed .sidebar-nav-btn {
             justify-content: center;
@@ -369,10 +357,6 @@
             color: var(--text-main);
             flex-shrink: 0;
         }
-        .sidebar-nav-label,
-        .sidebar-nav-btn .slide-num {
-            transition: opacity 0.18s ease;
-        }
         body.sidebar-collapsed .sidebar-nav-label,
         body.sidebar-collapsed .sidebar-nav-btn .slide-num {
             display: none;
@@ -382,43 +366,38 @@
             font-size: 0.68rem;
             font-family: var(--font-code);
             font-weight: 700;
-            color: var(--text-main);
-            background: var(--bg-surface);
+            color: var(--text-muted);
+            background: #e4e4e7;
             padding: 2px 7px;
             border-radius: 999px;
-            border: 1.5px solid var(--border);
         }
 
         .sidebar-nav-btn:hover {
-            background: var(--bg-surface);
-            border-color: var(--border);
-            transform: translateX(2px);
+            background: #e4e4e7;
+            color: var(--text-main);
         }
         .sidebar-nav-btn.prev-context-nav {
-            background: rgba(20, 20, 19, 0.06);
-            border: 1.5px dashed var(--border);
+            background: #f4f4f5;
+            color: var(--text-main);
         }
         .sidebar-nav-btn.active {
-            background: var(--accent);
+            background: var(--text-main);
             color: #ffffff;
-            border-color: var(--border);
-            box-shadow: 3px 3px 0px var(--border);
         }
         .sidebar-nav-btn.active i { color: #ffffff; }
         .sidebar-nav-btn.active .slide-num {
-            background: var(--text-main);
+            background: rgba(255,255,255,0.2);
             color: #fff;
-            border-color: var(--text-main);
         }
 
         .sidebar-footer {
             padding: 10px 12px;
-            border-top: 2px solid var(--border);
+            border-top: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             gap: 8px;
             flex-shrink: 0;
-            background: var(--bg-subtle);
+            background: #fafafa;
         }
         .sidebar-step-row {
             display: flex;
@@ -426,10 +405,10 @@
         }
         .sidebar-step-btn {
             flex: 1;
-            border: 2px solid var(--border);
-            background: var(--bg-surface);
+            border: none;
+            background: #e4e4e7;
             color: var(--text-main);
-            padding: 7px 10px;
+            padding: 8px 10px;
             border-radius: 999px;
             font-size: 0.76rem;
             font-weight: 800;
@@ -439,31 +418,27 @@
             justify-content: center;
             gap: 6px;
             transition: var(--transition);
-            box-shadow: 2px 2px 0px var(--border);
         }
         .sidebar-step-btn:hover {
-            background: var(--accent);
+            background: var(--text-main);
             color: #fff;
-            transform: translate(-1px, -1px);
-            box-shadow: 3px 3px 0px var(--border);
         }
         .sidebar-stats-row {
             display: flex;
             justify-content: space-between;
             font-size: 0.72rem;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--text-muted);
             padding: 2px 4px;
         }
         .sidebar-resume-btn {
             width: 100%;
             justify-content: center;
-            padding: 0.55rem 0.8rem;
+            padding: 0.6rem 0.8rem;
             border-radius: 999px;
             font-size: 0.8rem;
         }
 
-        /* Clean, simplified Collapsed Footer Icons */
         body.sidebar-collapsed .sidebar-footer {
             align-items: center;
             padding: 10px 6px;
@@ -503,17 +478,19 @@
             flex-direction: column;
             overflow: hidden;
             background: var(--bg-main);
+            position: relative;
         }
 
         #header {
             height: var(--header-h);
-            background: var(--bg-main);
-            border-bottom: 2px solid var(--border);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
+            padding: 0 28px;
             flex-shrink: 0;
         }
 
@@ -533,33 +510,31 @@
             align-items: center;
             gap: 8px;
             font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.03em;
+            font-weight: 700;
+            font-size: 1.55rem;
+            letter-spacing: 0.01em;
             color: var(--text-main);
             cursor: pointer;
         }
 
-        /* --- SPENCER GABOR PILL SEGMENTED PROFILE TOGGLE --- */
+        /* --- MINIMAL SOFT PILL PROFILE TOGGLE --- */
         .minimal-mode-switch {
             display: inline-flex;
             align-items: center;
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
+            background: #e4e4e7;
             border-radius: 999px;
-            padding: 3px;
-            gap: 3px;
-            box-shadow: 3px 3px 0px var(--border);
+            padding: 4px;
+            gap: 4px;
         }
 
         .mode-switch-btn {
             border: none;
             background: transparent;
-            color: var(--text-main);
+            color: #52525b;
             font-family: var(--font-main);
             font-size: 0.76rem;
             font-weight: 800;
-            padding: 6px 13px;
+            padding: 6px 14px;
             border-radius: 999px;
             cursor: pointer;
             display: inline-flex;
@@ -570,8 +545,9 @@
         }
 
         .mode-switch-btn.active {
-            background: var(--accent);
+            background: #2b2b2b;
             color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
         .header-right {
@@ -580,45 +556,101 @@
             gap: 12px;
         }
 
-        /* Spencer Gabor Bonus Feature: Interactive Color Palette Dots */
-        .gabor-palette-bar {
+        /* Spencer Gabor Floating Corner Buttons (Top-Right Avatar + Bottom-Right Palette) */
+        .gabor-floating-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #e4e4e7;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid #e4e4e7;
+            transition: var(--transition);
+        }
+        .gabor-floating-avatar:hover {
+            transform: scale(1.08) rotate(6deg);
+        }
+        .gabor-floating-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gabor-floating-palette-wrap {
+            position: fixed;
+            bottom: 22px;
+            right: 24px;
+            z-index: 1500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .gabor-palette-drawer {
+            display: flex;
+            align-items: center;
             gap: 6px;
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            padding: 5px 10px;
+            background: #ffffff;
+            padding: 8px 12px;
             border-radius: 999px;
-            box-shadow: 2px 2px 0px var(--border);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            opacity: 0;
+            transform: translateX(12px) scale(0.9);
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .gabor-floating-palette-wrap.open .gabor-palette-drawer {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+        }
+        .gabor-palette-fab {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e4e4e7;
+            color: #18181b;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        .gabor-palette-fab:hover {
+            transform: scale(1.08);
+            background: #d4d4d8;
         }
         .palette-swatch {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            border: 1.5px solid var(--border);
+            border: 1px solid rgba(0,0,0,0.15);
             cursor: pointer;
             transition: transform 0.18s ease;
         }
         .palette-swatch:hover,
         .palette-swatch.active {
-            transform: scale(1.25);
+            transform: scale(1.22);
         }
 
-        /* Compact Weather Pill in Header */
         .weather-widget {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            padding: 5px 12px;
+            background: #f4f4f5;
+            padding: 6px 14px;
             border-radius: 999px;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             color: var(--text-main);
             font-weight: 700;
-            box-shadow: 2px 2px 0px var(--border);
         }
-        .weather-location { font-weight: 800; color: var(--accent); }
+        .weather-location { font-weight: 800; color: var(--text-main); }
         .weather-info { display: flex; align-items: center; gap: 8px; }
 
         /* --- DIRECTIONAL 30% / 70% HORIZONTAL SPLIT STAGE --- */
@@ -650,16 +682,15 @@
             will-change: width, flex-basis, opacity, transform;
         }
 
-        /* 30% Shrunk Context Pane */
         .slide-panel.prev-slide {
             display: block;
             flex: 0 0 30%;
             width: 30%;
             max-width: 30%;
-            opacity: 0.94;
+            opacity: 0.92;
             pointer-events: auto;
-            padding: 20px 18px 36px;
-            background: var(--bg-subtle);
+            padding: 22px 18px 40px;
+            background: #fafafa;
             z-index: 4;
             cursor: pointer;
         }
@@ -667,7 +698,6 @@
             opacity: 1;
         }
 
-        /* 70% Main Active Content Pane */
         .slide-panel.active-slide {
             display: block;
             flex: 1 1 70%;
@@ -675,7 +705,7 @@
             max-width: 70%;
             opacity: 1;
             pointer-events: auto;
-            padding: 28px 32px 48px;
+            padding: 32px 36px 60px;
             background: var(--bg-main);
             z-index: 5;
         }
@@ -683,32 +713,27 @@
         .deck-viewport.dir-forward .slide-panel.active-slide { order: 1; }
         .deck-viewport.dir-forward .slide-panel.prev-slide {
             order: 2;
-            border-left: 2px solid var(--border);
-            border-right: none;
+            border-left: 1px solid var(--border);
         }
 
         .deck-viewport.dir-backward .slide-panel.prev-slide {
             order: 1;
-            border-right: 2px solid var(--border);
-            border-left: none;
+            border-right: 1px solid var(--border);
         }
         .deck-viewport.dir-backward .slide-panel.active-slide { order: 2; }
 
-        /* Banner shown only on the 30% Shrunk Pane */
         .prev-pane-indicator {
             display: none;
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
+            background: #e4e4e7;
             padding: 8px 14px;
             border-radius: 999px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             font-size: 0.74rem;
             font-weight: 800;
             color: var(--text-main);
-            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 20;
@@ -725,338 +750,579 @@
 
         .slide-inner {
             width: 100%;
-            max-width: 100%;
-            margin: 0;
+            max-width: 1080px;
+            margin: 0 auto;
         }
 
-        /* Container queries so the 30% Pane adapts all grids cleanly */
-        @container (max-width: 560px) {
-            .hero-bento-grid,
-            .exp-visual-card,
-            .projects-visual-grid,
-            .gh-bottom-bento,
-            .gh-metrics-2x2,
-            .achievements-visual-grid,
-            .blog-grid,
-            .spotify-grid,
-            .social-hub-grid {
-                grid-template-columns: 1fr !important;
-            }
-            .hero-kpi-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            .skills-vector-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            .exp-Snapshot-thumb {
-                grid-column: 1 / -1 !important;
-            }
-            .hero-main-card,
-            .github-dashboard-wrapper {
-                padding: 18px !important;
-            }
-            .hero-headline {
-                font-size: 1.5rem !important;
-            }
-            .section-header-bar h2 {
-                font-size: 1.25rem !important;
-            }
-        }
-
-        /* --- SPENCER GABOR STUDIO BUTTONS & PILLS --- */
+        /* --- SPENCER GABOR PILL BUTTONS --- */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: var(--accent);
+            background: #2b2b2b;
             color: #ffffff;
-            padding: 0.72rem 1.45rem;
+            padding: 0.72rem 1.5rem;
             border-radius: 999px;
-            font-weight: 800;
-            font-size: 0.88rem;
-            border: 2px solid var(--border);
+            font-family: var(--font-display);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.92rem;
+            border: none;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: var(--shadow-sm);
         }
         .btn:hover {
-            background: var(--text-main);
+            background: var(--accent);
             color: #ffffff;
-            transform: translate(-2px, -2px);
-            box-shadow: var(--shadow-md);
+            transform: scale(1.04);
         }
 
         .btn-outline {
-            background: var(--bg-surface);
-            color: var(--text-main);
-            border: 2px solid var(--border);
+            background: #e4e4e7;
+            color: #2b2b2b;
         }
         .btn-outline:hover {
-            background: #ffcf40;
-            color: var(--text-main);
+            background: #2b2b2b;
+            color: #ffffff;
         }
 
-        .section-header-bar {
+        /* --- SPENCER GABOR CENTERED SECTION HEADINGS --- */
+        .gabor-section-title {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .gabor-section-title h2 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 4.8rem);
+            color: #2b2b2b;
+            letter-spacing: -0.01em;
+            line-height: 0.95;
+            margin-bottom: 8px;
+        }
+        .gabor-section-title p {
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            color: #52525b;
+            font-weight: 500;
+            margin: 0 auto;
+        }
+
+        /* ============================================================================
+           SLIDE 01: EXACT SPENCER GABOR HERO (IMAGE 1) + TWO-TONE ABOUT (IMAGE 7)
+           ============================================================================ */
+        .gabor-hero-stage {
+            text-align: center;
+            padding: 10px 0 36px;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--border);
-            flex-wrap: wrap;
-            gap: 14px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .gabor-top-meta {
+            margin-bottom: 14px;
+        }
+        .gabor-top-meta .loc {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            color: #2b2b2b;
+            display: block;
+            text-transform: uppercase;
+        }
+        .gabor-top-meta .mail {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            color: #cbcbcb;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 2px;
+        }
+        .gabor-top-meta .mail:hover {
+            color: #2b2b2b;
         }
 
-        .section-eyebrow {
-            font-size: 0.75rem;
-            font-weight: 800;
+        .gabor-giant-name {
+            font-family: var(--font-display);
+            font-size: clamp(4.2rem, 10.5vw, 8.8rem);
+            color: #2b2b2b;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-main);
-            background: #ffcf40;
-            border: 1.5px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        /* 4 Fanned Overlapping Square Cards in Center of Hero */
+        .gabor-fanned-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 14px auto 26px;
+            padding: 18px 10px;
+            position: relative;
+            max-width: 780px;
+        }
+        .gabor-fan-card {
+            width: 185px;
+            height: 185px;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 22px 44px -12px rgba(0, 0, 0, 0.18);
+            transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), z-index 0s;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .gabor-fan-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gabor-fan-card:nth-child(1) {
+            background: #d4ff33;
+            transform: rotate(-6deg) translateY(10px);
+            z-index: 1;
+        }
+        .gabor-fan-card:nth-child(2) {
+            background: #0d8bf2;
+            margin-left: -34px;
+            transform: rotate(-2deg) translateY(-6px);
+            z-index: 2;
+        }
+        .gabor-fan-card:nth-child(3) {
+            background: #80e619;
+            margin-left: -34px;
+            transform: rotate(5deg) translateY(8px);
+            z-index: 3;
+        }
+        .gabor-fan-card:nth-child(4) {
+            background: #fae3e6;
+            margin-left: -34px;
+            transform: rotate(-3deg) translateY(-4px);
+            z-index: 4;
+        }
+        .gabor-fan-card:hover {
+            transform: scale(1.12) rotate(0deg) translateY(-10px) !important;
+            z-index: 10 !important;
+        }
+
+        .gabor-giant-role {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7.8vw, 6.4rem);
+            color: #d4d4d4;
+            line-height: 0.94;
+            letter-spacing: -0.015em;
+            text-transform: uppercase;
+            max-width: 960px;
+            margin: 0 auto 28px;
+        }
+
+        .gabor-clients-tiny {
+            margin-top: 8px;
+            text-align: center;
+        }
+        .gabor-clients-tiny strong {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.03em;
+            color: #2b2b2b;
+            display: block;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .gabor-clients-tiny span {
+            font-family: var(--font-display);
+            font-size: 0.86rem;
+            letter-spacing: 0.04em;
+            color: #d4d4d4;
+            text-transform: uppercase;
+        }
+
+        /* Spencer Gabor Two-Tone ABOUT Section (Image 7) */
+        .gabor-about-block {
+            margin-top: 48px;
+            padding-top: 42px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .gabor-about-label {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            color: #2b2b2b;
+            margin-bottom: 24px;
+            display: block;
+        }
+        .gabor-about-dark {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4.2vw, 3.3rem);
+            color: #2b2b2b;
+            line-height: 0.98;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .gabor-about-gray {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4.2vw, 3.3rem);
+            color: #d4d4d4;
+            line-height: 0.98;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        /* ============================================================================
+           SLIDE 03: SPENCER GABOR "FEATURED WORK" 3-CARD TILTED CAROUSEL + "MORE WORK"
+           ============================================================================ */
+        .gabor-featured-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            padding: 16px 0 24px;
+            overflow: hidden;
+        }
+        .gabor-wing-card {
+            width: 270px;
+            height: 330px;
+            border-radius: 26px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0.92;
+        }
+        .gabor-wing-card.left-wing {
+            transform: rotate(-10deg) translateY(24px) translateX(-16px);
+        }
+        .gabor-wing-card.right-wing {
+            transform: rotate(10deg) translateY(24px) translateX(16px);
+        }
+        .gabor-wing-card:hover {
+            opacity: 1;
+            transform: rotate(0deg) scale(1.03);
+        }
+        .gabor-wing-card img,
+        .gabor-center-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gabor-center-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+        .gabor-center-card {
+            width: min(440px, 82vw);
+            height: 410px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            transition: var(--transition);
+            background: #f4f4f5;
+        }
+        .gabor-center-card:hover {
+            transform: scale(1.02);
+        }
+        .gabor-pill-caption {
+            margin-top: 20px;
+            background: #dcdcdc;
+            color: #2b2b2b;
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 10px 28px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .gabor-pill-caption:hover {
+            background: #2b2b2b;
+            color: #ffffff;
+        }
+
+        /* MORE WORK 3-Column Colorful Square Grid (Images 3 & 4) */
+        .gabor-more-work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 24px;
+        }
+        .gabor-square-card {
+            aspect-ratio: 1 / 1;
+            border-radius: 26px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 22px 44px -14px rgba(0, 0, 0, 0.13);
+            cursor: pointer;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .gabor-square-card:hover {
+            transform: translateY(-8px) rotate(-1.5deg) scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.2);
+        }
+        .gabor-square-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+        .gabor-square-card:hover img {
+            transform: scale(1.07);
+        }
+        .gabor-square-overlay {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(to top, rgba(20, 20, 19, 0.88) 0%, rgba(20, 20, 19, 0.35) 65%, transparent 100%);
+            padding: 20px;
+            color: #fff;
+            text-align: left;
+        }
+        .gabor-square-overlay span.tag-pill {
+            display: inline-block;
+            background: #ffffff;
+            color: #18181b;
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
             padding: 3px 10px;
             border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 8px;
-            box-shadow: 2px 2px 0px var(--border);
+            margin-bottom: 6px;
+        }
+        .gabor-square-overlay h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .gabor-square-overlay p {
+            color: rgba(255,255,255,0.86);
+            font-size: 0.8rem;
+            line-height: 1.35;
+            margin: 0;
         }
 
-        /* --- SLIDE 1: SPENCER GABOR EDITORIAL HERO + "ORGANIZATIONS INCLUDE" STRIP --- */
-        .hero-bento-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 22px;
-            align-items: stretch;
+        /* ============================================================================
+           SPENCER GABOR INTERACTIVE HOVER PROJECT / EXPERIENCE DIRECTORY (IMAGE 9)
+           ============================================================================ */
+        .gabor-interactive-list-stage {
+            position: relative;
+            padding: 30px 0 40px;
+            text-align: center;
         }
-
-        .hero-main-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 34px;
+        .gabor-list-heading {
+            font-family: var(--font-display);
+            font-size: 2.3rem;
+            color: #2b2b2b;
+            margin-bottom: 18px;
+        }
+        .gabor-giant-hover-item {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6.5vw, 5.4rem);
+            color: #d4d4d4;
+            line-height: 0.96;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            position: relative;
+            display: block;
+            padding: 4px 0;
+        }
+        .gabor-giant-hover-item:hover,
+        .gabor-giant-hover-item.active-hover {
+            color: #2b2b2b;
+            transform: scale(1.02);
+        }
+        /* Floating flanking preview cards that appear when hovering the giant list (Image 9) */
+        .gabor-hover-float-card {
+            position: absolute;
+            width: 195px;
+            height: 195px;
+            border-radius: 22px;
+            overflow: hidden;
             box-shadow: var(--shadow-lg);
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 15;
+        }
+        .gabor-hover-float-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gabor-hover-float-card.float-left {
+            left: 3%;
+            top: 24%;
+            transform: rotate(-5deg);
+        }
+        .gabor-hover-float-card.float-right {
+            right: 3%;
+            top: 26%;
+            transform: rotate(5deg);
+        }
+
+        /* ============================================================================
+           SPENCER GABOR "NEWS" 2x2 VIBRANT HORIZONTAL CARDS (IMAGE 8)
+           ============================================================================ */
+        .gabor-news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 860px;
+            margin: 0 auto 36px;
+        }
+        .gabor-news-card {
+            border-radius: 22px;
+            padding: 14px;
+            display: flex;
+            align-items: stretch;
+            gap: 16px;
+            min-height: 148px;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+        .gabor-news-card:hover {
+            transform: translateY(-5px) scale(1.015);
+            box-shadow: var(--shadow-md);
+        }
+        .gabor-news-thumb {
+            width: 122px;
+            height: 122px;
+            border-radius: 14px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #fff;
+        }
+        .gabor-news-info {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-        }
-
-        .gabor-meta-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding-bottom: 16px;
-            margin-bottom: 18px;
-            border-bottom: 2px dashed var(--border);
-            font-size: 0.85rem;
-            font-weight: 800;
-        }
-
-        .badge-strip {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-
-        .clean-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 13px;
-            border-radius: 999px;
-            font-size: 0.76rem;
-            font-weight: 800;
-            background: var(--bg-subtle);
-            color: var(--text-main);
-            border: 1.5px solid var(--border);
-            box-shadow: 2px 2px 0px var(--border);
-        }
-        .clean-badge.accent {
-            background: #ffcf40;
-            color: var(--text-main);
-        }
-
-        .hero-headline {
-            font-size: clamp(2.1rem, 3.8vw, 3.35rem);
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--text-main);
-            line-height: 1.06;
-        }
-        .hero-headline span {
-            color: var(--accent);
-            text-decoration: underline;
-            text-decoration-thickness: 3px;
-            text-underline-offset: 6px;
-        }
-
-        /* Spencer Gabor "Clients / Organizations Include" Ticker Block */
-        .gabor-clients-bar {
-            margin-top: 22px;
-            padding: 14px 18px;
-            background: #ffcf40;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .gabor-clients-label {
-            font-family: var(--font-display);
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            background: var(--text-main);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 999px;
-        }
-        .gabor-clients-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 0.92rem;
-            color: var(--text-main);
-        }
-
-        /* Visual Architecture Graphic Strip inside Hero */
-        .hero-visual-diagram {
-            margin: 18px 0 6px;
-            padding: 14px 16px;
-            background: var(--bg-subtle);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .diagram-node {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--bg-surface);
-            padding: 8px 14px;
-            border-radius: 999px;
-            border: 1.5px solid var(--border);
-            font-size: 0.78rem;
-            font-weight: 800;
-            color: var(--text-main);
-            box-shadow: 2px 2px 0px var(--border);
-        }
-        .diagram-node img, .diagram-node svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .hero-kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 22px;
-        }
-        .kpi-box {
-            background: var(--bg-subtle);
-            border: 2px solid var(--border);
-            padding: 14px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-        .kpi-box:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: var(--shadow-md);
-            background: var(--bg-surface);
-        }
-        .kpi-box h3 {
-            font-size: 1.55rem;
-            color: var(--accent);
-            margin-bottom: 2px;
-        }
-        .kpi-box p {
-            font-size: 0.76rem;
-            margin: 0;
-            color: var(--text-main);
-            font-weight: 700;
-        }
-
-        /* Draggable Bubbles on Hero Photo */
-        .hero-msg-bubble {
-            position: absolute;
-            background: #ffffff;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            padding: 5px 9px;
-            max-width: 145px;
-            box-shadow: 3px 3px 0px var(--border);
-            z-index: 30;
-            font-size: 0.7rem;
-            cursor: grab;
-            user-select: none;
+            padding: 4px 0;
             text-align: left;
         }
-        .hero-msg-bubble strong {
-            color: var(--accent);
+        .gabor-news-info .news-top-tag {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+        .gabor-news-info .news-bottom-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            letter-spacing: 0.01em;
+            line-height: 1;
+        }
+        /* Exact 4 colors from Image 8 */
+        .gabor-news-card.lime { background: #dfff00; }
+        .gabor-news-card.lime .news-bottom-title { color: #00b84c; }
+        .gabor-news-card.pink { background: #ffc2f9; }
+        .gabor-news-card.pink .news-bottom-title { color: #ff471a; }
+        .gabor-news-card.orange { background: #ec5328; }
+        .gabor-news-card.orange .news-bottom-title { color: #ffd9f8; }
+        .gabor-news-card.teal { background: #1f5666; }
+        .gabor-news-card.teal .news-bottom-title { color: #dfff00; }
+
+        /* ============================================================================
+           SPENCER GABOR MASSIVE FULL-WIDTH "CONTACT" BLOCK (IMAGES 5 & 6)
+           ============================================================================ */
+        .gabor-contact-monolith {
+            margin-top: 32px;
+            background: #d9d9d9;
+            border-radius: 28px;
+            padding: 36px 20px 28px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .gabor-contact-giant-word {
+            font-family: var(--font-display);
+            font-size: clamp(4.5rem, 15.5vw, 13.5rem);
+            color: #ffffff;
+            line-height: 0.86;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
             display: block;
-            font-size: 0.62rem;
-            font-weight: 800;
+            width: 100%;
+            margin-bottom: 24px;
+            user-select: none;
+        }
+        .gabor-contact-links-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.03em;
+            color: #2b2b2b;
             text-transform: uppercase;
         }
-        .hero-msg-bubble p {
-            margin: 0;
-            color: var(--text-main);
-            font-size: 0.7rem;
-            font-weight: 700;
-            line-height: 1.2;
+        .gabor-contact-links-stack a:hover {
+            opacity: 0.65;
+            text-decoration: underline;
+        }
+        .gabor-copyright-white {
+            margin-top: 22px;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            text-transform: uppercase;
         }
 
-        /* --- SLIDE 2: EXPERIENCE CARDS --- */
+        /* --- EXPERIENCE & GITHUB CARDS (CLEAN BORDERLESS STUDIO CARDS) --- */
         .exp-filter-row {
             display: flex;
+            justify-content: center;
             gap: 8px;
             flex-wrap: wrap;
+            margin-bottom: 28px;
         }
         .timeline-tab-btn {
-            border: 2px solid var(--border);
-            background: var(--bg-surface);
+            border: none;
+            background: #e4e4e7;
             color: var(--text-main);
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 2px 2px 0px var(--border);
         }
         .timeline-tab-btn.active {
-            background: var(--accent);
+            background: #2b2b2b;
             color: #fff;
         }
 
         .experience-cards-list {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 20px;
         }
 
         .exp-visual-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 22px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
             box-shadow: var(--shadow-md);
             display: grid;
             grid-template-columns: 64px 1fr 240px;
@@ -1065,22 +1331,20 @@
             transition: var(--transition);
         }
         .exp-visual-card:hover {
-            transform: translate(-3px, -3px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
         }
 
         .exp-company-logo {
             width: 60px;
             height: 60px;
-            border-radius: 14px;
-            border: 2px solid var(--border);
-            background: var(--bg-surface);
+            border-radius: 16px;
+            background: #f4f4f5;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             padding: 6px;
-            box-shadow: 3px 3px 0px var(--border);
         }
         .exp-company-logo img {
             width: 100%;
@@ -1089,7 +1353,7 @@
         }
 
         .exp-body h3 {
-            font-size: 1.18rem;
+            font-size: 1.45rem;
             margin-bottom: 4px;
         }
         .exp-company-meta {
@@ -1103,14 +1367,13 @@
             gap: 8px;
         }
         .exp-date-pill {
-            font-size: 0.74rem;
-            font-family: var(--font-code);
-            font-weight: 700;
-            background: #ffcf40;
+            font-size: 0.78rem;
+            font-family: var(--font-display);
+            letter-spacing: 0.04em;
+            background: #e4e4e7;
             color: var(--text-main);
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 999px;
-            border: 1.5px solid var(--border);
         }
 
         .exp-body ul {
@@ -1128,7 +1391,7 @@
         .nielit-subroles {
             margin-top: 14px;
             padding-left: 16px;
-            border-left: 3px solid var(--border);
+            border-left: 3px solid #e4e4e7;
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -1137,162 +1400,79 @@
         .subrole-item::before {
             content: '';
             position: absolute;
-            left: -22px;
+            left: -21px;
             top: 6px;
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: var(--accent);
-            border: 2px solid var(--border);
+            background: #2b2b2b;
         }
-        .subrole-item h4 { font-size: 0.96rem; margin-bottom: 2px; }
+        .subrole-item h4 { font-size: 1.15rem; margin-bottom: 2px; }
 
         .exp-Snapshot-thumb {
             width: 100%;
-            border-radius: var(--radius-sm);
+            border-radius: 18px;
             overflow: hidden;
-            border: 2px solid var(--border);
             background: var(--bg-subtle);
-            box-shadow: 3px 3px 0px var(--border);
+            box-shadow: var(--shadow-sm);
         }
         .exp-Snapshot-thumb img {
             width: 100%;
-            height: 125px;
+            height: 130px;
             object-fit: cover;
             display: block;
         }
         .exp-Snapshot-caption {
-            padding: 6px 10px;
-            font-size: 0.72rem;
+            padding: 8px 12px;
+            font-size: 0.75rem;
             color: var(--text-main);
             font-weight: 800;
-            background: #ffcf40;
-            border-top: 2px solid var(--border);
+            background: #f4f4f5;
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        /* --- SLIDE 3: SPENCER GABOR "FEATURED WORK" GALLERY CARDS --- */
-        .projects-visual-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 22px;
-        }
-
-        .project-visual-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-        }
-        .project-visual-card:hover {
-            transform: translate(-4px, -4px) rotate(-0.4deg);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-thumb-banner {
-            position: relative;
-            height: 195px;
-            width: 100%;
-            overflow: hidden;
-            background: var(--bg-subtle);
-            border-bottom: 2px solid var(--border);
-        }
-        .project-thumb-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        .project-visual-card:hover .project-thumb-banner img {
-            transform: scale(1.06);
-        }
-        .project-category-float {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #ffcf40;
-            color: var(--text-main);
-            border: 2px solid var(--border);
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 4px 11px;
-            border-radius: 999px;
-            box-shadow: 2px 2px 0px var(--border);
-        }
-
-        .project-card-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        .project-card-body h3 {
-            font-size: 1.22rem;
-            margin-bottom: 6px;
-        }
-        .project-card-body p {
-            font-size: 0.88rem;
-            margin-bottom: 14px;
-            flex: 1;
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .tech-tags span {
             font-size: 0.72rem;
-            font-family: var(--font-code);
             font-weight: 700;
-            background: var(--bg-subtle);
+            background: #f4f4f5;
             color: var(--text-main);
-            padding: 3px 9px;
+            padding: 4px 10px;
             border-radius: 999px;
-            border: 1.5px solid var(--border);
         }
 
-        .project-links {
-            display: flex;
-            gap: 12px;
-            padding-top: 12px;
-            border-top: 2px dashed var(--border);
-            flex-wrap: wrap;
-        }
         .link-btn {
             font-size: 0.82rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
             color: var(--text-main);
-            background: var(--bg-subtle);
-            border: 1.5px solid var(--border);
-            padding: 5px 12px;
+            background: #e4e4e7;
+            border: none;
+            padding: 6px 14px;
             border-radius: 999px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            font-family: inherit;
-            box-shadow: 2px 2px 0px var(--border);
+            gap: 6px;
             transition: var(--transition);
         }
         .link-btn:hover {
-            background: var(--accent);
+            background: #2b2b2b;
             color: #fff;
-            transform: translate(-1px, -1px);
         }
 
         /* --- SLIDE 4: GITHUB INTERACTIONS DASHBOARD --- */
         .github-dashboard-wrapper {
             background: #130d26;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
+            border-radius: 28px;
             padding: 26px;
             color: #f3e8ff;
             box-shadow: var(--shadow-lg);
@@ -1443,96 +1623,65 @@
             text-transform: uppercase;
         }
 
-        /* --- SLIDE 5: SKILLS & RECOGNITION WITH VECTOR LOGOS --- */
+        /* --- SLIDE 5: SKILLS & RECOGNITION --- */
         .skills-vector-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-            gap: 14px;
-            margin-bottom: 28px;
+            gap: 16px;
+            margin-bottom: 36px;
         }
         .skill-vector-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 16px 10px;
+            background: #f4f4f5;
+            border-radius: 22px;
+            padding: 20px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-align: center;
-            box-shadow: var(--shadow-sm);
             transition: var(--transition);
         }
         .skill-vector-card:hover {
-            background: #ffcf40;
-            transform: translate(-3px, -3px) rotate(-1deg);
+            background: #dfff00;
+            transform: translateY(-5px) rotate(-2deg);
             box-shadow: var(--shadow-md);
         }
         .skill-vector-card img {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             object-fit: contain;
         }
         .skill-vector-card span {
-            font-size: 0.8rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.02em;
             color: var(--text-main);
         }
 
-        .achievements-visual-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-        }
-        .achievement-visual-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow-md);
-        }
-        .achievement-Visual-img {
-            height: 140px;
-            width: 100%;
-            object-fit: cover;
-            border-bottom: 2px solid var(--border);
-        }
-        .achievement-visual-body {
-            padding: 18px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* --- SLIDE 6 & 7: BLOG, SPOTIFY, SOCIALS & SPENCER GABOR GIANT CONTACT FOOTER --- */
+        /* --- BLOG, SPOTIFY & VISITOR WALL --- */
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
             gap: 18px;
         }
         .blog-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
+            background: #f4f4f5;
+            border-radius: 22px;
             overflow: hidden;
             display: flex;
             cursor: pointer;
-            box-shadow: var(--shadow-sm);
             transition: var(--transition);
         }
         .blog-card:hover {
-            transform: translate(-3px, -3px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
         .vote-section {
-            background: #ffcf40;
-            padding: 12px 8px;
+            background: #e4e4e7;
+            padding: 12px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-right: 2px solid var(--border);
             min-width: 48px;
         }
         .vote-btn {
@@ -1544,9 +1693,8 @@
             font-weight: 800;
         }
         .vote-count { font-weight: 800; font-size: 0.85rem; margin: 4px 0; }
-        .blog-content { padding: 14px; flex: 1; }
-        .blog-title { font-size: 1.05rem; margin-bottom: 4px; }
-        .blog-image { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin: 8px 0; }
+        .blog-content { padding: 16px; flex: 1; }
+        .blog-title { font-size: 1.3rem; margin-bottom: 4px; }
 
         .spotify-grid {
             display: grid;
@@ -1554,193 +1702,97 @@
             gap: 14px;
         }
         .spotify-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            padding: 10px 12px;
-            border-radius: var(--radius-md);
+            background: #f4f4f5;
+            padding: 12px 14px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
         }
-        .track-art { width: 48px; height: 48px; border-radius: 8px; border: 1.5px solid var(--border); object-fit: cover; }
-        .track-name { font-weight: 800; font-size: 0.86rem; display: block; }
+        .spotify-card:hover {
+            transform: translateY(-3px);
+            background: #e6f4ea;
+        }
+        .track-art { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; }
+        .track-name { font-weight: 800; font-size: 0.88rem; display: block; }
         .track-artist { font-size: 0.76rem; color: var(--text-muted); font-weight: 600; }
-
-        /* --- SOCIAL POST PREVIEW CARDS (SLIDE 07) --- */
-        .social-hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
-            gap: 18px;
-            margin-bottom: 28px;
-        }
-        .social-post-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-        .social-post-card:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: var(--shadow-lg);
-        }
-        .social-post-header {
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 2px solid var(--border);
-            background: var(--bg-subtle);
-        }
-        .social-post-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .social-hub-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 9px;
-            border: 1.5px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.05rem;
-            flex-shrink: 0;
-            box-shadow: 2px 2px 0px var(--border);
-        }
-        .social-post-author h4 {
-            font-size: 0.9rem;
-            margin-bottom: 1px;
-        }
-        .social-post-author span {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            font-weight: 700;
-            display: block;
-        }
-        .social-post-badge {
-            font-size: 0.68rem;
-            font-weight: 800;
-            padding: 3px 9px;
-            border-radius: 999px;
-            background: #ffcf40;
-            color: var(--text-main);
-            border: 1.5px solid var(--border);
-        }
-        .social-post-thumb {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 2px solid var(--border);
-            background: var(--bg-subtle);
-        }
-        .social-post-body {
-            padding: 14px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .social-post-caption {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin: 0;
-        }
-        .social-post-caption strong {
-            color: var(--text-main);
-        }
-        .social-post-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 8px;
-            border-top: 1.5px dashed var(--border);
-            font-size: 0.75rem;
-            color: var(--text-main);
-            font-weight: 800;
-        }
-
-        /* Spencer Gabor Expanding Giant Contact Banner */
-        .gabor-giant-contact {
-            margin-top: 24px;
-            background: var(--accent);
-            color: #ffffff;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px 28px;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
-            display: block;
-        }
-        .gabor-giant-contact:hover {
-            background: var(--text-main);
-            transform: translate(-3px, -3px);
-        }
-        .gabor-giant-contact h2 {
-            color: #ffffff;
-            font-size: clamp(1.6rem, 3.2vw, 2.6rem);
-            margin-bottom: 6px;
-        }
 
         input, textarea {
             width: 100%;
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius-sm);
+            background: #f4f4f5;
+            border: 1px solid transparent;
+            padding: 0.85rem 1.1rem;
+            border-radius: 16px;
             color: var(--text-main);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 600;
             outline: none;
             margin-bottom: 10px;
-            box-shadow: 2px 2px 0px var(--border);
+            transition: var(--transition);
         }
         input:focus, textarea:focus {
-            background: #fffdf7;
-            box-shadow: 4px 4px 0px var(--accent);
+            background: #ffffff;
+            border-color: #2b2b2b;
+            box-shadow: var(--shadow-sm);
         }
 
         .messages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 12px;
-            margin-top: 16px;
         }
         .message-card {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            padding: 12px 14px;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-sm);
+            background: #f4f4f5;
+            padding: 14px 16px;
+            border-radius: 18px;
         }
 
-        /* --- MODALS & FLOATING CONTROLS --- */
+        .hero-msg-bubble {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 5px 9px;
+            max-width: 145px;
+            box-shadow: var(--shadow-md);
+            z-index: 30;
+            font-size: 0.7rem;
+            cursor: grab;
+            user-select: none;
+            text-align: left;
+        }
+        .hero-msg-bubble strong {
+            color: var(--accent);
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .hero-msg-bubble p {
+            margin: 0;
+            color: var(--text-main);
+            font-size: 0.7rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* --- MODALS & TOAST --- */
         .modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(20, 20, 19, 0.65);
-            backdrop-filter: blur(4px);
+            background: rgba(20, 20, 19, 0.55);
+            backdrop-filter: blur(6px);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
         .modal-content {
-            background: var(--bg-surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 26px;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 30px;
             width: 100%;
             max-width: 580px;
             max-height: 85vh;
@@ -1750,9 +1802,9 @@
         }
         .close-modal {
             position: absolute;
-            top: 14px;
-            right: 18px;
-            font-size: 1.5rem;
+            top: 16px;
+            right: 20px;
+            font-size: 1.6rem;
             cursor: pointer;
             color: var(--text-main);
             font-weight: 800;
@@ -1761,16 +1813,16 @@
         .toast-notification {
             position: fixed;
             top: 76px;
-            right: 20px;
-            background: var(--text-main);
+            right: 24px;
+            background: #2b2b2b;
             color: #fff;
-            border: 2px solid var(--border);
-            padding: 10px 18px;
+            padding: 10px 20px;
             border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            letter-spacing: 0.04em;
+            font-size: 0.9rem;
             z-index: 3000;
-            box-shadow: 4px 4px 0px var(--accent);
+            box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1784,27 +1836,41 @@
             transform: translateY(0);
         }
 
-        /* Mobile Drawer Backdrop */
         .mobile-sidebar-backdrop {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(20, 20, 19, 0.5);
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1150;
+        }
+
+        /* Container queries for the 30% context pane */
+        @container (max-width: 580px) {
+            .gabor-fanned-cards { transform: scale(0.65); margin: -20px auto; }
+            .gabor-wing-card { display: none !important; }
+            .gabor-more-work-grid,
+            .gabor-news-grid,
+            .exp-visual-card,
+            .gh-bottom-bento,
+            .gh-metrics-2x2 {
+                grid-template-columns: 1fr !important;
+            }
+            .gabor-hover-float-card { display: none !important; }
+            .exp-Snapshot-thumb { grid-column: 1 / -1 !important; }
         }
 
         /* --- FULL MOBILE & TABLET RESPONSIVENESS --- */
         @media (max-width: 992px) {
+            .gabor-wing-card { display: none; }
+            .gabor-more-work-grid { grid-template-columns: repeat(2, 1fr); }
             .exp-visual-card { grid-template-columns: 52px 1fr; }
             .exp-Snapshot-thumb { grid-column: 1 / -1; }
             .gh-bottom-bento { grid-template-columns: 1fr; }
+            .gabor-hover-float-card { display: none; }
         }
 
         @media (max-width: 768px) {
-            .mobile-Drawer-btn {
-                display: inline-flex;
-            }
-            /* On mobile, sidebar becomes an off-canvas slide-over drawer so the content gets 100% width */
+            .mobile-Drawer-btn { display: inline-flex; }
             .app-sidebar {
                 position: fixed;
                 top: 0;
@@ -1815,79 +1881,44 @@
                 transform: translateX(-105%);
                 box-shadow: var(--shadow-lg);
             }
-            body.mobile-drawer-open .app-sidebar {
-                transform: translateX(0);
-            }
-            body.mobile-drawer-open .mobile-sidebar-backdrop {
-                display: block;
-            }
-            /* Disable collapsed icon-only rules on mobile drawer */
-            body.sidebar-collapsed .sidebar-brand-text,
-            body.sidebar-collapsed .sidebar-nav-label,
-            body.sidebar-collapsed .sidebar-nav-btn .slide-num,
-            body.sidebar-collapsed .sidebar-profile-details,
-            body.sidebar-collapsed .sidebar-step-btn span,
-            body.sidebar-collapsed .sidebar-stats-row,
-            body.sidebar-collapsed .resume-btn-text {
-                display: initial !important;
-                opacity: 1 !important;
-                width: auto !important;
-            }
-            body.sidebar-collapsed .sidebar-profile-showcase {
-                width: auto;
-                height: auto;
-                padding: 12px;
-                margin: 10px 12px 6px;
-                border-radius: var(--radius-md);
-                background: var(--bg-surface);
-                border: 2px solid var(--border);
-            }
-            body.sidebar-collapsed .sidebar-photo-box {
-                width: 96px;
-                height: 96px;
-                border-radius: 14px;
-                margin-bottom: 8px;
-            }
-            body.sidebar-collapsed .sidebar-nav-btn {
-                justify-content: space-between;
-                padding: 9px 12px;
-            }
-            body.sidebar-collapsed .sidebar-step-row {
-                flex-direction: row;
-            }
-            body.sidebar-collapsed .sidebar-step-btn,
-            body.sidebar-collapsed .sidebar-resume-btn {
-                width: 100% !important;
-                height: auto !important;
-                padding: 8px 12px !important;
-                border-radius: 999px !important;
-            }
+            body.mobile-drawer-open .app-sidebar { transform: translateX(0); }
+            body.mobile-drawer-open .mobile-sidebar-backdrop { display: block; }
 
             #header {
-                padding: 0 12px;
+                padding: 8px 14px;
                 height: auto;
                 min-height: 60px;
-                padding-top: 8px;
-                padding-bottom: 8px;
             }
             .weather-widget { display: none !important; }
-            .brand-logo span { font-size: 1.05rem; }
-            .mode-switch-btn { padding: 5px 9px; font-size: 0.7rem; }
+            .mode-switch-btn { padding: 5px 10px; font-size: 0.7rem; }
 
-            /* Single 100% pane on mobile for clean reading & touch scrolling */
             .slide-panel.prev-slide { display: none !important; }
             .slide-panel.active-slide {
                 flex: 1 1 100% !important;
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 16px 14px 70px !important;
+                padding: 18px 14px 80px !important;
             }
-            .hero-main-card { padding: 20px 16px; }
-            .hero-kpi-grid { grid-template-columns: repeat(2, 1fr); }
-            .gh-metrics-2x2 { grid-template-columns: 1fr; }
-            .projects-visual-grid,
-            .social-hub-grid { grid-template-columns: 1fr; }
-            .contact-split-box { grid-template-columns: 1fr !important; padding: 18px !important; }
+
+            .gabor-fanned-cards {
+                flex-wrap: nowrap;
+                transform: scale(0.72);
+                margin: -10px auto 4px;
+            }
+            .gabor-fan-card {
+                width: 135px;
+                height: 135px;
+            }
+            .gabor-more-work-grid,
+            .gabor-news-grid {
+                grid-template-columns: 1fr;
+            }
+            .gabor-center-card {
+                height: 300px;
+            }
+            .contact-split-box {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>
@@ -1895,8 +1926,22 @@
 
     <!-- Toast Notification -->
     <div id="toastNotification" class="toast-notification">
-        <i class="fas fa-check-circle" style="color: #ffcf40;"></i>
+        <i class="fas fa-check-circle" style="color: #dfff00;"></i>
         <span id="toastMessage">Switched Mode</span>
+    </div>
+
+    <!-- Spencer Gabor Floating Bottom-Right Palette Button & Drawer -->
+    <div class="gabor-floating-palette-wrap" id="gaborPaletteWrap">
+        <div class="gabor-palette-drawer">
+            <span class="palette-swatch active" style="background:#ffffff;" data-palette="cream" title="Pure Studio White"></span>
+            <span class="palette-swatch" style="background:#b9f6ca;" data-palette="mint" title="Studio Mint"></span>
+            <span class="palette-swatch" style="background:#ffe57f;" data-palette="butter" title="Butter Yellow"></span>
+            <span class="palette-swatch" style="background:#d1c4e9;" data-palette="lavender" title="Soft Lavender"></span>
+            <span class="palette-swatch" style="background:#ffab91;" data-palette="coral" title="Warm Coral"></span>
+        </div>
+        <button class="gabor-palette-fab" id="gaborPaletteBtn" title="Switch Studio Background Palette">
+            <i class="fas fa-palette"></i>
+        </button>
     </div>
 
     <!-- Mobile Backdrop when Drawer is Open -->
@@ -1911,10 +1956,10 @@
                 <button class="sidebar-trigger-btn" id="toggleSidebarBtn" title="Collapse / Expand Sidebar">
                     <i class="fas fa-bars"></i>
                 </button>
-                <span class="sidebar-brand-text">Workspace</span>
+                <span class="sidebar-brand-text">CHANDAN SAROJ</span>
             </div>
 
-            <!-- RICH PROFILE PANEL AT TOP OF SIDEBAR (FROM IMAGE 2) -->
+            <!-- RICH PROFILE PANEL AT TOP OF SIDEBAR -->
             <div class="sidebar-profile-showcase">
                 <div class="sidebar-photo-box">
                     <img src="assets/img/chandan-saroj.png" 
@@ -1924,8 +1969,8 @@
                     <div id="heroMessages"></div>
                 </div>
                 <div class="sidebar-profile-details">
-                    <h4>Chandan Saroj</h4>
-                    <span class="sidebar-role-tag dev-only">MERN Stack & .NET Engineer • Ex-NIELIT SDE</span>
+                    <h4>CHANDAN SAROJ</h4>
+                    <span class="sidebar-role-tag dev-only">MERN Stack & .NET Engineer • 2.5+ Yrs</span>
                     <span class="sidebar-role-tag ds-only">Data Science Specialist @ HYI.AI • 4+ Yrs</span>
                     <div class="sidebar-mini-banner">
                         <img class="dev-only" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80" alt="Developer Architecture">
@@ -1933,23 +1978,23 @@
                         <div class="sidebar-mini-banner-foot">
                             <span class="dev-only"><i class="fas fa-server"></i> Production Web & API</span>
                             <span class="ds-only"><i class="fas fa-chart-line"></i> Neural & Data Infra</span>
-                            <a href="https://linkedin.com/in/chandan-saroj" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 700;">LinkedIn ↗</a>
+                            <a href="https://linkedin.com/in/chandan-saroj" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 800;">LinkedIn ↗</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="sidebar-nav-list">
-                <button class="sidebar-nav-btn active" data-slide="0" title="01. Overview & Profile">
-                    <span class="nav-left"><i class="fas fa-house"></i> <span class="sidebar-nav-label">Overview & Profile</span></span>
+                <button class="sidebar-nav-btn active" data-slide="0" title="01. Overview & About">
+                    <span class="nav-left"><i class="fas fa-house"></i> <span class="sidebar-nav-label">Overview & About</span></span>
                     <span class="slide-num">01</span>
                 </button>
                 <button class="sidebar-nav-btn" data-slide="1" title="02. Work Experience">
                     <span class="nav-left"><i class="fas fa-briefcase"></i> <span class="sidebar-nav-label">Work Experience</span></span>
                     <span class="slide-num">02</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="2" title="03. Projects & Programs">
-                    <span class="nav-left"><i class="fas fa-layer-group"></i> <span class="sidebar-nav-label">Projects & Programs</span></span>
+                <button class="sidebar-nav-btn" data-slide="2" title="03. Featured & More Work">
+                    <span class="nav-left"><i class="fas fa-layer-group"></i> <span class="sidebar-nav-label">Featured Work</span></span>
                     <span class="slide-num">03</span>
                 </button>
                 <button class="sidebar-nav-btn" data-slide="3" title="04. GitHub Heatmap & Stats">
@@ -1964,8 +2009,8 @@
                     <span class="nav-left"><i class="fas fa-newspaper"></i> <span class="sidebar-nav-label">Blog, Music & Wall</span></span>
                     <span class="slide-num">06</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="6" title="07. Socials & Contact">
-                    <span class="nav-left"><i class="fas fa-paper-plane"></i> <span class="sidebar-nav-label">Socials & Contact</span></span>
+                <button class="sidebar-nav-btn" data-slide="6" title="07. News & Contact">
+                    <span class="nav-left"><i class="fas fa-paper-plane"></i> <span class="sidebar-nav-label">News & Contact</span></span>
                     <span class="slide-num">07</span>
                 </button>
             </div>
@@ -1992,14 +2037,14 @@
         <!-- RIGHT WORKSPACE AREA -->
         <div class="workspace-main">
 
-            <!-- SPENCER GABOR STUDIO HEADER (WITH BONUS COLOR PALETTE SWITCHER & MOBILE DRAWER BUTTON) -->
+            <!-- MINIMAL SPENCER GABOR TOP BAR -->
             <header id="header">
                 <div class="header-left">
                     <button class="sidebar-trigger-btn mobile-Drawer-btn" id="mobileMenuBtn" title="Open Menu">
                         <i class="fas fa-bars"></i>
                     </button>
                     <div class="brand-logo" onclick="window.goToSlide(0)">
-                        <span>ChandanSaroj</span>
+                        <span>CHANDAN SAROJ</span>
                     </div>
 
                     <!-- MINIMAL DUAL-MODE SEGMENTED SWITCH -->
@@ -2009,186 +2054,163 @@
                             <span>Developer (2.5+ Yrs)</span>
                         </button>
                         <button type="button" class="mode-switch-btn" data-target-mode="datascience">
-                            <i class="fas fa-chart-network"></i>
+                            <i class="fas fa-brain"></i>
                             <span>Data Science (4+ Yrs)</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="header-right">
-                    <!-- Spencer Gabor Signature Palette Switcher -->
-                    <div class="gabor-palette-bar" title="Switch Studio Color Palette">
-                        <span class="palette-swatch active" style="background:#f6f3ec;" data-palette="cream" title="Warm Paper"></span>
-                        <span class="palette-swatch" style="background:#b9f6ca;" data-palette="mint" title="Studio Mint"></span>
-                        <span class="palette-swatch" style="background:#ffe57f;" data-palette="butter" title="Butter Yellow"></span>
-                        <span class="palette-swatch" style="background:#d1c4e9;" data-palette="lavender" title="Soft Lavender"></span>
-                        <span class="palette-swatch" style="background:#ffab91;" data-palette="coral" title="Warm Coral"></span>
-                    </div>
-
                     <div id="weather-widget" class="weather-widget" style="display:none;">
                         <span class="weather-location" id="weatherLocation"><i class="fas fa-location-dot"></i> <span>Delhi</span></span>
                         <div class="weather-info">
                             <span id="weatherTemp">--°C</span>
                             <span id="weatherCondition" style="display:none;"></span>
-                            <span id="weatherAQI" style="border-left:1.5px solid var(--border); padding-left:8px;">AQI: --</span>
+                            <span id="weatherAQI" style="border-left:1px solid var(--border); padding-left:8px;">AQI: --</span>
                         </div>
                     </div>
 
-                    <button class="sidebar-trigger-btn" id="likeBtn" title="Like Portfolio" style="width: auto; border-radius: 999px; padding: 0 12px; gap: 6px; font-size: 0.8rem; font-weight: 800;">
+                    <button class="sidebar-trigger-btn" id="likeBtn" title="Like Portfolio" style="width: auto; border-radius: 999px; padding: 0 14px; gap: 6px; font-size: 0.8rem; font-weight: 800;">
                         <i class="fas fa-heart" style="color: #e11d48;"></i>
                         <span id="likeCount">0</span>
                     </button>
+
+                    <!-- Spencer Gabor Signature Top-Right Circular Avatar Button -->
+                    <div class="gabor-floating-avatar" onclick="window.goToSlide(0)" title="Back to Hero Overview">
+                        <img src="assets/img/chandan-saroj.png" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'" alt="Chandan Avatar">
+                    </div>
                 </div>
             </header>
 
             <!-- ==================== DIRECTIONAL 30% / 70% SPLIT VIEWPORT ==================== -->
             <main class="deck-viewport dir-forward" id="deckViewport">
 
-        <!-- ==================== SLIDE 0: OVERVIEW / HERO WORKSPACE ==================== -->
+        <!-- ==================== SLIDE 0: EXACT SPENCER GABOR HERO + TWO-TONE ABOUT (IMAGES 1 & 7) ==================== -->
         <section class="slide-panel active-slide" data-slide-index="0" data-slide-title="01 / Overview">
             <div class="slide-inner">
-                <div class="hero-bento-grid">
-                    
-                    <!-- Main Spencer Gabor Studio Card -->
-                    <div class="hero-main-card">
-                        <div>
-                            <!-- Spencer Gabor Top Editorial Location & Email Bar -->
-                            <div class="gabor-meta-row">
-                                <span><i class="fas fa-asterisk" style="color:var(--accent);"></i> SDE & Data Science Specialist • Bengaluru / Delhi, India</span>
-                                <a href="mailto:imjunior471@gmail.com" style="text-decoration:underline;">imjunior471@gmail.com ↗</a>
-                            </div>
+                
+                <!-- SPENCER GABOR CENTERED HERO (IMAGE 1) -->
+                <div class="gabor-hero-stage">
+                    <div class="gabor-top-meta">
+                        <span class="loc">BENGALURU & DELHI, INDIA</span>
+                        <a href="mailto:imjunior471@gmail.com" class="mail">IMJUNIOR471@GMAIL.COM</a>
+                    </div>
 
-                            <div class="badge-strip">
-                                <span class="clean-badge accent dev-only"><i class="fas fa-code"></i> Software Development Engineer • 2.5+ Years Exp.</span>
-                                <span class="clean-badge accent ds-only"><i class="fas fa-brain"></i> Data Science Specialist • 4+ Years Exp.</span>
-                                <span class="clean-badge"><i class="fas fa-trophy" style="color:#d97706;"></i> National Hackathon Winner (Paranox 2.0)</span>
-                                <span class="clean-badge"><i class="fas fa-book" style="color:#2563eb;"></i> Springer Author (6 Citations)</span>
-                            </div>
+                    <h1 class="gabor-giant-name">CHANDAN SAROJ</h1>
 
-                            <!-- Developer Headline & Bio -->
-                            <div class="dev-only">
-                                <h1 class="hero-headline">Full-Stack <span>Software Engineer</span> & Systems Architect</h1>
-                                <p>
-                                    I am a Software Development Engineer specializing in full-stack web architecture and cloud-based solutions. My engineering practice focuses on building scalable enterprise applications using the <strong>MERN stack</strong>. I create high-performance RESTful APIs and responsive UIs, actively managing server infrastructure on <strong>AWS and Ubuntu</strong>, alongside CI/CD pipelines and database optimization to ensure system reliability and speed.
-                                </p>
-                            </div>
-
-                            <!-- Data Science Specialist Headline & Bio -->
-                            <div class="ds-only">
-                                <h1 class="hero-headline"><span>Data Science Specialist</span> & Applied AI Researcher</h1>
-                                <p>
-                                    Bridging scalable systems with Applied AI, my tenure as an SDE at <strong>NIELIT Ropar</strong> involved designing high-traffic admission portals and integrating machine learning models into administrative workflows. My research on automated systems—specifically <strong>Resume Classification (RNN)</strong> and <strong>Object Detection</strong>—has been published in <strong>Springer</strong> journals and recognized with the <strong>"Best Project in AI/ML"</strong> award at NICEDT 2025.
-                                </p>
-                            </div>
-
-                            <!-- Visual Vector Workflow Strip (Text + Graphics) -->
-                            <div class="hero-visual-diagram dev-only">
-                                <div class="diagram-node">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
-                                    <span>React & TypeScript UI</span>
-                                </div>
-                                <i class="fas fa-arrow-right" style="color: var(--text-light); font-size: 0.8rem;"></i>
-                                <div class="diagram-node">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node">
-                                    <span>Node.js / .NET Core APIs</span>
-                                </div>
-                                <i class="fas fa-arrow-right" style="color: var(--text-light); font-size: 0.8rem;"></i>
-                                <div class="diagram-node">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins">
-                                    <span>Jenkins CI/CD & SHA-256 DB</span>
-                                </div>
-                            </div>
-
-                            <div class="hero-visual-diagram ds-only">
-                                <div class="diagram-node">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-                                    <span>Data Pipelines & EDA</span>
-                                </div>
-                                <i class="fas fa-arrow-right" style="color: var(--text-light); font-size: 0.8rem;"></i>
-                                <div class="diagram-node">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch">
-                                    <span>YOLOv8 / Diffusion / LLMs</span>
-                                </div>
-                                <i class="fas fa-arrow-right" style="color: var(--text-light); font-size: 0.8rem;"></i>
-                                <div class="diagram-node">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg'" alt="Deploy">
-                                    <span>Production AI & Governance</span>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;">
-                                <button class="btn" onclick="window.goToSlide(1)">
-                                    <i class="fas fa-briefcase"></i> View Updated Experience
-                                </button>
-                                <button class="btn btn-outline" onclick="window.goToSlide(2)">
-                                    <i class="fas fa-layer-group"></i> Browse Visual Projects
-                                </button>
-                                <button class="btn btn-outline" onclick="window.goToSlide(3)">
-                                    <i class="fab fa-github"></i> GitHub Heatmap & Radar
-                                </button>
-                            <!-- Data Science KPIs -->
-                            <div class="hero-kpi-grid ds-only">
-                                <div class="kpi-box">
-                                    <h3>4+ Yrs</h3>
-                                    <p>Data Science Specialist</p>
-                                </div>
-                                <div class="kpi-box">
-                                    <h3>1.5 Yrs</h3>
-                                    <p>IndiaAI (MeitY) Program</p>
-                                </div>
-                                <div class="kpi-box">
-                                    <h3>99.2%</h3>
-                                    <p>YOLOv8 Model Accuracy</p>
-                                </div>
-                                <div class="kpi-box">
-                                    <h3>6 Citations</h3>
-                                    <p>4+ Springer Papers</p>
-                                </div>
-                            </div>
-
-                            <!-- Spencer Gabor "Clients Include" Style Banner -->
-                            <div class="gabor-clients-bar">
-                                <span class="gabor-clients-label">Organizations & Programs Include</span>
-                                <div class="gabor-clients-list">
-                                    <span>HYI.AI</span>
-                                    <span>•</span>
-                                    <span>NIELIT (Govt. of India)</span>
-                                    <span>•</span>
-                                    <span>IndiaAI (MeitY)</span>
-                                    <span>•</span>
-                                    <span>NITI Aayog (Shahdol)</span>
-                                    <span>•</span>
-                                    <span>Webcreaters_</span>
-                                    <span>•</span>
-                                    <span>BR TECHGEEKS</span>
-                                    <span>•</span>
-                                    <span>PIET College</span>
-                                    <span>•</span>
-                                    <span>Springer</span>
-                                </div>
-                            </div>
+                    <!-- 4 Overlapping Fanned Square Project Cards (Clicking jumps to Featured Work) -->
+                    <div class="gabor-fanned-cards">
+                        <div class="gabor-fan-card" onclick="window.goToSlide(2)" title="SimpleBit & MERN Stack">
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80" alt="SimpleBit Fintech">
+                        </div>
+                        <div class="gabor-fan-card" onclick="window.goToSlide(2)" title="SmartLane AI — YOLOv8">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=600&q=80" alt="SmartLane AI">
+                        </div>
+                        <div class="gabor-fan-card" onclick="window.goToSlide(2)" title="NIELIT SHA-256 Platform">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Secure Question Paper">
+                        </div>
+                        <div class="gabor-fan-card" onclick="window.goToSlide(2)" title="IndiaAI & Springer Diffusion Research">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="IndiaAI Research">
                         </div>
                     </div>
 
+                    <!-- Giant Muted Gray Role Typography (Swaps between Developer & Data Science) -->
+                    <h2 class="gabor-giant-role dev-only">
+                        SOFTWARE ENGINEER,<br>MERN & .NET ARCHITECT
+                    </h2>
+                    <h2 class="gabor-giant-role ds-only">
+                        DATA SCIENCE SPECIALIST,<br>AI RESEARCHER & TRAINER
+                    </h2>
+
+                    <div class="gabor-clients-tiny">
+                        <strong>ORGANIZATIONS & PROGRAMS INCLUDE</strong>
+                        <span>HYI.AI, NIELIT (GOVT. OF INDIA), INDIAAI (MEITY), NITI AAYOG, WEBCREATERS_, BR TECHGEEKS, PIET COLLEGE, SPRINGER</span>
+                    </div>
                 </div>
+
+                <!-- SPENCER GABOR TWO-TONE ABOUT STATEMENT (IMAGE 7) -->
+                <div class="gabor-about-block">
+                    <span class="gabor-about-label">ABOUT</span>
+
+                    <!-- Developer Mode Two-Tone Bio -->
+                    <div class="dev-only">
+                        <div class="gabor-about-dark">
+                            CHANDAN SAROJ IS A SOFTWARE DEVELOPMENT ENGINEER (2.5+ YRS EXP) SPECIALIZING IN FULL-STACK WEB ARCHITECTURE AND CLOUD SOLUTIONS USING THE MERN STACK & ASP.NET CORE.
+                        </div>
+                        <div class="gabor-about-gray">
+                            HIS ENGINEERING PRACTICE CREATES HIGH-PERFORMANCE RESTFUL APIS AND RESPONSIVE INTERFACES, ACTIVELY MANAGING AWS & UBUNTU SERVER INFRASTRUCTURE, JENKINS CI/CD PIPELINES, AND SHA-256 DATABASE SECURITY FOR 30,000+ FILES.
+                        </div>
+                    </div>
+
+                    <!-- Data Science Mode Two-Tone Bio -->
+                    <div class="ds-only">
+                        <div class="gabor-about-dark">
+                            CHANDAN SAROJ IS A DATA SCIENCE SPECIALIST AT HYI.AI (4+ YRS EXP) AND FORMER SDE AT NIELIT ROPAR, DESIGNING HIGH-TRAFFIC PORTALS AND INTEGRATING ML MODELS INTO PRODUCTION WORKFLOWS.
+                        </div>
+                        <div class="gabor-about-gray">
+                            HIS RESEARCH ON RESUME CLASSIFICATION (RNN), YOLOV8 OBJECT DETECTION & DIFFUSION MODELS IS PUBLISHED IN SPRINGER JOURNALS (6 CITATIONS) AND WON THE "BEST PROJECT IN AI/ML" AWARD AT NICEDT 2025 & PARANOX 2.0.
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn" onclick="window.goToSlide(2)">Explore Featured Work →</button>
+                        <button class="btn btn-outline" onclick="window.goToSlide(1)">Career Timeline (02)</button>
+                        <button class="btn btn-outline" onclick="window.goToSlide(3)">GitHub Heatmap (04)</button>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- ==================== SLIDE 1: UPDATED WORK EXPERIENCE (FROM LINKEDIN SCREENSHOTS) ==================== -->
+        <!-- ==================== SLIDE 1: WORK EXPERIENCE + SPENCER GABOR HOVER DIRECTORY (IMAGE 9) ==================== -->
         <section class="slide-panel" data-slide-index="1" data-slide-title="02 / Experience">
             <div class="slide-inner">
-                <div class="section-header-bar">
-                    <div>
-                        <span class="section-eyebrow"><i class="fas fa-briefcase"></i> Verified LinkedIn Career History</span>
-                        <h2>Professional Experience & Roles</h2>
-                        <p style="margin: 4px 0 0;"> Automatically filtered by your active profile mode, or click "All Experience" to view your complete career path.</p>
+                <div class="gabor-section-title">
+                    <h2>EXPERIENCE</h2>
+                    <p>Verified career path across Data Science (4+ Yrs) and Full-Stack Engineering (2.5+ Yrs)</p>
+                </div>
+
+                <!-- Spencer Gabor Interactive Hover Project/Role Stack (Image 9) -->
+                <div class="gabor-interactive-list-stage" id="expHoverStage">
+                    <div class="gabor-hover-float-card float-left">
+                        <img id="expFloatLeftImg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80" alt="Preview Left">
                     </div>
-                    <div class="exp-filter-row">
-                        <button class="timeline-tab-btn active" data-filter="mode">Match Active Profile Mode</button>
-                        <button class="timeline-tab-btn" data-filter="all">All Experience</button>
-                        <button class="timeline-tab-btn" data-filter="dev">Developer Roles (2.5+ Yrs)</button>
-                        <button class="timeline-tab-btn" data-filter="ds">Data Science Roles (4+ Yrs)</button>
+                    <div class="gabor-hover-float-card float-right">
+                        <img id="expFloatRightImg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt="Preview Right">
                     </div>
+
+                    <span class="gabor-giant-hover-item active-hover"
+                          data-img-left="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80"
+                          data-img-right="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=500&q=80">
+                        HYI.AI BENGALURU
+                    </span>
+                    <span class="gabor-giant-hover-item"
+                          data-img-left="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=500&q=80"
+                          data-img-right="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80">
+                        BR TECHGEEKS & PIET
+                    </span>
+                    <span class="gabor-giant-hover-item"
+                          data-img-left="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80"
+                          data-img-right="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=500&q=80">
+                        WEBCREATERS_ MERN
+                    </span>
+                    <span class="gabor-giant-hover-item"
+                          data-img-left="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=80"
+                          data-img-right="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=80">
+                        NIELIT & INDIAAI
+                    </span>
+                    <span class="gabor-giant-hover-item"
+                          data-img-left="https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=500&q=80"
+                          data-img-right="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=500&q=80">
+                        NITI AAYOG SHAHDOL
+                    </span>
+                </div>
+
+                <div class="exp-filter-row">
+                    <button class="timeline-tab-btn active" data-filter="mode">Match Active Profile Mode</button>
+                    <button class="timeline-tab-btn" data-filter="all">All Experience</button>
+                    <button class="timeline-tab-btn" data-filter="dev">Developer Roles (2.5+ Yrs)</button>
+                    <button class="timeline-tab-btn" data-filter="ds">Data Science Roles (4+ Yrs)</button>
                 </div>
 
                 <div class="experience-cards-list" id="experienceTimeline">
@@ -2353,249 +2375,181 @@
             </div>
         </section>
 
-        <!-- ==================== SLIDE 2: VISUAL PROJECTS & RESEARCH PORTFOLIO ==================== -->
-        <section class="slide-panel" data-slide-index="2" data-slide-title="03 / Projects">
+        <!-- ==================== SLIDE 2: SPENCER GABOR "FEATURED WORK" CAROUSEL + "MORE WORK" 3x2 GRID (IMAGES 2, 3, 4) ==================== -->
+        <section class="slide-panel" data-slide-index="2" data-slide-title="03 / Featured Work">
             <div class="slide-inner">
-                <div class="section-header-bar">
-                    <div>
-                        <span class="section-eyebrow dev-only"><i class="fas fa-code-branch"></i> Developer Portfolio (2.5+ Yrs)</span>
-                        <span class="section-eyebrow ds-only"><i class="fas fa-brain"></i> Data Science & AI Specialist Portfolio (4+ Yrs)</span>
-                        <h2 class="dev-only">Full-Stack Systems & Production Platforms</h2>
-                        <h2 class="ds-only">AI Models, Govt. Programs & Springer Research</h2>
-                    </div>
-                    <span style="font-size: 0.78rem; color: var(--text-light); background: var(--bg-surface); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">
-                        <i class="fas fa-image"></i> Visual Preview Cards (Replaceable with your project screenshots)
-                    </span>
+                
+                <!-- FEATURED WORK HEADER & 3-CARD TILTED CAROUSEL (IMAGE 2) -->
+                <div class="gabor-section-title">
+                    <h2>FEATURED WORK</h2>
+                    <p>Select recent and notable projects (Click side cards to cycle)</p>
                 </div>
 
-                <!-- DEVELOPER PROJECTS GRID -->
-                <div class="projects-visual-grid dev-only">
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=80" alt="Secure Question Paper Platform">
-                            <span class="project-category-float">SHA-256 • 30,000+ Exam Files</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>NIELIT Secure Question Paper Platform</h3>
-                            <p>Leak-proof examination platform using SHA-256 hashing in Microsoft SQL Server and SSRS PDF automation with zero plaintext DBA exposure.</p>
-                            <div class="tech-tags">
-                                <span>Node.js</span><span>React</span><span>SQL Server</span><span>SHA-256</span><span>SSRS</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/chandanXP/NIELIT-Secure-Question-Paper-Platform" target="_blank" rel="noopener" class="link-btn"><i class="fab fa-github"></i> View Code</a>
-                                <button class="link-btn" onclick="window.openProofModal('secure_qp')"><i class="fas fa-circle-info"></i> Architecture Details</button>
-                            </div>
-                        </div>
+                <!-- Developer Featured Carousel -->
+                <div class="gabor-featured-carousel dev-only" id="devFeaturedCarousel">
+                    <div class="gabor-wing-card left-wing" onclick="window.cycleFeatured('dev', -1)">
+                        <img id="devWingLeftImg" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80" alt="Previous Project">
                     </div>
-
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80" alt="SimpleBit Fintech">
-                            <span class="project-category-float">Live Fintech App</span>
+                    <div class="gabor-center-stage">
+                        <div class="gabor-center-card" id="devCenterCard" onclick="window.openFeaturedLink('dev')">
+                            <img id="devCenterImg" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80" alt="Featured Developer Project">
                         </div>
-                        <div class="project-card-body">
-                            <h3>SimpleBit Crypto Trading Dashboard</h3>
-                            <p>High-performance cryptocurrency trading frontend built with React and TypeScript featuring real-time market charts and JWT authentication.</p>
-                            <div class="tech-tags">
-                                <span>React.js</span><span>TypeScript</span><span>Redux Toolkit</span><span>JWT</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://app.simple-bit.com" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i> app.simple-bit.com</a>
-                            </div>
-                        </div>
+                        <button class="gabor-pill-caption" id="devCenterPill" onclick="window.openFeaturedLink('dev')">
+                            SECURE QUESTION PAPER PLATFORM ↗
+                        </button>
                     </div>
-
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80" alt="The Hidout Booking">
-                            <span class="project-category-float">Booking & CMS</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>The Hidout Property Booking Engine</h3>
-                            <p>End-to-end reservation engine, availability calendar, and CMS with integrated secure payment gateway workflows.</p>
-                            <div class="tech-tags">
-                                <span>MERN Stack</span><span>Node.js</span><span>Express</span><span>MongoDB</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://dev.thehidout.com" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i> dev.thehidout.com</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=700&q=80" alt="AksumBase CI/CD">
-                            <span class="project-category-float">Jenkins CI/CD</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>AksumBase Resource Management</h3>
-                            <p>Scalable administrative backend and resource dashboard deployed via automated Jenkins CI/CD testing and production pipelines.</p>
-                            <div class="tech-tags">
-                                <span>Node.js</span><span>React</span><span>Jenkins CI/CD</span><span>Docker</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://aksumbase.com" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i> aksumbase.com</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=700&q=80" alt="NIELIT Ropar University">
-                            <span class="project-category-float">Official Gov Portal</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>NIELIT Ropar University Portal</h3>
-                            <p>Official academic portal for B.Tech, M.Tech, PhD, and Diploma programs with dynamic faculty directories and course repositories.</p>
-                            <div class="tech-tags">
-                                <span>HTML5/SCSS</span><span>JavaScript</span><span>Bootstrap</span><span>PHP</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/chandanXP/nielit-ropar-university" target="_blank" rel="noopener" class="link-btn"><i class="fab fa-github"></i> GitHub Repo</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt="Identity Card & LMS">
-                            <span class="project-category-float">60% Faster Workflow</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>ID Card Automation & LMS Portal</h3>
-                            <p>Automated batch ID card generator in Python/Django + OpenCV alongside a full-stack React & Django Learning Management System.</p>
-                            <div class="tech-tags">
-                                <span>Django</span><span>Python</span><span>MongoDB</span><span>React</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://idcardnielit.pythonanywhere.com/" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i> ID Card Live</a>
-                                <a href="https://techstudy.pythonanywhere.com/" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i> LMS Live</a>
-                            </div>
-                        </div>
+                    <div class="gabor-wing-card right-wing" onclick="window.cycleFeatured('dev', 1)">
+                        <img id="devWingRightImg" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80" alt="Next Project">
                     </div>
                 </div>
 
-                <!-- DATA SCIENCE SPECIALIST PROJECTS GRID -->
-                <div class="projects-visual-grid ds-only">
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=80" alt="IndiaAI Program">
-                            <span class="project-category-float">1.5 Years • MeitY Govt.</span>
+                <!-- Data Science Featured Carousel -->
+                <div class="gabor-featured-carousel ds-only" id="dsFeaturedCarousel">
+                    <div class="gabor-wing-card left-wing" onclick="window.cycleFeatured('ds', -1)">
+                        <img id="dsWingLeftImg" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=80" alt="Previous AI Project">
+                    </div>
+                    <div class="gabor-center-stage">
+                        <div class="gabor-center-card" id="dsCenterCard" onclick="window.openFeaturedLink('ds')">
+                            <img id="dsCenterImg" src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=900&q=80" alt="Featured AI Project">
                         </div>
-                        <div class="project-card-body">
-                            <h3>IndiaAI Program (MeitY Initiative)</h3>
-                            <p>1.5-year flagship contribution to India's National AI Mission—developing Diffusion Models, Audio DL pipelines, and national AI literacy programs.</p>
-                            <div class="tech-tags">
-                                <span>IndiaAI (MeitY)</span><span>Diffusion Models</span><span>Deep Learning</span><span>PyTorch</span>
-                            </div>
-                            <div class="project-links">
-                                <button class="link-btn" onclick="window.openProofModal('govt_ai')"><i class="fas fa-award"></i> Program Proof</button>
-                                <a href="https://github.com/chandanXP" target="_blank" rel="noopener" class="link-btn"><i class="fab fa-github"></i> Repositories</a>
-                            </div>
+                        <button class="gabor-pill-caption" id="dsCenterPill" onclick="window.openFeaturedLink('ds')">
+                            SMARTLANE AI (YOLOV8) ↗
+                        </button>
+                    </div>
+                    <div class="gabor-wing-card right-wing" onclick="window.cycleFeatured('ds', 1)">
+                        <img id="dsWingRightImg" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=80" alt="Next AI Project">
+                    </div>
+                </div>
+
+                <!-- MORE WORK HEADER & 3x2 ROUNDED SQUARE GRID (IMAGES 3 & 4) -->
+                <div class="gabor-section-title" style="margin-top: 52px;">
+                    <h2>MORE WORK</h2>
+                    <p>Take a click, stay a while</p>
+                </div>
+
+                <!-- DEVELOPER 3x2 SQUARE GRID -->
+                <div class="gabor-more-work-grid dev-only">
+                    <a href="https://github.com/chandanXP/NIELIT-Secure-Question-Paper-Platform" target="_blank" rel="noopener" class="gabor-square-card" style="background:#d4ff33;">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=80" alt="Secure Question Paper">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">SHA-256 • SQL SERVER</span>
+                            <h3>SECURE EXAM PLATFORM</h3>
+                            <p>Zero plaintext DBA exposure for 30,000+ examination files at NIELIT.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://app.simple-bit.com" target="_blank" rel="noopener" class="gabor-square-card" style="background:#e8e6d9;">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80" alt="SimpleBit">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">REACT • TYPESCRIPT</span>
+                            <h3>SIMPLEBIT FINTECH</h3>
+                            <p>Live crypto trading frontend with JWT auth & market charts.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://dev.thehidout.com" target="_blank" rel="noopener" class="gabor-square-card" style="background:#f26449;">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80" alt="The Hidout">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">MERN STACK • CMS</span>
+                            <h3>THE HIDOUT BOOKING</h3>
+                            <p>Full-stack property reservation engine and payment workflows.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://aksumbase.com" target="_blank" rel="noopener" class="gabor-square-card" style="background:#a8c7fa;">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=700&q=80" alt="AksumBase">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">JENKINS CI/CD • DOCKER</span>
+                            <h3>AKSUMBASE CLOUD</h3>
+                            <p>Automated CI/CD deployment pipelines and resource dashboard.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/chandanXP/nielit-ropar-university" target="_blank" rel="noopener" class="gabor-square-card" style="background:#00994d;">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=700&q=80" alt="NIELIT Portal">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">GOVT PORTAL • NIELIT</span>
+                            <h3>NIELIT UNIVERSITY</h3>
+                            <p>High-traffic admission & academic portal for NIELIT Ropar.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://idcardnielit.pythonanywhere.com/" target="_blank" rel="noopener" class="gabor-square-card" style="background:#f4b4aa;">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt="ID Card & LMS">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">DJANGO • OPENCV</span>
+                            <h3>ID AUTOMATION & LMS</h3>
+                            <p>Automated batch ID card generator reducing manual work by 60%.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- DATA SCIENCE SPECIALIST 3x2 SQUARE GRID -->
+                <div class="gabor-more-work-grid ds-only">
+                    <div onclick="window.openProofModal('govt_ai')" class="gabor-square-card" style="background:#d4ff33;">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=80" alt="IndiaAI Program">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">1.5 YEARS • MEITY</span>
+                            <h3>INDIAAI INITIATIVE</h3>
+                            <p>Diffusion Models, Audio DL pipelines & national AI mission research.</p>
                         </div>
                     </div>
 
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=700&q=80" alt="SmartLane AI">
-                            <span class="project-category-float">99.2% Accuracy • Hackathon Winner</span>
+                    <a href="https://paranox-sourcecode.hf.space" target="_blank" rel="noopener" class="gabor-square-card" style="background:#0d8bf2;">
+                        <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=700&q=80" alt="SmartLane AI">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">99.2% ACCURACY • YOLOV8</span>
+                            <h3>SMARTLANE AI</h3>
+                            <p>Paranox 2.0 National Hackathon Winning traffic & emergency vision.</p>
                         </div>
-                        <div class="project-card-body">
-                            <h3>SmartLane AI — Traffic & Emergency Vision</h3>
-                            <p>Paranox 2.0 National Hackathon Winning system using YOLOv8 and Custom CNNs to detect emergency vehicles and adapt 4-way traffic signals.</p>
-                            <div class="tech-tags">
-                                <span>YOLOv8</span><span>TensorFlow</span><span>OpenCV</span><span>Streamlit</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://paranox-sourcecode.hf.space" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i> Live HF Space</a>
-                                <a href="https://colab.research.google.com/drive/1v-TD755AdnonZuIX0nXLbM2DvF281xiu?usp=sharing" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-code"></i> Colab Notebook</a>
-                            </div>
+                    </a>
+
+                    <div onclick="window.openProofModal('piet_training')" class="gabor-square-card" style="background:#f26449;">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80" alt="PIET Training">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">LEAD TRAINER • PIET</span>
+                            <h3>PIET AI SUMMER PROGRAM</h3>
+                            <p>Mentored engineering cohorts in Python, EDA, Scikit-Learn & YOLO.</p>
                         </div>
                     </div>
 
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80" alt="PIET Summer Training">
-                            <span class="project-category-float">Lead Trainer • PIET College</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>AI & Data Science Summer Training @ PIET</h3>
-                            <p>Conducted practical summer training at PIET College covering Python for Data Science, EDA, Scikit-Learn, and Computer Vision deployment.</p>
-                            <div class="tech-tags">
-                                <span>Python</span><span>Pandas & NumPy</span><span>Scikit-Learn</span><span>YOLOv8</span>
-                            </div>
-                            <div class="project-links">
-                                <button class="link-btn" onclick="window.openProofModal('piet_training')"><i class="fas fa-images"></i> Training Curriculum & Proof</button>
-                            </div>
+                    <div onclick="window.openProofModal('niti_shahdol')" class="gabor-square-card" style="background:#f5c71a;">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="NITI Aayog Shahdol">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">3 MONTHS • SHAHDOL</span>
+                            <h3>NITI AAYOG ANALYTICS</h3>
+                            <p>Socio-economic district governance KPI modeling in Shahdol.</p>
                         </div>
                     </div>
 
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="NITI Aayog Shahdol">
-                            <span class="project-category-float">3 Months • Shahdol</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>NITI Aayog Program (Shahdol Analytics)</h3>
-                            <p>3-month field and data science initiative in Shahdol processing district socio-economic datasets into governance KPI dashboards.</p>
-                            <div class="tech-tags">
-                                <span>NITI Aayog</span><span>Data Analytics</span><span>Statistical Modeling</span><span>KPIs</span>
-                            </div>
-                            <div class="project-links">
-                                <button class="link-btn" onclick="window.openProofModal('niti_shahdol')"><i class="fas fa-file-contract"></i> Program Details</button>
-                            </div>
+                    <div onclick="window.openProofModal('springer')" class="gabor-square-card" style="background:#00994d;">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=80" alt="Diffusion Floor Layouts">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">SPRINGER 2025 • BEST PAPER</span>
+                            <h3>DIFFUSION FLOOR LAYOUTS</h3>
+                            <p>Synthetic house floor layout generation awarded at NICEDT 2025.</p>
                         </div>
                     </div>
 
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=80" alt="Diffusion Floor Layout">
-                            <span class="project-category-float">Springer 2025 • Best Paper</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Synthetic Floor Layouts via Diffusion Models</h3>
-                            <p>Generative Diffusion architecture synthesizing realistic house floor layout blueprints. Awarded Best Research Paper at NICEDT 2025.</p>
-                            <div class="tech-tags">
-                                <span>Diffusion Models</span><span>Generative AI</span><span>Springer 2025</span>
-                            </div>
-                            <div class="project-links">
-                                <button class="link-btn" onclick="window.openProofModal('springer')"><i class="fas fa-book-open"></i> Read Paper Summary</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-visual-card">
-                        <div class="project-thumb-banner">
-                            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=700&q=80" alt="Resume GenAI & Audio DL">
-                            <span class="project-category-float">Springer 2024 & 2025</span>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>GenAI Resume Summarizer & Audio DL</h3>
-                            <p>Sequence-to-sequence RNN/LLM Resume Summarization presented at NICEDT-2024 (Guwahati) plus Deep Learning Audio Classification.</p>
-                            <div class="tech-tags">
-                                <span>Generative AI</span><span>RNN / NLP</span><span>Audio CNN</span><span>NLTK</span>
-                            </div>
-                            <div class="project-links">
-                                <button class="link-btn" onclick="window.openProofModal('springer')"><i class="fas fa-book"></i> View Citations (6)</button>
-                            </div>
+                    <div onclick="window.openProofModal('springer')" class="gabor-square-card" style="background:#f4b4aa;">
+                        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=700&q=80" alt="GenAI Resume & Audio DL">
+                        <div class="gabor-square-overlay">
+                            <span class="tag-pill">6 CITATIONS • SPRINGER</span>
+                            <h3>RNN RESUME & AUDIO DL</h3>
+                            <p>Generative AI Resume Summarization (Guwahati) & Audio CNNs.</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- ==================== SLIDE 3: GITHUB INTERACTIONS & HEATMAP (EXACT REPLICA OF SCREENSHOT) ==================== -->
+        <!-- ==================== SLIDE 3: GITHUB INTERACTIONS & HEATMAP ==================== -->
         <section class="slide-panel" data-slide-index="3" data-slide-title="04 / GitHub Activity">
             <div class="slide-inner">
-                <div class="section-header-bar">
-                    <div>
-                        <span class="section-eyebrow"><i class="fab fa-github"></i> Live Open-Source & Code Telemetry</span>
-                        <h2>GitHub Contribution Heatmap & Language Radar</h2>
-                        <p style="margin: 4px 0 0;">Interactive visualization of my GitHub repositories, commits, pull requests, and language distribution (<code>@chandanXP</code>).</p>
-                    </div>
-                    <a href="https://github.com/chandanXP" target="_blank" rel="noopener" class="btn">
-                        <i class="fab fa-github"></i> Open @chandanXP Profile
-                    </a>
+                <div class="gabor-section-title">
+                    <h2>GITHUB TELEMETRY</h2>
+                    <p>50+ Repositories • 500+ Commits • Language Radar (@chandanXP)</p>
                 </div>
 
                 <!-- Exact Replica of the Uploaded GitHub Heatmap & Radar Image -->
@@ -2618,9 +2572,7 @@
                                 <span>Wed</span>
                                 <span>Fri</span>
                             </div>
-                            <div class="gh-grid-matrix" id="ghHeatmapGrid">
-                                <!-- Populated dynamically by JS for realistic interactive cells -->
-                            </div>
+                            <div class="gh-grid-matrix" id="ghHeatmapGrid"></div>
                         </div>
 
                         <div class="gh-legend-row">
@@ -2636,37 +2588,30 @@
 
                     <!-- Bottom Row: Language Radar + 4 Bento Stat Cards -->
                     <div class="gh-bottom-bento">
-                        
-                        <!-- SVG Language Radar Chart -->
                         <div class="gh-radar-card">
                             <div class="gh-section-label" style="align-self: flex-start; margin-bottom: 8px;">
                                 <span>❖ LANGUAGE RADAR</span>
                             </div>
                             <svg viewBox="0 0 260 230" width="100%" height="215" style="overflow: visible;">
-                                <!-- Pentagon Concentric Webs -->
                                 <polygon points="130,30 215,92 182,190 78,190 45,92" fill="none" stroke="rgba(167, 139, 250, 0.18)" stroke-width="1"/>
                                 <polygon points="130,55 194,101 169,175 91,175 66,101" fill="none" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
                                 <polygon points="130,80 172,110 156,160 104,160 88,110" fill="none" stroke="rgba(167, 139, 250, 0.12)" stroke-width="1"/>
                                 <polygon points="130,105 151,120 143,145 117,145 109,120" fill="none" stroke="rgba(167, 139, 250, 0.1)" stroke-width="1"/>
                                 
-                                <!-- Axis Lines -->
                                 <line x1="130" y1="130" x2="130" y2="30" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
                                 <line x1="130" y1="130" x2="215" y2="92" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
                                 <line x1="130" y1="130" x2="182" y2="190" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
                                 <line x1="130" y1="130" x2="78" y2="190" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
                                 <line x1="130" y1="130" x2="45" y2="92" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
 
-                                <!-- Data Polygon: Python 40%, JavaScript 25%, TypeScript 15%, Django 10%, C/DevOps 10% -->
                                 <polygon points="130,42 184,106 152,156 112,150 105,118" fill="rgba(168, 85, 247, 0.28)" stroke="#c084fc" stroke-width="2.2"/>
                                 
-                                <!-- Vertex Dots -->
                                 <circle cx="130" cy="42" r="4" fill="#e9d5ff" />
                                 <circle cx="184" cy="106" r="4" fill="#e9d5ff" />
                                 <circle cx="152" cy="156" r="4" fill="#e9d5ff" />
                                 <circle cx="112" cy="150" r="4" fill="#e9d5ff" />
                                 <circle cx="105" cy="118" r="4" fill="#e9d5ff" />
 
-                                <!-- Labels -->
                                 <text x="130" y="14" text-anchor="middle" fill="#e9d5ff" font-size="9.5" font-family="Fira Code" font-weight="600">Python</text>
                                 <text x="130" y="25" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="Fira Code">40%</text>
 
@@ -2684,49 +2629,24 @@
                             </svg>
                         </div>
 
-                        <!-- 4 Bento Cards -->
                         <div class="gh-metrics-2x2">
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box">
-                                    <i class="fas fa-cube"></i>
-                                </div>
-                                <div>
-                                    <h3>50+</h3>
-                                    <span>REPOSITORIES</span>
-                                </div>
+                                <div class="gh-stat-icon-box"><i class="fas fa-cube"></i></div>
+                                <div><h3>50+</h3><span>REPOSITORIES</span></div>
                             </div>
-
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.1);">
-                                    <i class="fas fa-bolt"></i>
-                                </div>
-                                <div>
-                                    <h3>500+</h3>
-                                    <span>TOTAL COMMITS</span>
-                                </div>
+                                <div class="gh-stat-icon-box" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.1);"><i class="fas fa-bolt"></i></div>
+                                <div><h3>500+</h3><span>TOTAL COMMITS</span></div>
                             </div>
-
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box" style="color: #facc15; border-color: rgba(250, 204, 21, 0.35); background: rgba(250, 204, 21, 0.1);">
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <h3>25+</h3>
-                                    <span>STARS EARNED</span>
-                                </div>
+                                <div class="gh-stat-icon-box" style="color: #facc15; border-color: rgba(250, 204, 21, 0.35); background: rgba(250, 204, 21, 0.1);"><i class="far fa-star"></i></div>
+                                <div><h3>25+</h3><span>STARS EARNED</span></div>
                             </div>
-
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.1);">
-                                    <i class="fas fa-arrows-rotate"></i>
-                                </div>
-                                <div>
-                                    <h3>30+</h3>
-                                    <span>PULL REQUESTS</span>
-                                </div>
+                                <div class="gh-stat-icon-box" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.1);"><i class="fas fa-arrows-rotate"></i></div>
+                                <div><h3>30+</h3><span>PULL REQUESTS</span></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -2735,12 +2655,10 @@
         <!-- ==================== SLIDE 4: VECTOR SKILLS & SHARED RECOGNITION ==================== -->
         <section class="slide-panel" data-slide-index="4" data-slide-title="05 / Skills & Awards">
             <div class="slide-inner">
-                <div class="section-header-bar">
-                    <div>
-                        <span class="section-eyebrow"><i class="fas fa-layer-group"></i> Visual Tech Stack & Shared Honors</span>
-                        <h2 class="dev-only">Developer Arsenal & National Recognition</h2>
-                        <h2 class="ds-only">Data Science Arsenal & National Recognition</h2>
-                    </div>
+                <div class="gabor-section-title">
+                    <h2 class="dev-only">DEVELOPER ARSENAL</h2>
+                    <h2 class="ds-only">DATA SCIENCE ARSENAL</h2>
+                    <p>Production technologies, cloud infrastructure, and national awards</p>
                 </div>
 
                 <!-- Developer Vector Icons Grid -->
@@ -2823,35 +2741,41 @@
                     </div>
                 </div>
 
-                <h3 style="margin-bottom: 14px; font-size: 1.15rem;">Common Honors & Recognition (Both Profiles)</h3>
-                <div class="achievements-visual-grid">
-                    <div class="achievement-visual-card">
-                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=500&q=80" class="achievement-Visual-img" alt="Paranox Hackathon">
-                        <div class="achievement-visual-body">
-                            <span class="clean-badge accent" style="align-self:flex-start; margin-bottom:6px;">Top 3 of 1,552 Projects</span>
-                            <h4>2nd Runner Up — Paranox 2.0</h4>
-                            <p style="font-size: 0.84rem; margin: 6px 0 12px;">National Hackathon winner at Newton School of Technology among 20,000+ participants for SmartLane AI.</p>
-                            <button class="link-btn" style="margin-top:auto;" onclick="window.openProofModal('paranox')">View Verification ↗</button>
+                <div class="gabor-section-title" style="margin-top: 20px;">
+                    <h2>HONORS & AWARDS</h2>
+                    <p>National hackathons & peer-reviewed Springer publications</p>
+                </div>
+
+                <div class="gabor-news-grid">
+                    <div class="gabor-news-card lime" onclick="window.openProofModal('paranox')">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="Paranox">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag" style="color:#18181b;">PARANOX 2.0</span>
+                            <span class="news-bottom-title">2ND RUNNER UP (TOP 3 OF 1,552)</span>
                         </div>
                     </div>
 
-                    <div class="achievement-visual-card">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=500&q=80" class="achievement-Visual-img" alt="NICEDT 2025">
-                        <div class="achievement-visual-body">
-                            <span class="clean-badge accent" style="align-self:flex-start; margin-bottom:6px;">NICEDT 2025 & 2024</span>
-                            <h4>Best Research Paper & Project</h4>
-                            <p style="font-size: 0.84rem; margin: 6px 0 12px;">Awarded Best Paper & Best AI/ML Project at NICEDT 2025, plus NICEDT-2024 presentation in Guwahati, Assam.</p>
-                            <button class="link-btn" style="margin-top:auto;" onclick="window.openProofModal('nicedt')">View Award Record ↗</button>
+                    <div class="gabor-news-card pink" onclick="window.openProofModal('nicedt')">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="NICEDT">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag">NICEDT 2025</span>
+                            <span class="news-bottom-title">BEST AI/ML PROJECT & PAPER</span>
                         </div>
                     </div>
 
-                    <div class="achievement-visual-card">
-                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=500&q=80" class="achievement-Visual-img" alt="Springer Author">
-                        <div class="achievement-visual-body">
-                            <span class="clean-badge accent" style="align-self:flex-start; margin-bottom:6px;">6 Google Scholar Citations</span>
-                            <h4>Springer Author (4+ Papers)</h4>
-                            <p style="font-size: 0.84rem; margin: 6px 0 12px;">Published peer-reviewed research on Diffusion Models, Generative AI Resume Summarization, and Audio Deep Learning.</p>
-                            <button class="link-btn" style="margin-top:auto;" onclick="window.openProofModal('springer')">View Publications ↗</button>
+                    <div class="gabor-news-card orange" onclick="window.openProofModal('springer')">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="Springer">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag">SPRINGER AUTHOR</span>
+                            <span class="news-bottom-title">4+ PAPERS • 6 CITATIONS</span>
+                        </div>
+                    </div>
+
+                    <div class="gabor-news-card teal" onclick="window.openProofModal('govt_ai')">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="IndiaAI">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag">GOVT INITIATIVES</span>
+                            <span class="news-bottom-title">INDIAAI & NITI AAYOG</span>
                         </div>
                     </div>
                 </div>
@@ -2861,30 +2785,28 @@
         <!-- ==================== SLIDE 5: BLOG, MUSIC & COMMUNITY WALL ==================== -->
         <section class="slide-panel" data-slide-index="5" data-slide-title="06 / Blog & Wall">
             <div class="slide-inner">
-                <div class="section-header-bar">
-                    <div>
-                        <span class="section-eyebrow"><i class="fas fa-newspaper"></i> Interactive Community, Blog & Music</span>
-                        <h2>Articles, Spotify Vibe & Live Visitor Wall</h2>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div class="gabor-section-title">
+                    <h2>STUDIO WALL & VIBE</h2>
+                    <p>Articles, original DHH releases on Spotify, and live visitor notes</p>
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 14px;">
                         <button id="createPostBtn" class="btn">+ New Blog Post</button>
-                        <a href="music.html" class="btn btn-outline" style="border-color:#16a34a; color:#16a34a;"><i class="fab fa-spotify"></i> Original Music</a>
+                        <a href="music.html" class="btn btn-outline"><i class="fab fa-spotify" style="color:#16a34a;"></i> Original Music</a>
                     </div>
                 </div>
 
-                <div id="blog-feed" class="blog-grid" style="margin-bottom: 28px;">
-                    <div style="color:var(--text-muted);">Loading posts...</div>
+                <div id="blog-feed" class="blog-grid" style="margin-bottom: 32px;">
+                    <div style="color:var(--text-muted); text-align:center;">Loading posts...</div>
                 </div>
 
-                <h3 style="font-size: 1.1rem; margin-bottom: 12px;"><i class="fab fa-spotify" style="color:#1DB954;"></i> Recently Played & Artist Releases</h3>
-                <div class="spotify-grid" id="spotifyTracks" style="margin-bottom: 28px;"></div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 14px; text-align:center;">RECENTLY PLAYED ON SPOTIFY</h3>
+                <div class="spotify-grid" id="spotifyTracks" style="margin-bottom: 36px;"></div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: start;">
-                    <div style="background: var(--bg-surface); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <h4 style="margin-bottom: 8px;">Leave a Live Note</h4>
-                        <p style="font-size: 0.8rem; margin-bottom: 10px;">Appears here and as a draggable note on your profile photo.</p>
-                        <input type="text" id="msgName" placeholder="Your Name (Optional)" maxlength="30">
-                        <textarea id="msgText" placeholder="Write a message..." maxlength="280" style="min-height: 80px;"></textarea>
+                    <div style="background: #f4f4f5; padding: 22px; border-radius: 24px;">
+                        <h4 style="font-size: 1.4rem; margin-bottom: 6px;">LEAVE A LIVE NOTE</h4>
+                        <p style="font-size: 0.82rem; margin-bottom: 12px;">Appears here and as a draggable note on the sidebar photo.</p>
+                        <input type="text" id="msgName" placeholder="Your Name (Optional)" maxlength="30" style="background:#fff;">
+                        <textarea id="msgText" placeholder="Write a message..." maxlength="280" style="min-height: 80px; background:#fff;"></textarea>
                         <button id="postMsgBtn" class="btn" style="width: 100%;">Post Message</button>
                     </div>
                     <div class="messages-grid" id="messagesGrid" style="margin-top: 0;">
@@ -2894,194 +2816,94 @@
             </div>
         </section>
 
-        <!-- ==================== SLIDE 6: SOCIALS & CONTACT (WITH LIVE RECENT POST PREVIEWS) ==================== -->
-        <section class="slide-panel" data-slide-index="6" data-slide-title="07 / Contact">
+        <!-- ==================== SLIDE 6: SPENCER GABOR "NEWS" CARDS + MASSIVE "CONTACT" BLOCK (IMAGES 5, 6, 8) ==================== -->
+        <section class="slide-panel" data-slide-index="6" data-slide-title="07 / News & Contact">
             <div class="slide-inner">
-                <div class="section-header-bar">
-                    <div>
-                        <span class="section-eyebrow"><i class="fas fa-share-nodes"></i> Featured Social Posts & Direct Contact</span>
-                        <h2>Recent Social Activity & Collaboration Hub</h2>
-                        <p style="margin: 4px 0 0;">Live preview cards of my latest posts, releases, and code activity across LinkedIn, GitHub, YouTube, Instagram, Spotify, and X.</p>
-                    </div>
+                
+                <!-- SPENCER GABOR "NEWS" 4 VIBRANT HORIZONTAL CARDS (IMAGE 8) -->
+                <div class="gabor-section-title">
+                    <h2>NEWS & SOCIALS</h2>
+                    <p>Recent updates, releases, and social handles</p>
                 </div>
 
-                <div class="social-hub-grid">
-                    <!-- 1. LinkedIn Recent Post Preview -->
-                    <a href="https://linkedin.com/in/chandan-saroj" target="_blank" rel="noopener" class="social-post-card">
-                        <div class="social-post-header">
-                            <div class="social-post-author">
-                                <div class="social-hub-icon" style="background:#eff6ff; color:#0A66C2;"><i class="fab fa-linkedin-in"></i></div>
-                                <div>
-                                    <h4>LinkedIn</h4>
-                                    <span>@chandan-saroj • Recent Post</span>
-                                </div>
-                            </div>
-                            <span class="social-post-badge">Featured</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" class="social-post-thumb" alt="LinkedIn Post Preview">
-                        <div class="social-post-body">
-                            <p class="social-post-caption">
-                                <strong>Joined HYI.AI as Data Science Specialist!</strong> Excited to architect scalable ML & educational analytics infrastructure for Indian youth, building on my Springer research & NIELIT journey.
-                            </p>
-                            <div class="social-post-footer">
-                                <span><i class="fas fa-thumbs-up" style="color:#0A66C2;"></i> 140+ Reactions</span>
-                                <span style="color:var(--accent);">Read Post ↗</span>
-                            </div>
+                <div class="gabor-news-grid">
+                    <!-- 1. Neon Lime Card (LinkedIn) -->
+                    <a href="https://linkedin.com/in/chandan-saroj" target="_blank" rel="noopener" class="gabor-news-card lime">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="LinkedIn">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag" style="color:#18181b;">LINKEDIN</span>
+                            <span class="news-bottom-title">JOINED HYI.AI AS DS SPECIALIST</span>
                         </div>
                     </a>
 
-                    <!-- 2. GitHub Recent Activity Preview -->
-                    <a href="https://github.com/chandanXP" target="_blank" rel="noopener" class="social-post-card">
-                        <div class="social-post-header">
-                            <div class="social-post-author">
-                                <div class="social-hub-icon" style="background:#f1f5f9; color:#0f172a;"><i class="fab fa-github"></i></div>
-                                <div>
-                                    <h4>GitHub</h4>
-                                    <span>@chandanXP • 50+ Repositories</span>
-                                </div>
-                            </div>
-                            <span class="social-post-badge">500+ Commits</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" class="social-post-thumb" alt="GitHub Release Preview">
-                        <div class="social-post-body">
-                            <p class="social-post-caption">
-                                <strong>Pinned Release:</strong> <code>NIELIT-Secure-Question-Paper-Platform</code> & <code>SmartLane-AI</code> — SHA-256 SQL Server encryption for 30,000+ files and YOLOv8 emergency vehicle detection.
-                            </p>
-                            <div class="social-post-footer">
-                                <span><i class="fas fa-star" style="color:#eab308;"></i> 25+ Stars • 30+ PRs</span>
-                                <span style="color:var(--accent);">View Repos ↗</span>
-                            </div>
+                    <!-- 2. Pastel Pink Card (GitHub) -->
+                    <a href="https://github.com/chandanXP" target="_blank" rel="noopener" class="gabor-news-card pink">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="GitHub">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag">GITHUB @CHANDANXP</span>
+                            <span class="news-bottom-title">50+ REPOS & 500+ COMMITS</span>
                         </div>
                     </a>
 
-                    <!-- 3. YouTube Recent Video Preview -->
-                    <a href="https://www.youtube.com/@SarojXCI" target="_blank" rel="noopener" class="social-post-card">
-                        <div class="social-post-header">
-                            <div class="social-post-author">
-                                <div class="social-hub-icon" style="background:#fef2f2; color:#dc2626;"><i class="fab fa-youtube"></i></div>
-                                <div>
-                                    <h4>YouTube</h4>
-                                    <span>@SarojXCI • Creator Channel</span>
-                                </div>
-                            </div>
-                            <span class="social-post-badge">Latest Video</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" class="social-post-thumb" alt="YouTube Video Preview">
-                        <div class="social-post-body">
-                            <p class="social-post-caption">
-                                <strong>Watch Latest Upload:</strong> Original DHH music visuals, studio engineering sessions, and AI/Tech deep-dives on <strong>@SarojXCI</strong>.
-                            </p>
-                            <div class="social-post-footer">
-                                <span><i class="fas fa-play" style="color:#dc2626;"></i> Official Channel</span>
-                                <span style="color:var(--accent);">Watch Now ↗</span>
-                            </div>
+                    <!-- 3. Bright Orange Card (YouTube & Instagram) -->
+                    <a href="https://www.youtube.com/@SarojXCI" target="_blank" rel="noopener" class="gabor-news-card orange">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="YouTube">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag">YOUTUBE & IG</span>
+                            <span class="news-bottom-title">@SAROJXCI CREATOR HUB</span>
                         </div>
                     </a>
 
-                    <!-- 4. Instagram Recent Reel/Post Preview -->
-                    <a href="https://instagram.com/sarojxci" target="_blank" rel="noopener" class="social-post-card">
-                        <div class="social-post-header">
-                            <div class="social-post-author">
-                                <div class="social-hub-icon" style="background:#fdf2f8; color:#db2777;"><i class="fab fa-instagram"></i></div>
-                                <div>
-                                    <h4>Instagram</h4>
-                                    <span>@sarojxci • Reels & Stories</span>
-                                </div>
-                            </div>
-                            <span class="social-post-badge">Recent Reel</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80" class="social-post-thumb" alt="Instagram Post Preview">
-                        <div class="social-post-body">
-                            <p class="social-post-caption">
-                                <strong>Studio & Hackathon Reel:</strong> Behind the scenes from national hackathons, AI training cohorts, and late-night studio sessions in Delhi.
-                            </p>
-                            <div class="social-post-footer">
-                                <span><i class="fas fa-heart" style="color:#db2777;"></i> @sarojxci</span>
-                                <span style="color:var(--accent);">Open Instagram ↗</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- 5. Spotify Artist Release Preview -->
-                    <a href="music.html" class="social-post-card">
-                        <div class="social-post-header">
-                            <div class="social-post-author">
-                                <div class="social-hub-icon" style="background:#f0fdf4; color:#16a34a;"><i class="fab fa-spotify"></i></div>
-                                <div>
-                                    <h4>Spotify Artist</h4>
-                                    <span>Saroj • Delhi DHH</span>
-                                </div>
-                            </div>
-                            <span class="social-post-badge">Original Release</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80" class="social-post-thumb" alt="Spotify Release Preview">
-                        <div class="social-post-body">
-                            <p class="social-post-caption">
-                                <strong>Latest Release — "Sawwal Hee Nahi":</strong> Stream original tracks and curated coding/workout playlists on my official music page.
-                            </p>
-                            <div class="social-post-footer">
-                                <span><i class="fas fa-music" style="color:#16a34a;"></i> No Mediocrity</span>
-                                <span style="color:var(--accent);">Listen Now ↗</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- 6. X / Twitter Recent Thread Preview -->
-                    <a href="https://twitter.com/_chandan_saroj" target="_blank" rel="noopener" class="social-post-card">
-                        <div class="social-post-header">
-                            <div class="social-post-author">
-                                <div class="social-hub-icon" style="background:#f0f9ff; color:#0284c7;"><i class="fab fa-x-twitter"></i></div>
-                                <div>
-                                    <h4>X / Twitter</h4>
-                                    <span>@_chandan_saroj • Tech Thread</span>
-                                </div>
-                            </div>
-                            <span class="social-post-badge">Pinned Thread</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" class="social-post-thumb" alt="X Thread Preview">
-                        <div class="social-post-body">
-                            <p class="social-post-caption">
-                                <strong>Thread:</strong> How we combined Diffusion Models for synthetic floor layouts with production React + .NET Core microservices.
-                            </p>
-                            <div class="social-post-footer">
-                                <span><i class="fas fa-retweet" style="color:#0284c7;"></i> @_chandan_saroj</span>
-                                <span style="color:var(--accent);">Read Thread ↗</span>
-                            </div>
+                    <!-- 4. Deep Teal Card (Spotify Original Music) -->
+                    <a href="music.html" class="gabor-news-card teal">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400&q=80" class="gabor-news-thumb" alt="Spotify">
+                        <div class="gabor-news-info">
+                            <span class="news-top-tag">SPOTIFY ARTIST</span>
+                            <span class="news-bottom-title">NEW RELEASE: SAWWAL HEE NAHI</span>
                         </div>
                     </a>
                 </div>
 
-                <div class="contact-split-box" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-md);">
+                <!-- Quick Direct Message Form -->
+                <div class="contact-split-box" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; background: #f4f4f5; border-radius: 26px; padding: 28px; margin-bottom: 28px;">
                     <div>
-                        <h3>Get in Touch Directly</h3>
+                        <h3 style="font-size: 1.8rem;">DIRECT MESSAGE</h3>
                         <p style="margin-top: 8px;">Available for Senior Data Science / AI Specialist initiatives, enterprise MERN/.NET consulting, and technical training programs.</p>
-                        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; font-weight: 700;">
-                            <div><i class="fas fa-envelope" style="color:var(--accent); width:22px;"></i> imjunior471@gmail.com</div>
-                            <div><i class="fas fa-phone" style="color:var(--accent); width:22px;"></i> +91 9315632708</div>
-                            <div><i class="fas fa-location-dot" style="color:var(--accent); width:22px;"></i> Bengaluru / Delhi / Chandigarh, India</div>
-                        </div>
-                        <div style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="https://wa.me/919315632708" target="_blank" rel="noopener" class="btn" style="background:#16a34a;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:imjunior471@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Email</a>
+                        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; font-weight: 700;">
+                            <div><i class="fas fa-envelope" style="width:22px;"></i> imjunior471@gmail.com</div>
+                            <div><i class="fas fa-phone" style="width:22px;"></i> +91 9315632708</div>
+                            <div><i class="fas fa-location-dot" style="width:22px;"></i> Bengaluru / Delhi / Chandigarh, India</div>
                         </div>
                     </div>
                     <form id="contactForm">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                            <input type="text" name="name" placeholder="Your Name" required />
-                            <input type="email" name="email" placeholder="Your Email" required />
+                            <input type="text" name="name" placeholder="Your Name" required style="background:#fff;" />
+                            <input type="email" name="email" placeholder="Your Email" required style="background:#fff;" />
                         </div>
-                        <input type="text" name="subject" placeholder="Subject (Data Science / Full-Stack / Training)" required />
-                        <textarea name="message" placeholder="How can we collaborate?" style="min-height: 100px;" required></textarea>
-                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                        <input type="text" name="subject" placeholder="Subject (Data Science / Full-Stack / Training)" required style="background:#fff;" />
+                        <textarea name="message" placeholder="How can we collaborate?" style="min-height: 90px; background:#fff;" required></textarea>
+                        <button type="submit" class="btn" style="width: 100%;">Send Message via WhatsApp</button>
                     </form>
                 </div>
 
-                <!-- Spencer Gabor Signature Expanding Giant Contact Footer Link -->
-                <a href="mailto:imjunior471@gmail.com" class="gabor-giant-contact">
-                    <span style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;">Take a click, stay a while • Let's Collaborate</span>
-                    <h2>imjunior471@gmail.com ↗</h2>
-                    <span style="font-size:0.82rem; font-weight:700;">All rights reserved 2026 © Chandan Saroj • LinkedIn · GitHub · YouTube · Spotify</span>
-                </a>
+                <!-- SPENCER GABOR MASSIVE EDGE-TO-EDGE "CONTACT" BLOCK (IMAGES 5 & 6) -->
+                <div class="gabor-contact-monolith">
+                    <span class="gabor-contact-giant-word">CONTACT</span>
+                    <div class="gabor-contact-links-stack">
+                        <a href="mailto:imjunior471@gmail.com">IMJUNIOR471@GMAIL.COM</a>
+                        <div style="margin-top: 6px; display: flex; flex-direction: column; gap: 2px;">
+                            <a href="https://linkedin.com/in/chandan-saroj" target="_blank" rel="noopener">LINKEDIN</a>
+                            <a href="https://github.com/chandanXP" target="_blank" rel="noopener">GITHUB</a>
+                            <a href="https://instagram.com/sarojxci" target="_blank" rel="noopener">INSTAGRAM</a>
+                            <a href="https://www.youtube.com/@SarojXCI" target="_blank" rel="noopener">YOUTUBE</a>
+                            <a href="music.html">SPOTIFY</a>
+                        </div>
+                    </div>
+                    <div class="gabor-copyright-white">
+                        ALL RIGHTS RESERVED 2026 INC SAROJ
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -3319,7 +3141,14 @@
             document.body.classList.remove('mobile-drawer-open');
         });
 
-        // --- SPENCER GABOR STUDIO COLOR PALETTE SWITCHER ---
+        // --- SPENCER GABOR FLOATING BOTTOM-RIGHT PALETTE SWITCHER ---
+        const gaborPaletteWrap = document.getElementById('gaborPaletteWrap');
+        const gaborPaletteBtn = document.getElementById('gaborPaletteBtn');
+
+        gaborPaletteBtn?.addEventListener('click', () => {
+            gaborPaletteWrap?.classList.toggle('open');
+        });
+
         document.querySelectorAll('.palette-swatch').forEach(swatch => {
             swatch.addEventListener('click', () => {
                 document.querySelectorAll('.palette-swatch').forEach(s => s.classList.remove('active'));
@@ -3330,6 +3159,93 @@
                 } else {
                     document.body.setAttribute('data-palette', pal);
                 }
+                gaborPaletteWrap?.classList.remove('open');
+            });
+        });
+
+        // --- SPENCER GABOR FEATURED WORK 3-CARD CAROUSEL ENGINE (IMAGE 2) ---
+        const featuredDeck = {
+            dev: [
+                {
+                    title: "SECURE QUESTION PAPER PLATFORM ↗",
+                    img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80",
+                    url: "https://github.com/chandanXP/NIELIT-Secure-Question-Paper-Platform"
+                },
+                {
+                    title: "SIMPLEBIT CRYPTO FINTECH ↗",
+                    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80",
+                    url: "https://app.simple-bit.com"
+                },
+                {
+                    title: "THE HIDOUT BOOKING ENGINE ↗",
+                    img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80",
+                    url: "https://dev.thehidout.com"
+                },
+                {
+                    title: "AKSUMBASE JENKINS CI/CD ↗",
+                    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
+                    url: "https://aksumbase.com"
+                }
+            ],
+            ds: [
+                {
+                    title: "SMARTLANE AI (YOLOV8) ↗",
+                    img: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=900&q=80",
+                    url: "https://paranox-sourcecode.hf.space"
+                },
+                {
+                    title: "INDIAAI PROGRAM (MEITY) ↗",
+                    img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=900&q=80",
+                    url: "https://github.com/chandanXP"
+                },
+                {
+                    title: "SPRINGER DIFFUSION FLOOR LAYOUTS ↗",
+                    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80",
+                    url: "https://github.com/chandanXP"
+                },
+                {
+                    title: "NITI AAYOG SHAHDOL ANALYTICS ↗",
+                    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+                    url: "https://linkedin.com/in/chandan-saroj"
+                }
+            ]
+        };
+        const featuredIdx = { dev: 0, ds: 0 };
+
+        window.cycleFeatured = function(track, delta) {
+            const list = featuredDeck[track];
+            featuredIdx[track] = (featuredIdx[track] + delta + list.length) % list.length;
+            const curr = featuredIdx[track];
+            const prev = (curr - 1 + list.length) % list.length;
+            const next = (curr + 1) % list.length;
+
+            const cImg = document.getElementById(`${track}CenterImg`);
+            const lImg = document.getElementById(`${track}WingLeftImg`);
+            const rImg = document.getElementById(`${track}WingRightImg`);
+            const pill = document.getElementById(`${track}CenterPill`);
+
+            if (cImg) cImg.src = list[curr].img;
+            if (lImg) lImg.src = list[prev].img;
+            if (rImg) rImg.src = list[next].img;
+            if (pill) pill.textContent = list[curr].title;
+        };
+
+        window.openFeaturedLink = function(track) {
+            const item = featuredDeck[track][featuredIdx[track]];
+            if (item?.url) window.open(item.url, '_blank');
+        };
+
+        // --- SPENCER GABOR HOVER IMAGE STACK ON SLIDE 02 (IMAGE 9) ---
+        document.querySelectorAll('.gabor-giant-hover-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                document.querySelectorAll('.gabor-giant-hover-item').forEach(i => i.classList.remove('active-hover'));
+                item.classList.add('active-hover');
+                const lSrc = item.getAttribute('data-img-left');
+                const rSrc = item.getAttribute('data-img-right');
+                const lEl = document.getElementById('expFloatLeftImg');
+                const rEl = document.getElementById('expFloatRightImg');
+                if (lEl && lSrc) lEl.src = lSrc;
+                if (rEl && rSrc) rEl.src = rSrc;
             });
         });
 
