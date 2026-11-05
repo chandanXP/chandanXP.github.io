@@ -704,14 +704,13 @@
         .weather-location { font-weight: 800; color: var(--text-main); }
         .weather-info { display: flex; align-items: center; gap: 8px; }
 
-        /* --- DIRECTIONAL 30% / 70% HORIZONTAL SPLIT STAGE --- */
+        /* --- 100% FULL-WIDTH SLIDE WORKSPACE --- */
         .deck-viewport {
             flex: 1;
             width: 100%;
             height: calc(100vh - var(--header-h));
             display: flex;
-            flex-direction: row;
-            align-items: stretch;
+            flex-direction: column;
             overflow: hidden;
             background: var(--bg-main);
             position: relative;
@@ -723,80 +722,19 @@
             overflow-y: auto;
             overflow-x: hidden;
             opacity: 0;
-            flex: 0 0 0%;
-            width: 0%;
-            max-width: 0%;
-            padding: 0;
-            pointer-events: none;
-            container-type: inline-size;
-            position: relative;
-            will-change: width, flex-basis, opacity, transform;
-        }
-
-        .slide-panel.prev-slide {
-            display: block;
-            flex: 0 0 30%;
-            width: 30%;
-            max-width: 30%;
-            opacity: 0.92;
-            pointer-events: auto;
-            padding: 22px 18px 40px;
-            background: #fafafa;
-            z-index: 4;
-            cursor: pointer;
-        }
-        .slide-panel.prev-slide:hover {
-            opacity: 1;
+            width: 100%;
+            padding: 32px 36px 60px;
+            background: var(--bg-main);
+            z-index: 5;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .slide-panel.active-slide {
             display: block;
-            flex: 1 1 70%;
-            width: 70%;
-            max-width: 70%;
             opacity: 1;
             pointer-events: auto;
-            padding: 32px 36px 60px;
-            background: var(--bg-main);
-            z-index: 5;
-        }
-
-        .deck-viewport.dir-forward .slide-panel.active-slide { order: 1; }
-        .deck-viewport.dir-forward .slide-panel.prev-slide {
-            order: 2;
-            border-left: 1px solid var(--border);
-        }
-
-        .deck-viewport.dir-backward .slide-panel.prev-slide {
-            order: 1;
-            border-right: 1px solid var(--border);
-        }
-        .deck-viewport.dir-backward .slide-panel.active-slide { order: 2; }
-
-        .prev-pane-indicator {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            background: #e4e4e7;
-            padding: 8px 14px;
-            border-radius: 999px;
-            margin-bottom: 18px;
-            font-size: 0.74rem;
-            font-weight: 800;
-            color: var(--text-main);
-            position: sticky;
-            top: 0;
-            z-index: 20;
-        }
-        .slide-panel.prev-slide .prev-pane-indicator {
-            display: flex;
-        }
-
-        .deck-viewport.single-pane-mode .slide-panel.active-slide {
-            flex: 1 1 100%;
-            width: 100%;
-            max-width: 100%;
         }
 
         .slide-inner {
@@ -2061,11 +1999,7 @@
             .weather-widget { display: none !important; }
             .mode-switch-btn { padding: 5px 10px; font-size: 0.7rem; }
 
-            .slide-panel.prev-slide { display: none !important; }
             .slide-panel.active-slide {
-                flex: 1 1 100% !important;
-                width: 100% !important;
-                max-width: 100% !important;
                 padding: 18px 14px 80px !important;
             }
 
@@ -3174,125 +3108,35 @@
             window._toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
         }
 
-        // --- DIRECTIONAL & SMOOTH GSAP 30% / 70% SPLIT-STAGE ENGINE ---
+        // --- 100% FULL-WIDTH SLIDE NAVIGATION ENGINE ---
         let currentSlide = 0;
-        let previousSlide = 1;
-        let hasSwitchedOnce = false;
-        let lastDirection = 'forward'; // 'forward' -> 30% on Right; 'backward' -> 30% on Left
         const deckViewport = document.getElementById('deckViewport');
         const slides = document.querySelectorAll('.slide-panel');
         const totalSlides = slides.length;
 
-        // Inject a sleek sticky header indicator inside every slide for when it sits in the 30% dock
-        slides.forEach((panel, idx) => {
-            const title = panel.getAttribute('data-slide-title') || `0${idx + 1}`;
-            const indicator = document.createElement('div');
-            indicator.className = 'prev-pane-indicator';
-            indicator.innerHTML = `
-                <span class="prev-indicator-label"><i class="fas fa-columns" style="color:var(--accent);"></i> Context (30%): <strong>${title}</strong></span>
-                <span style="color:var(--accent); font-weight:700;">Expand 70% ↗</span>
-            `;
-            panel.insertBefore(indicator, panel.firstChild);
+        window.goToSlide = function(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
 
-            // Clicking the 30% shrunk pane promotes it back to 70% with consistent directional flow
-            panel.addEventListener('click', (e) => {
-                if (panel.classList.contains('prev-slide')) {
-                    if (e.target.closest('a, button, input, textarea')) return;
-                    window.goToSlide(idx);
-                }
-            });
-        });
-
-        // Start in single-pane 100% until the user switches
-        deckViewport?.classList.add('single-pane-mode');
-
-        window.goToSlide = function(index, explicitDir = null) {
-            let dir = explicitDir;
-            if (index < 0) {
-                index = totalSlides - 1;
-                dir = 'backward';
-            } else if (index >= totalSlides) {
-                index = 0;
-                dir = 'forward';
-            }
-
-            if (index === currentSlide && hasSwitchedOnce) return;
-
-            if (index !== currentSlide) {
-                if (!dir) {
-                    dir = index > currentSlide ? 'forward' : 'backward';
-                }
-                lastDirection = dir;
-                previousSlide = currentSlide;
-                currentSlide = index;
-                hasSwitchedOnce = true;
-
-                deckViewport?.classList.remove('single-pane-mode', 'dir-forward', 'dir-backward');
-                deckViewport?.classList.add(dir === 'forward' ? 'dir-forward' : 'dir-backward');
-            }
+            if (index === currentSlide && slides[currentSlide].classList.contains('active-slide')) return;
+            
+            currentSlide = index;
 
             slides.forEach((panel, idx) => {
-                panel.classList.remove('active-slide', 'prev-slide');
+                panel.classList.remove('active-slide');
                 if (idx === currentSlide) {
                     panel.classList.add('active-slide');
                     panel.scrollTop = 0;
-                } else if (hasSwitchedOnce && idx === previousSlide) {
-                    panel.classList.add('prev-slide');
-                    panel.scrollTop = 0;
-                    const lbl = panel.querySelector('.prev-indicator-label');
-                    const title = panel.getAttribute('data-slide-title') || `0${idx + 1}`;
-                    if (lbl) {
-                        const sideText = lastDirection === 'forward' ? '30% Right' : '30% Left';
-                        lbl.innerHTML = `<i class="fas fa-columns" style="color:var(--accent);"></i> ${sideText}: <strong>${title}</strong>`;
-                    }
                 }
             });
 
-            // Smooth GSAP width & slide Choreography
-            if (typeof gsap !== 'undefined' && hasSwitchedOnce && window.innerWidth > 720) {
+            // Smooth Fade & Slide-up Transition
+            if (typeof gsap !== 'undefined') {
                 const activeEl = slides[currentSlide];
-                const prevEl = slides[previousSlide];
-
-                gsap.killTweensOf([activeEl, prevEl]);
-
+                gsap.killTweensOf(slides);
                 gsap.fromTo(activeEl,
-                    {
-                        flexBasis: '42%',
-                        width: '42%',
-                        maxWidth: '42%',
-                        opacity: 0.55,
-                        x: lastDirection === 'forward' ? -24 : 24
-                    },
-                    {
-                        flexBasis: '70%',
-                        width: '70%',
-                        maxWidth: '70%',
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.58,
-                        ease: 'expo.out',
-                        clearProps: 'flexBasis,width,maxWidth,x'
-                    }
-                );
-
-                gsap.fromTo(prevEl,
-                    {
-                        flexBasis: '58%',
-                        width: '58%',
-                        maxWidth: '58%',
-                        opacity: 1,
-                        x: lastDirection === 'forward' ? -18 : 18
-                    },
-                    {
-                        flexBasis: '30%',
-                        width: '30%',
-                        maxWidth: '30%',
-                        opacity: 0.9,
-                        x: 0,
-                        duration: 0.58,
-                        ease: 'expo.out',
-                        clearProps: 'flexBasis,width,maxWidth,x'
-                    }
+                    { opacity: 0, y: 15 },
+                    { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', clearProps: 'opacity,y' }
                 );
             }
 
@@ -3300,12 +3144,11 @@
             document.querySelectorAll('.sidebar-nav-btn').forEach(btn => {
                 const sIdx = parseInt(btn.getAttribute('data-slide'), 10);
                 btn.classList.toggle('active', sIdx === currentSlide);
-                btn.classList.toggle('prev-context-nav', hasSwitchedOnce && sIdx === previousSlide);
             });
         };
 
-        document.getElementById('prevSlideBtn')?.addEventListener('click', () => window.goToSlide(currentSlide - 1, 'backward'));
-        document.getElementById('nextSlideBtn')?.addEventListener('click', () => window.goToSlide(currentSlide + 1, 'forward'));
+        document.getElementById('prevSlideBtn')?.addEventListener('click', () => window.goToSlide(currentSlide - 1));
+        document.getElementById('nextSlideBtn')?.addEventListener('click', () => window.goToSlide(currentSlide + 1));
 
         document.querySelectorAll('.sidebar-nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -3318,8 +3161,8 @@
         // Keyboard Left/Right Arrow support for slide deck
         window.addEventListener('keydown', (e) => {
             if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName) || document.activeElement?.isContentEditable) return;
-            if (e.key === 'ArrowRight') window.goToSlide(currentSlide + 1, 'forward');
-            if (e.key === 'ArrowLeft') window.goToSlide(currentSlide - 1, 'backward');
+            if (e.key === 'ArrowRight') window.goToSlide(currentSlide + 1);
+            if (e.key === 'ArrowLeft') window.goToSlide(currentSlide - 1);
         });
 
         // --- GEMINI-STYLE PUSH SIDEBAR TOGGLE + MOBILE DRAWER ---
@@ -3464,7 +3307,7 @@
             if (item?.url) window.open(item.url, '_blank');
         };
 
-        // Enable Horizontal Wheel & Touch/Mouse Swipe on Featured Carousels (Clockwise & Counter-Clockwise)
+        // Enable Swipe/Drag & Horizontal Wheel on Featured Carousels
         ['dev', 'ds'].forEach(track => {
             const carouselEl = document.getElementById(`${track}FeaturedCarousel`);
             if (!carouselEl) return;
@@ -3481,16 +3324,34 @@
                 }
             }, { passive: false });
 
-            let startX = null;
-            carouselEl.addEventListener('pointerdown', (e) => { startX = e.clientX; });
-            carouselEl.addEventListener('pointerup', (e) => {
-                if (startX === null) return;
-                const diff = e.clientX - startX;
-                if (Math.abs(diff) > 40) {
-                    window.cycleFeatured(track, diff < 0 ? 1 : -1);
-                }
-                startX = null;
+            let startX = 0;
+            let isDragging = false;
+
+            carouselEl.addEventListener('pointerdown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                carouselEl.style.cursor = 'grabbing';
             });
+
+            carouselEl.addEventListener('pointermove', (e) => {
+                if (!isDragging) return;
+                const diff = e.clientX - startX;
+                // Trigger swipe if dragged more than 50px
+                if (Math.abs(diff) > 50) {
+                    window.cycleFeatured(track, diff < 0 ? 1 : -1);
+                    isDragging = false; // Lock until next touch
+                    carouselEl.style.cursor = 'grab';
+                }
+            });
+
+            const endDrag = () => {
+                isDragging = false;
+                carouselEl.style.cursor = 'grab';
+            };
+
+            carouselEl.addEventListener('pointerup', endDrag);
+            carouselEl.addEventListener('pointerleave', endDrag);
+            carouselEl.addEventListener('pointercancel', endDrag);
         });
 
         // --- DUAL PROFESSION MODE SWITCHER (2.5+ YRS DEV VS 4+ YRS DATA SCIENCE) ---
