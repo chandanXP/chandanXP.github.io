@@ -208,7 +208,7 @@
         /* --- RICH PROFILE PANEL AT TOP OF SIDEBAR --- */
         .sidebar-profile-showcase {
             margin: 10px 12px 6px;
-            padding: 12px;
+            padding: 14px 12px;
             background: #ffffff;
             border: 1px solid var(--border);
             border-radius: 20px;
@@ -223,13 +223,13 @@
         }
 
         .sidebar-photo-box {
-            width: 104px;
-            height: 104px;
-            border-radius: 18px;
+            width: 112px;
+            height: 112px;
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
             background: #f4f4f5;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
         }
@@ -264,29 +264,58 @@
             line-height: 1.3;
         }
 
-        .sidebar-mini-banner {
+        /* Minimal Single-Note Slideshow Pill below Sidebar Photo */
+        .sidebar-msg-pill {
             width: 100%;
+            background: #f4f4f5;
+            border: 1px solid var(--border);
             border-radius: 12px;
-            overflow: hidden;
-            background: var(--bg-subtle);
-            text-align: left;
-        }
-
-        .sidebar-mini-banner img {
-            width: 100%;
-            height: 40px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .sidebar-mini-banner-foot {
-            padding: 5px 8px;
-            font-size: 0.65rem;
-            color: var(--text-main);
+            padding: 6px 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-weight: 700;
+            gap: 8px;
+            text-align: left;
+            min-height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .sidebar-msg-pill:hover {
+            background: #e4e4e7;
+        }
+        .sidebar-msg-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.68rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .sidebar-msg-content {
+            overflow: hidden;
+            flex: 1;
+        }
+        .sidebar-msg-content strong {
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar-msg-content p {
+            margin: 0;
+            font-size: 0.7rem;
+            color: var(--text-main);
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
         }
 
         body.sidebar-collapsed .sidebar-profile-showcase {
@@ -306,7 +335,7 @@
             margin-bottom: 0;
         }
         body.sidebar-collapsed .sidebar-profile-details,
-        body.sidebar-collapsed #heroMessages {
+        body.sidebar-collapsed .sidebar-msg-pill {
             display: none !important;
         }
 
@@ -328,7 +357,7 @@
             border-radius: 999px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             color: var(--text-muted);
             font-family: var(--font-main);
             font-size: 0.82rem;
@@ -357,19 +386,8 @@
             color: var(--text-main);
             flex-shrink: 0;
         }
-        body.sidebar-collapsed .sidebar-nav-label,
-        body.sidebar-collapsed .sidebar-nav-btn .slide-num {
+        body.sidebar-collapsed .sidebar-nav-label {
             display: none;
-        }
-
-        .sidebar-nav-btn .slide-num {
-            font-size: 0.68rem;
-            font-family: var(--font-code);
-            font-weight: 700;
-            color: var(--text-muted);
-            background: #e4e4e7;
-            padding: 2px 7px;
-            border-radius: 999px;
         }
 
         .sidebar-nav-btn:hover {
@@ -385,9 +403,42 @@
             color: #ffffff;
         }
         .sidebar-nav-btn.active i { color: #ffffff; }
-        .sidebar-nav-btn.active .slide-num {
-            background: rgba(255,255,255,0.2);
-            color: #fff;
+        /* --- MINIMAL ICON-ONLY PROFILE TOGGLE --- */
+        .minimal-mode-switch {
+            display: inline-flex;
+            align-items: center;
+            background: #e4e4e7;
+            border-radius: 999px;
+            padding: 4px;
+            gap: 4px;
+            position: relative;
+        }
+
+        .mode-switch-btn {
+            border: none;
+            background: transparent;
+            color: #52525b;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.92rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .mode-switch-btn:hover {
+            color: #18181b;
+            transform: scale(1.06);
+        }
+
+        .mode-switch-btn.active {
+            background: #2b2b2b;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.16);
         }
 
         .sidebar-footer {
@@ -527,27 +578,27 @@
             gap: 4px;
         }
 
-        .mode-switch-btn {
-            border: none;
-            background: transparent;
-            color: #52525b;
-            font-family: var(--font-main);
-            font-size: 0.76rem;
-            font-weight: 800;
-            padding: 6px 14px;
-            border-radius: 999px;
-            cursor: pointer;
-            display: inline-flex;
+        . header-left {
+            display: flex;
             align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-            white-space: nowrap;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .mode-switch-btn.active {
-            background: #2b2b2b;
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        .mobile-Drawer-btn {
+            display: none;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.55rem;
+            letter-spacing: 0.01em;
+            color: var(--text-main);
+            cursor: pointer;
         }
 
         .header-right {
@@ -983,8 +1034,42 @@
             align-items: center;
             justify-content: center;
             gap: 32px;
-            padding: 16px 0 24px;
+            padding: 20px 0 28px;
             overflow: hidden;
+            user-select: none;
+            cursor: grab;
+        }
+        .gabor-featured-carousel:active {
+            cursor: grabbing;
+        }
+        .gabor-carousel-rotate-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .gabor-rotate-btn {
+            border: 1px solid var(--border-strong);
+            background: #ffffff;
+            color: var(--text-main);
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .gabor-rotate-btn:hover {
+            background: #2b2b2b;
+            color: #ffffff;
+            transform: translateY(-2px);
         }
         .gabor-wing-card {
             width: 270px;
@@ -1111,54 +1196,48 @@
             margin-bottom: 4px;
         }
         .gabor-square-overlay p {
-            color: rgba(255,255,255,0.86);
+            color: rgba(255, 255, 255, 0.85);
             font-size: 0.8rem;
-            line-height: 1.35;
             margin: 0;
+            line-height: 1.35;
         }
 
-        /* ============================================================================
-           SPENCER GABOR INTERACTIVE HOVER PROJECT / EXPERIENCE DIRECTORY (IMAGE 9)
-           ============================================================================ */
+        /* Spencer Gabor Interactive Hover Project/Role Stack (Image 9) */
         .gabor-interactive-list-stage {
             position: relative;
-            padding: 30px 0 40px;
             text-align: center;
-        }
-        .gabor-list-heading {
-            font-family: var(--font-display);
-            font-size: 2.3rem;
-            color: #2b2b2b;
-            margin-bottom: 18px;
+            padding: 24px 0 36px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border);
         }
         .gabor-giant-hover-item {
             font-family: var(--font-display);
-            font-size: clamp(2.8rem, 6.5vw, 5.4rem);
+            font-size: clamp(2.6rem, 5.8vw, 4.6rem);
             color: #d4d4d4;
             line-height: 0.96;
             text-transform: uppercase;
             cursor: pointer;
             transition: color 0.2s ease, transform 0.2s ease;
-            position: relative;
             display: block;
-            padding: 4px 0;
+            position: relative;
+            z-index: 3;
         }
         .gabor-giant-hover-item:hover,
         .gabor-giant-hover-item.active-hover {
             color: #2b2b2b;
             transform: scale(1.02);
         }
-        /* Floating flanking preview cards that appear when hovering the giant list (Image 9) */
         .gabor-hover-float-card {
             position: absolute;
-            width: 195px;
-            height: 195px;
+            width: 175px;
+            height: 175px;
             border-radius: 22px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             pointer-events: none;
+            z-index: 2;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 15;
+            background: #e879f9;
         }
         .gabor-hover-float-card img {
             width: 100%;
@@ -1166,44 +1245,46 @@
             object-fit: cover;
         }
         .gabor-hover-float-card.float-left {
-            left: 3%;
-            top: 24%;
-            transform: rotate(-5deg);
+            left: 4%;
+            top: 18%;
+            transform: rotate(-6deg);
         }
         .gabor-hover-float-card.float-right {
-            right: 3%;
-            top: 26%;
-            transform: rotate(5deg);
+            right: 4%;
+            top: 22%;
+            transform: rotate(6deg);
         }
 
-        /* ============================================================================
-           SPENCER GABOR "NEWS" 2x2 VIBRANT HORIZONTAL CARDS (IMAGE 8)
-           ============================================================================ */
+        /* Spencer Gabor 4 Vibrant Horizontal "NEWS" Cards (Image 8) */
         .gabor-news-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            max-width: 860px;
-            margin: 0 auto 36px;
+            margin-bottom: 36px;
         }
         .gabor-news-card {
             border-radius: 22px;
-            padding: 14px;
+            padding: 16px;
             display: flex;
             align-items: stretch;
-            gap: 16px;
-            min-height: 148px;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            gap: 18px;
+            min-height: 165px;
             cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
             box-shadow: var(--shadow-sm);
         }
         .gabor-news-card:hover {
-            transform: translateY(-5px) scale(1.015);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: var(--shadow-lg);
         }
+        .gabor-news-card.lime { background: #dfff00; }
+        .gabor-news-card.pink { background: #ffc2f9; }
+        .gabor-news-card.orange { background: #f25c2a; }
+        .gabor-news-card.teal { background: #1d5663; }
+
         .gabor-news-thumb {
-            width: 122px;
-            height: 122px;
+            width: 135px;
+            height: 135px;
             border-radius: 14px;
             object-fit: cover;
             flex-shrink: 0;
@@ -1218,41 +1299,34 @@
         }
         .gabor-news-info .news-top-tag {
             font-family: var(--font-display);
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             color: #ffffff;
-            letter-spacing: 0.02em;
+            text-transform: uppercase;
             line-height: 1;
         }
         .gabor-news-info .news-bottom-title {
             font-family: var(--font-display);
             font-size: 1.45rem;
-            letter-spacing: 0.01em;
+            text-transform: uppercase;
             line-height: 1;
         }
-        /* Exact 4 colors from Image 8 */
-        .gabor-news-card.lime { background: #dfff00; }
-        .gabor-news-card.lime .news-bottom-title { color: #00b84c; }
-        .gabor-news-card.pink { background: #ffc2f9; }
-        .gabor-news-card.pink .news-bottom-title { color: #ff471a; }
-        .gabor-news-card.orange { background: #ec5328; }
-        .gabor-news-card.orange .news-bottom-title { color: #ffd9f8; }
-        .gabor-news-card.teal { background: #1f5666; }
+        .gabor-news-card.lime .news-bottom-title { color: #00aa3a; }
+        .gabor-news-card.pink .news-bottom-title { color: #f2441d; }
+        .gabor-news-card.orange .news-bottom-title { color: #e2d9ff; }
         .gabor-news-card.teal .news-bottom-title { color: #dfff00; }
 
-        /* ============================================================================
-           SPENCER GABOR MASSIVE FULL-WIDTH "CONTACT" BLOCK (IMAGES 5 & 6)
-           ============================================================================ */
+        /* Spencer Gabor Massive Edge-to-Edge "CONTACT" Footer Block (Images 5 & 6) */
         .gabor-contact-monolith {
-            margin-top: 32px;
             background: #d9d9d9;
             border-radius: 28px;
-            padding: 36px 20px 28px;
+            padding: 36px 24px 28px;
             text-align: center;
+            margin-top: 32px;
             overflow: hidden;
         }
         .gabor-contact-giant-word {
             font-family: var(--font-display);
-            font-size: clamp(4.5rem, 15.5vw, 13.5rem);
+            font-size: clamp(4.5rem, 16vw, 13.5rem);
             color: #ffffff;
             line-height: 0.86;
             letter-spacing: -0.02em;
@@ -1266,11 +1340,179 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 4px;
+        }
+        .gabor-contact-links-stack a {
             font-family: var(--font-display);
             font-size: 1.05rem;
-            letter-spacing: 0.03em;
             color: #2b2b2b;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        /* --- SLIDE 4: LIGHT-THEMED GITHUB INTERACTIONS DASHBOARD --- */
+        .github-dashboard-wrapper {
+            background: #ffffff;
+            border: 1px solid var(--border-strong);
+            border-radius: 28px;
+            padding: 28px;
+            color: var(--text-main);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gh-heatmap-card {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 22px 24px;
+            margin-bottom: 22px;
+        }
+
+        .gh-section-label {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gh-months-row {
+            display: grid;
+            grid-template-columns: 36px repeat(12, 1fr);
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .gh-heatmap-body {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .gh-days-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 112px;
+            font-family: var(--font-code);
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 4px 0;
+        }
+
+        .gh-grid-matrix {
+            display: grid;
+            grid-template-columns: repeat(36, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            gap: 4px;
+            flex: 1;
+            min-width: 620px;
+        }
+
+        .gh-cell {
+            width: 13px;
+            height: 13px;
+            border-radius: 3px;
+            background: #ebedf0;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.15s ease;
+        }
+        .gh-cell:hover {
+            transform: scale(1.3);
+            z-index: 2;
+            border-color: #18181b;
+        }
+        .gh-cell.lvl-1 { background: #9be9a8; }
+        .gh-cell.lvl-2 { background: #40c463; }
+        .gh-cell.lvl-3 { background: #30a14e; }
+        .gh-cell.lvl-4 { background: #216e39; }
+
+        .gh-legend-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 5px;
+            margin-top: 12px;
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .gh-bottom-bento {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+        }
+
+        .gh-radar-card {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gh-metrics-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .gh-stat-card {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: var(--transition);
+        }
+        .gh-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+            background: #ffffff;
+        }
+        .gh-stat-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid var(--border-strong);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: #16a34a;
+            font-size: 1.15rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .gh-stat-card h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .gh-stat-card span {
+            font-family: var(--font-code);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
             text-transform: uppercase;
         }
         .gabor-contact-links-stack a:hover {
@@ -1469,160 +1711,6 @@
             color: #fff;
         }
 
-        /* --- SLIDE 4: GITHUB INTERACTIONS DASHBOARD --- */
-        .github-dashboard-wrapper {
-            background: #130d26;
-            border-radius: 28px;
-            padding: 26px;
-            color: #f3e8ff;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .gh-heatmap-card {
-            background: rgba(25, 16, 48, 0.85);
-            border: 1px solid rgba(168, 85, 247, 0.22);
-            border-radius: 14px;
-            padding: 20px 24px;
-            margin-bottom: 20px;
-        }
-
-        .gh-section-label {
-            font-family: var(--font-code);
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #a78bfa;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .gh-months-row {
-            display: grid;
-            grid-template-columns: 36px repeat(12, 1fr);
-            font-family: var(--font-code);
-            font-size: 0.68rem;
-            color: #7c6f9f;
-            margin-bottom: 8px;
-        }
-
-        .gh-heatmap-body {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            overflow-x: auto;
-        }
-
-        .gh-days-col {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 112px;
-            font-family: var(--font-code);
-            font-size: 0.65rem;
-            color: #7c6f9f;
-            padding: 4px 0;
-        }
-
-        .gh-grid-matrix {
-            display: grid;
-            grid-template-columns: repeat(36, 1fr);
-            grid-template-rows: repeat(7, 1fr);
-            gap: 4px;
-            flex: 1;
-            min-width: 620px;
-        }
-
-        .gh-cell {
-            width: 13px;
-            height: 13px;
-            border-radius: 3px;
-            background: #231942;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: transform 0.15s ease;
-        }
-        .gh-cell:hover {
-            transform: scale(1.3);
-            z-index: 2;
-            border-color: #e9d5ff;
-        }
-        .gh-cell.lvl-1 { background: #4c1d95; }
-        .gh-cell.lvl-2 { background: #6d28d9; }
-        .gh-cell.lvl-3 { background: #8b5cf6; }
-        .gh-cell.lvl-4 { background: #c084fc; box-shadow: 0 0 8px rgba(192, 132, 252, 0.5); }
-
-        .gh-legend-row {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 5px;
-            margin-top: 12px;
-            font-family: var(--font-code);
-            font-size: 0.68rem;
-            color: #7c6f9f;
-        }
-
-        .gh-bottom-bento {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 20px;
-        }
-
-        .gh-radar-card {
-            background: rgba(25, 16, 48, 0.85);
-            border: 1px solid rgba(168, 85, 247, 0.22);
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .gh-metrics-2x2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        .gh-stat-card {
-            background: rgba(25, 16, 48, 0.85);
-            border: 1px solid rgba(168, 85, 247, 0.22);
-            border-radius: 14px;
-            padding: 22px 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
-        .gh-stat-icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            border: 1px solid rgba(168, 85, 247, 0.35);
-            background: rgba(139, 92, 246, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            color: #c084fc;
-            font-size: 1.1rem;
-        }
-        .gh-stat-card h3 {
-            font-family: var(--font-code);
-            font-size: 2.1rem;
-            color: #c084fc;
-            margin-bottom: 4px;
-        }
-        .gh-stat-card span {
-            font-family: var(--font-code);
-            font-size: 0.72rem;
-            letter-spacing: 0.08em;
-            color: #8b7ba8;
-            text-transform: uppercase;
-        }
-
         /* --- SLIDE 5: SKILLS & RECOGNITION --- */
         .skills-vector-grid {
             display: grid;
@@ -1741,12 +1829,93 @@
         .messages-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 12px;
+            gap: 14px;
         }
         .message-card {
-            background: #f4f4f5;
-            padding: 14px 16px;
-            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        .message-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .msg-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .msg-avatar-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .msg-author-meta strong {
+            display: block;
+            font-size: 0.84rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+        .msg-author-meta span {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Visitor Notes Interactive Slideshow Banner */
+        .notes-slideshow-box {
+            background: #fafafa;
+            border: 1px solid var(--border-strong);
+            border-radius: 24px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+        .notes-slide-stage {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
+        }
+        .notes-slide-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .notes-slide-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border-strong);
+            background: #ffffff;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .notes-slide-btn:hover {
+            background: #2b2b2b;
+            color: #ffffff;
         }
 
         .hero-msg-bubble {
@@ -1959,59 +2128,51 @@
                 <span class="sidebar-brand-text">CHANDAN SAROJ</span>
             </div>
 
-            <!-- RICH PROFILE PANEL AT TOP OF SIDEBAR -->
+            <!-- MINIMAL CLEAN PROFILE PANEL AT TOP OF SIDEBAR -->
             <div class="sidebar-profile-showcase">
                 <div class="sidebar-photo-box">
                     <img src="assets/img/chandan-saroj.png" 
                          onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'" 
                          alt="Chandan Saroj" 
                          class="profile-photo">
-                    <div id="heroMessages"></div>
                 </div>
                 <div class="sidebar-profile-details">
                     <h4>CHANDAN SAROJ</h4>
-                    <span class="sidebar-role-tag dev-only">MERN Stack & .NET Engineer • 2.5+ Yrs</span>
-                    <span class="sidebar-role-tag ds-only">Data Science Specialist @ HYI.AI • 4+ Yrs</span>
-                    <div class="sidebar-mini-banner">
-                        <img class="dev-only" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80" alt="Developer Architecture">
-                        <img class="ds-only" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80" alt="Data Science Analytics">
-                        <div class="sidebar-mini-banner-foot">
-                            <span class="dev-only"><i class="fas fa-server"></i> Production Web & API</span>
-                            <span class="ds-only"><i class="fas fa-chart-line"></i> Neural & Data Infra</span>
-                            <a href="https://linkedin.com/in/chandan-saroj" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 800;">LinkedIn ↗</a>
+                    <span class="sidebar-role-tag dev-only">MERN & .NET Engineer • 2.5+ Yrs</span>
+                    <span class="sidebar-role-tag ds-only">Data Science Specialist • 4+ Yrs</span>
+                    <div class="sidebar-msg-pill" id="sidebarMsgTicker" onclick="window.goToSlide(5)" title="Click to view Visitor Wall">
+                        <div class="sidebar-msg-avatar" id="sidebarTickerAvatar" style="background: #2563eb;">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+                        <div class="sidebar-msg-content">
+                            <strong id="sidebarTickerName">VISITOR NOTE</strong>
+                            <p id="sidebarTickerText">Leave a note on Slide 06!</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="sidebar-nav-list">
-                <button class="sidebar-nav-btn active" data-slide="0" title="01. Overview & About">
+                <button class="sidebar-nav-btn active" data-slide="0" title="Overview & About">
                     <span class="nav-left"><i class="fas fa-house"></i> <span class="sidebar-nav-label">Overview & About</span></span>
-                    <span class="slide-num">01</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="1" title="02. Work Experience">
+                <button class="sidebar-nav-btn" data-slide="1" title="Work Experience">
                     <span class="nav-left"><i class="fas fa-briefcase"></i> <span class="sidebar-nav-label">Work Experience</span></span>
-                    <span class="slide-num">02</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="2" title="03. Featured & More Work">
+                <button class="sidebar-nav-btn" data-slide="2" title="Featured Work">
                     <span class="nav-left"><i class="fas fa-layer-group"></i> <span class="sidebar-nav-label">Featured Work</span></span>
-                    <span class="slide-num">03</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="3" title="04. GitHub Heatmap & Stats">
+                <button class="sidebar-nav-btn" data-slide="3" title="GitHub Heatmap">
                     <span class="nav-left"><i class="fab fa-github"></i> <span class="sidebar-nav-label">GitHub Heatmap</span></span>
-                    <span class="slide-num">04</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="4" title="05. Skills & Recognition">
+                <button class="sidebar-nav-btn" data-slide="4" title="Skills & Awards">
                     <span class="nav-left"><i class="fas fa-award"></i> <span class="sidebar-nav-label">Skills & Awards</span></span>
-                    <span class="slide-num">05</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="5" title="06. Blog, Music & Wall">
+                <button class="sidebar-nav-btn" data-slide="5" title="Blog, Music & Wall">
                     <span class="nav-left"><i class="fas fa-newspaper"></i> <span class="sidebar-nav-label">Blog, Music & Wall</span></span>
-                    <span class="slide-num">06</span>
                 </button>
-                <button class="sidebar-nav-btn" data-slide="6" title="07. News & Contact">
+                <button class="sidebar-nav-btn" data-slide="6" title="News & Contact">
                     <span class="nav-left"><i class="fas fa-paper-plane"></i> <span class="sidebar-nav-label">News & Contact</span></span>
-                    <span class="slide-num">07</span>
                 </button>
             </div>
 
@@ -2047,15 +2208,13 @@
                         <span>CHANDAN SAROJ</span>
                     </div>
 
-                    <!-- MINIMAL DUAL-MODE SEGMENTED SWITCH -->
+                    <!-- MINIMAL ICON-ONLY DUAL-MODE SWITCH -->
                     <div class="minimal-mode-switch" role="group" aria-label="Profile Mode Switch">
-                        <button type="button" class="mode-switch-btn active" data-target-mode="developer">
+                        <button type="button" class="mode-switch-btn active" data-target-mode="developer" title="Developer Profile (2.5+ Yrs)">
                             <i class="fas fa-code"></i>
-                            <span>Developer (2.5+ Yrs)</span>
                         </button>
-                        <button type="button" class="mode-switch-btn" data-target-mode="datascience">
+                        <button type="button" class="mode-switch-btn" data-target-mode="datascience" title="Data Science Specialist Profile (4+ Yrs)">
                             <i class="fas fa-brain"></i>
-                            <span>Data Science (4+ Yrs)</span>
                         </button>
                     </div>
                 </div>
@@ -2380,44 +2539,64 @@
             <div class="slide-inner">
                 
                 <!-- FEATURED WORK HEADER & 3-CARD TILTED CAROUSEL (IMAGE 2) -->
-                <div class="gabor-section-title">
+                <div class="gabor-section-title" style="margin-bottom: 18px;">
                     <h2>FEATURED WORK</h2>
-                    <p>Select recent and notable projects (Click side cards to cycle)</p>
+                    <p>Scroll horizontally, drag, or click to rotate clockwise & counter-clockwise</p>
                 </div>
 
                 <!-- Developer Featured Carousel -->
-                <div class="gabor-featured-carousel dev-only" id="devFeaturedCarousel">
-                    <div class="gabor-wing-card left-wing" onclick="window.cycleFeatured('dev', -1)">
-                        <img id="devWingLeftImg" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80" alt="Previous Project">
-                    </div>
-                    <div class="gabor-center-stage">
-                        <div class="gabor-center-card" id="devCenterCard" onclick="window.openFeaturedLink('dev')">
-                            <img id="devCenterImg" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80" alt="Featured Developer Project">
-                        </div>
-                        <button class="gabor-pill-caption" id="devCenterPill" onclick="window.openFeaturedLink('dev')">
-                            SECURE QUESTION PAPER PLATFORM ↗
+                <div class="dev-only">
+                    <div class="gabor-carousel-rotate-bar">
+                        <button type="button" class="gabor-rotate-btn" onclick="window.cycleFeatured('dev', -1)">
+                            <i class="fas fa-rotate-left"></i> Counter-Clockwise
+                        </button>
+                        <button type="button" class="gabor-rotate-btn" onclick="window.cycleFeatured('dev', 1)">
+                            Clockwise <i class="fas fa-rotate-right"></i>
                         </button>
                     </div>
-                    <div class="gabor-wing-card right-wing" onclick="window.cycleFeatured('dev', 1)">
-                        <img id="devWingRightImg" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80" alt="Next Project">
+                    <div class="gabor-featured-carousel" id="devFeaturedCarousel">
+                        <div class="gabor-wing-card left-wing" id="devLeftWingCard" onclick="window.cycleFeatured('dev', -1)">
+                            <img id="devWingLeftImg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=700&q=80" alt="Previous Project">
+                        </div>
+                        <div class="gabor-center-stage">
+                            <div class="gabor-center-card" id="devCenterCard" onclick="window.openFeaturedLink('dev')">
+                                <img id="devCenterImg" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80" alt="Featured Developer Project">
+                            </div>
+                            <button class="gabor-pill-caption" id="devCenterPill" onclick="window.openFeaturedLink('dev')">
+                                SECURE QUESTION PAPER PLATFORM ↗
+                            </button>
+                        </div>
+                        <div class="gabor-wing-card right-wing" id="devRightWingCard" onclick="window.cycleFeatured('dev', 1)">
+                            <img id="devWingRightImg" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80" alt="Next Project">
+                        </div>
                     </div>
                 </div>
 
                 <!-- Data Science Featured Carousel -->
-                <div class="gabor-featured-carousel ds-only" id="dsFeaturedCarousel">
-                    <div class="gabor-wing-card left-wing" onclick="window.cycleFeatured('ds', -1)">
-                        <img id="dsWingLeftImg" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=80" alt="Previous AI Project">
-                    </div>
-                    <div class="gabor-center-stage">
-                        <div class="gabor-center-card" id="dsCenterCard" onclick="window.openFeaturedLink('ds')">
-                            <img id="dsCenterImg" src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=900&q=80" alt="Featured AI Project">
-                        </div>
-                        <button class="gabor-pill-caption" id="dsCenterPill" onclick="window.openFeaturedLink('ds')">
-                            SMARTLANE AI (YOLOV8) ↗
+                <div class="ds-only">
+                    <div class="gabor-carousel-rotate-bar">
+                        <button type="button" class="gabor-rotate-btn" onclick="window.cycleFeatured('ds', -1)">
+                            <i class="fas fa-rotate-left"></i> Counter-Clockwise
+                        </button>
+                        <button type="button" class="gabor-rotate-btn" onclick="window.cycleFeatured('ds', 1)">
+                            Clockwise <i class="fas fa-rotate-right"></i>
                         </button>
                     </div>
-                    <div class="gabor-wing-card right-wing" onclick="window.cycleFeatured('ds', 1)">
-                        <img id="dsWingRightImg" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=80" alt="Next AI Project">
+                    <div class="gabor-featured-carousel" id="dsFeaturedCarousel">
+                        <div class="gabor-wing-card left-wing" id="dsLeftWingCard" onclick="window.cycleFeatured('ds', -1)">
+                            <img id="dsWingLeftImg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="Previous AI Project">
+                        </div>
+                        <div class="gabor-center-stage">
+                            <div class="gabor-center-card" id="dsCenterCard" onclick="window.openFeaturedLink('ds')">
+                                <img id="dsCenterImg" src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=900&q=80" alt="Featured AI Project">
+                            </div>
+                            <button class="gabor-pill-caption" id="dsCenterPill" onclick="window.openFeaturedLink('ds')">
+                                SMARTLANE AI (YOLOV8) ↗
+                            </button>
+                        </div>
+                        <div class="gabor-wing-card right-wing" id="dsRightWingCard" onclick="window.cycleFeatured('ds', 1)">
+                            <img id="dsWingRightImg" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&q=80" alt="Next AI Project">
+                        </div>
                     </div>
                 </div>
 
@@ -2593,57 +2772,57 @@
                                 <span>❖ LANGUAGE RADAR</span>
                             </div>
                             <svg viewBox="0 0 260 230" width="100%" height="215" style="overflow: visible;">
-                                <polygon points="130,30 215,92 182,190 78,190 45,92" fill="none" stroke="rgba(167, 139, 250, 0.18)" stroke-width="1"/>
-                                <polygon points="130,55 194,101 169,175 91,175 66,101" fill="none" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
-                                <polygon points="130,80 172,110 156,160 104,160 88,110" fill="none" stroke="rgba(167, 139, 250, 0.12)" stroke-width="1"/>
-                                <polygon points="130,105 151,120 143,145 117,145 109,120" fill="none" stroke="rgba(167, 139, 250, 0.1)" stroke-width="1"/>
+                                <polygon points="130,30 215,92 182,190 78,190 45,92" fill="none" stroke="rgba(0, 0, 0, 0.12)" stroke-width="1"/>
+                                <polygon points="130,55 194,101 169,175 91,175 66,101" fill="none" stroke="rgba(0, 0, 0, 0.1)" stroke-width="1"/>
+                                <polygon points="130,80 172,110 156,160 104,160 88,110" fill="none" stroke="rgba(0, 0, 0, 0.08)" stroke-width="1"/>
+                                <polygon points="130,105 151,120 143,145 117,145 109,120" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
                                 
-                                <line x1="130" y1="130" x2="130" y2="30" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
-                                <line x1="130" y1="130" x2="215" y2="92" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
-                                <line x1="130" y1="130" x2="182" y2="190" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
-                                <line x1="130" y1="130" x2="78" y2="190" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
-                                <line x1="130" y1="130" x2="45" y2="92" stroke="rgba(167, 139, 250, 0.15)" stroke-width="1"/>
+                                <line x1="130" y1="130" x2="130" y2="30" stroke="rgba(0, 0, 0, 0.1)" stroke-width="1"/>
+                                <line x1="130" y1="130" x2="215" y2="92" stroke="rgba(0, 0, 0, 0.1)" stroke-width="1"/>
+                                <line x1="130" y1="130" x2="182" y2="190" stroke="rgba(0, 0, 0, 0.1)" stroke-width="1"/>
+                                <line x1="130" y1="130" x2="78" y2="190" stroke="rgba(0, 0, 0, 0.1)" stroke-width="1"/>
+                                <line x1="130" y1="130" x2="45" y2="92" stroke="rgba(0, 0, 0, 0.1)" stroke-width="1"/>
 
-                                <polygon points="130,42 184,106 152,156 112,150 105,118" fill="rgba(168, 85, 247, 0.28)" stroke="#c084fc" stroke-width="2.2"/>
+                                <polygon points="130,42 184,106 152,156 112,150 105,118" fill="rgba(34, 197, 94, 0.22)" stroke="#16a34a" stroke-width="2.2"/>
                                 
-                                <circle cx="130" cy="42" r="4" fill="#e9d5ff" />
-                                <circle cx="184" cy="106" r="4" fill="#e9d5ff" />
-                                <circle cx="152" cy="156" r="4" fill="#e9d5ff" />
-                                <circle cx="112" cy="150" r="4" fill="#e9d5ff" />
-                                <circle cx="105" cy="118" r="4" fill="#e9d5ff" />
+                                <circle cx="130" cy="42" r="4" fill="#15803d" />
+                                <circle cx="184" cy="106" r="4" fill="#15803d" />
+                                <circle cx="152" cy="156" r="4" fill="#15803d" />
+                                <circle cx="112" cy="150" r="4" fill="#15803d" />
+                                <circle cx="105" cy="118" r="4" fill="#15803d" />
 
-                                <text x="130" y="14" text-anchor="middle" fill="#e9d5ff" font-size="9.5" font-family="Fira Code" font-weight="600">Python</text>
-                                <text x="130" y="25" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="Fira Code">40%</text>
+                                <text x="130" y="14" text-anchor="middle" fill="#18181b" font-size="9.5" font-family="Fira Code" font-weight="700">Python</text>
+                                <text x="130" y="25" text-anchor="middle" fill="#16a34a" font-size="8.5" font-family="Fira Code" font-weight="700">40%</text>
 
-                                <text x="235" y="92" text-anchor="middle" fill="#e9d5ff" font-size="9.5" font-family="Fira Code" font-weight="600">JavaScript</text>
-                                <text x="235" y="103" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="Fira Code">25%</text>
+                                <text x="235" y="92" text-anchor="middle" fill="#18181b" font-size="9.5" font-family="Fira Code" font-weight="700">JavaScript</text>
+                                <text x="235" y="103" text-anchor="middle" fill="#16a34a" font-size="8.5" font-family="Fira Code" font-weight="700">25%</text>
 
-                                <text x="195" y="208" text-anchor="middle" fill="#e9d5ff" font-size="9.5" font-family="Fira Code" font-weight="600">TypeScript</text>
-                                <text x="195" y="219" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="Fira Code">15%</text>
+                                <text x="195" y="208" text-anchor="middle" fill="#18181b" font-size="9.5" font-family="Fira Code" font-weight="700">TypeScript</text>
+                                <text x="195" y="219" text-anchor="middle" fill="#16a34a" font-size="8.5" font-family="Fira Code" font-weight="700">15%</text>
 
-                                <text x="65" y="208" text-anchor="middle" fill="#e9d5ff" font-size="9.5" font-family="Fira Code" font-weight="600">Django</text>
-                                <text x="65" y="219" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="Fira Code">10%</text>
+                                <text x="65" y="208" text-anchor="middle" fill="#18181b" font-size="9.5" font-family="Fira Code" font-weight="700">Django</text>
+                                <text x="65" y="219" text-anchor="middle" fill="#16a34a" font-size="8.5" font-family="Fira Code" font-weight="700">10%</text>
 
-                                <text x="24" y="92" text-anchor="middle" fill="#e9d5ff" font-size="9.5" font-family="Fira Code" font-weight="600">C/DevOps</text>
-                                <text x="24" y="103" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-family="Fira Code">10%</text>
+                                <text x="24" y="92" text-anchor="middle" fill="#18181b" font-size="9.5" font-family="Fira Code" font-weight="700">C/DevOps</text>
+                                <text x="24" y="103" text-anchor="middle" fill="#16a34a" font-size="8.5" font-family="Fira Code" font-weight="700">10%</text>
                             </svg>
                         </div>
 
                         <div class="gh-metrics-2x2">
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box"><i class="fas fa-cube"></i></div>
+                                <div class="gh-stat-icon-box" style="color: #16a34a;"><i class="fas fa-cube"></i></div>
                                 <div><h3>50+</h3><span>REPOSITORIES</span></div>
                             </div>
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.1);"><i class="fas fa-bolt"></i></div>
+                                <div class="gh-stat-icon-box" style="color: #0284c7;"><i class="fas fa-bolt"></i></div>
                                 <div><h3>500+</h3><span>TOTAL COMMITS</span></div>
                             </div>
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box" style="color: #facc15; border-color: rgba(250, 204, 21, 0.35); background: rgba(250, 204, 21, 0.1);"><i class="far fa-star"></i></div>
+                                <div class="gh-stat-icon-box" style="color: #d97706;"><i class="far fa-star"></i></div>
                                 <div><h3>25+</h3><span>STARS EARNED</span></div>
                             </div>
                             <div class="gh-stat-card">
-                                <div class="gh-stat-icon-box" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.1);"><i class="fas fa-arrows-rotate"></i></div>
+                                <div class="gh-stat-icon-box" style="color: #7c3aed;"><i class="fas fa-arrows-rotate"></i></div>
                                 <div><h3>30+</h3><span>PULL REQUESTS</span></div>
                             </div>
                         </div>
@@ -2801,16 +2980,39 @@
                 <h3 style="font-size: 1.8rem; margin-bottom: 14px; text-align:center;">RECENTLY PLAYED ON SPOTIFY</h3>
                 <div class="spotify-grid" id="spotifyTracks" style="margin-bottom: 36px;"></div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: start;">
+                <div style="display: grid; grid-template-columns: 320px 1fr; gap: 22px; align-items: start;">
                     <div style="background: #f4f4f5; padding: 22px; border-radius: 24px;">
                         <h4 style="font-size: 1.4rem; margin-bottom: 6px;">LEAVE A LIVE NOTE</h4>
-                        <p style="font-size: 0.82rem; margin-bottom: 12px;">Appears here and as a draggable note on the sidebar photo.</p>
+                        <p style="font-size: 0.82rem; margin-bottom: 12px;">Appears in the interactive slideshow and tiles with an avatar icon.</p>
                         <input type="text" id="msgName" placeholder="Your Name (Optional)" maxlength="30" style="background:#fff;">
                         <textarea id="msgText" placeholder="Write a message..." maxlength="280" style="min-height: 80px; background:#fff;"></textarea>
                         <button id="postMsgBtn" class="btn" style="width: 100%;">Post Message</button>
                     </div>
-                    <div class="messages-grid" id="messagesGrid" style="margin-top: 0;">
-                        <div style="color:var(--text-muted);">Loading messages...</div>
+                    <div>
+                        <!-- Interactive Visitor Notes Slideshow Spotlight -->
+                        <div class="notes-slideshow-box" id="notesSlideshowBox">
+                            <div class="notes-slide-stage">
+                                <div class="msg-avatar-icon" id="slideNoteAvatar" style="background:#2563eb; width:46px; height:46px; border-radius:14px; font-size:1.1rem;">
+                                    <i class="fas fa-user-astronaut"></i>
+                                </div>
+                                <div style="overflow:hidden; flex:1;">
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <strong id="slideNoteAuthor" style="font-size:0.9rem; color:var(--text-main);">Loading Visitor Notes...</strong>
+                                        <span id="slideNoteCounter" style="font-size:0.7rem; font-family:var(--font-code); background:#e4e4e7; padding:2px 8px; border-radius:999px;">1 / 1</span>
+                                    </div>
+                                    <p id="slideNoteText" style="margin:4px 0 0; font-size:0.92rem; color:var(--text-main); font-weight:600;">Connecting to live visitor wall...</p>
+                                </div>
+                            </div>
+                            <div class="notes-slide-controls">
+                                <button type="button" class="notes-slide-btn" id="prevNoteSlideBtn" title="Previous Note"><i class="fas fa-chevron-left"></i></button>
+                                <button type="button" class="notes-slide-btn" id="nextNoteSlideBtn" title="Next Note"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Visitor Notes Tile Grid with Pre-Made Icons -->
+                        <div class="messages-grid" id="messagesGrid" style="margin-top: 0;">
+                            <div style="color:var(--text-muted);">Loading messages...</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3219,6 +3421,10 @@
             const prev = (curr - 1 + list.length) % list.length;
             const next = (curr + 1) % list.length;
 
+            const cCard = document.getElementById(`${track}CenterCard`);
+            const lCard = document.getElementById(`${track}LeftWingCard`);
+            const rCard = document.getElementById(`${track}RightWingCard`);
+
             const cImg = document.getElementById(`${track}CenterImg`);
             const lImg = document.getElementById(`${track}WingLeftImg`);
             const rImg = document.getElementById(`${track}WingRightImg`);
@@ -3228,6 +3434,29 @@
             if (lImg) lImg.src = list[prev].img;
             if (rImg) rImg.src = list[next].img;
             if (pill) pill.textContent = list[curr].title;
+
+            // Smooth Clockwise (delta > 0) & Counter-Clockwise (delta < 0) Arc Animation
+            if (typeof gsap !== 'undefined') {
+                const rotDir = delta > 0 ? 1 : -1;
+                if (cCard) {
+                    gsap.fromTo(cCard,
+                        { x: rotDir * 90, rotation: rotDir * 10, scale: 0.88, opacity: 0.65 },
+                        { x: 0, rotation: 0, scale: 1, opacity: 1, duration: 0.48, ease: "back.out(1.4)" }
+                    );
+                }
+                if (lCard) {
+                    gsap.fromTo(lCard,
+                        { x: rotDir * 50, rotation: -10 + rotDir * 8, opacity: 0.5 },
+                        { x: -16, rotation: -10, opacity: 0.92, duration: 0.45, ease: "power3.out" }
+                    );
+                }
+                if (rCard) {
+                    gsap.fromTo(rCard,
+                        { x: rotDir * 50, rotation: 10 + rotDir * 8, opacity: 0.5 },
+                        { x: 16, rotation: 10, opacity: 0.92, duration: 0.45, ease: "power3.out" }
+                    );
+                }
+            }
         };
 
         window.openFeaturedLink = function(track) {
@@ -3235,17 +3464,32 @@
             if (item?.url) window.open(item.url, '_blank');
         };
 
-        // --- SPENCER GABOR HOVER IMAGE STACK ON SLIDE 02 (IMAGE 9) ---
-        document.querySelectorAll('.gabor-giant-hover-item').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                document.querySelectorAll('.gabor-giant-hover-item').forEach(i => i.classList.remove('active-hover'));
-                item.classList.add('active-hover');
-                const lSrc = item.getAttribute('data-img-left');
-                const rSrc = item.getAttribute('data-img-right');
-                const lEl = document.getElementById('expFloatLeftImg');
-                const rEl = document.getElementById('expFloatRightImg');
-                if (lEl && lSrc) lEl.src = lSrc;
-                if (rEl && rSrc) rEl.src = rSrc;
+        // Enable Horizontal Wheel & Touch/Mouse Swipe on Featured Carousels (Clockwise & Counter-Clockwise)
+        ['dev', 'ds'].forEach(track => {
+            const carouselEl = document.getElementById(`${track}FeaturedCarousel`);
+            if (!carouselEl) return;
+
+            let wheelLocked = false;
+            carouselEl.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaX) > 10 || Math.abs(e.deltaY) > 15) {
+                    e.preventDefault();
+                    if (wheelLocked) return;
+                    wheelLocked = true;
+                    const delta = (e.deltaX || e.deltaY) > 0 ? 1 : -1;
+                    window.cycleFeatured(track, delta);
+                    setTimeout(() => { wheelLocked = false; }, 380);
+                }
+            }, { passive: false });
+
+            let startX = null;
+            carouselEl.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+            carouselEl.addEventListener('pointerup', (e) => {
+                if (startX === null) return;
+                const diff = e.clientX - startX;
+                if (Math.abs(diff) > 40) {
+                    window.cycleFeatured(track, diff < 0 ? 1 : -1);
+                }
+                startX = null;
             });
         });
 
@@ -3393,6 +3637,18 @@
             proofModal.style.display = 'flex';
         };
 
+        // --- EXPERIENCE HOVER INTERACTION ---
+        document.querySelectorAll('.gabor-giant-hover-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                document.querySelectorAll('.gabor-giant-hover-item').forEach(i => i.classList.remove('active-hover'));
+                item.classList.add('active-hover');
+                const lImg = document.getElementById('expFloatLeftImg');
+                const rImg = document.getElementById('expFloatRightImg');
+                if (lImg && item.dataset.imgLeft) lImg.src = item.dataset.imgLeft;
+                if (rImg && item.dataset.imgRight) rImg.src = item.dataset.imgRight;
+            });
+        });
+
         // --- WEATHER LOGIC ---
         const DELHI_COORDS = { lat: 28.6139, lon: 77.2090 };
         async function fetchWeatherData(lat, lon) {
@@ -3411,10 +3667,78 @@
         }
         fetchWeatherData(DELHI_COORDS.lat, DELHI_COORDS.lon);
 
-        // --- FIREBASE REALTIME LISTENERS ---
+        // --- FIREBASE REALTIME LISTENERS & VISITOR NOTES SLIDESHOW ---
         signInAnonymously(auth).catch(() => {});
         let currentUser = null;
         let loadedPosts = {};
+        let visitorMessages = [];
+        let activeNoteIndex = 0;
+
+        // Pre-made Avatar Icons & Color Palette for Visitor Names
+        const visitorAvatars = [
+            { icon: 'fa-user-astronaut', bg: '#2563eb' },
+            { icon: 'fa-user-ninja', bg: '#16a34a' },
+            { icon: 'fa-user-graduate', bg: '#7c3aed' },
+            { icon: 'fa-user-tie', bg: '#ea580c' },
+            { icon: 'fa-user-secret', bg: '#db2777' },
+            { icon: 'fa-bolt', bg: '#0284c7' },
+            { icon: 'fa-rocket', bg: '#4f46e5' },
+            { icon: 'fa-star', bg: '#d97706' }
+        ];
+
+        function getAvatarForName(nameStr) {
+            const clean = (nameStr || 'Anonymous').trim();
+            let hash = 0;
+            for (let i = 0; i < clean.length; i++) {
+                hash = clean.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return visitorAvatars[Math.abs(hash) % visitorAvatars.length];
+        }
+
+        function updateVisitorNoteSlideshow(index) {
+            if (!visitorMessages.length) return;
+            activeNoteIndex = (index + visitorMessages.length) % visitorMessages.length;
+            const item = visitorMessages[activeNoteIndex];
+            const av = getAvatarForName(item.name);
+
+            // Update Slide 06 Main Slideshow Banner
+            const sAv = document.getElementById('slideNoteAvatar');
+            const sAuthor = document.getElementById('slideNoteAuthor');
+            const sText = document.getElementById('slideNoteText');
+            const sCount = document.getElementById('slideNoteCounter');
+
+            if (sAv) {
+                sAv.style.background = av.bg;
+                sAv.innerHTML = `<i class="fas ${av.icon}"></i>`;
+            }
+            if (sAuthor) sAuthor.textContent = item.name || 'Anonymous';
+            if (sText) sText.textContent = item.text || '';
+            if (sCount) sCount.textContent = `${activeNoteIndex + 1} / ${visitorMessages.length}`;
+
+            // Also update the Minimal Sidebar Profile Ticker Pill
+            const tAv = document.getElementById('sidebarTickerAvatar');
+            const tName = document.getElementById('sidebarTickerName');
+            const tText = document.getElementById('sidebarTickerText');
+            if (tAv) {
+                tAv.style.background = av.bg;
+                tAv.innerHTML = `<i class="fas ${av.icon}"></i>`;
+            }
+            if (tName) tName.textContent = item.name || 'Anonymous';
+            if (tText) tText.textContent = item.text || '';
+        }
+
+        document.getElementById('prevNoteSlideBtn')?.addEventListener('click', () => {
+            updateVisitorNoteSlideshow(activeNoteIndex - 1);
+        });
+        document.getElementById('nextNoteSlideBtn')?.addEventListener('click', () => {
+            updateVisitorNoteSlideshow(activeNoteIndex + 1);
+        });
+
+        setInterval(() => {
+            if (visitorMessages.length > 1) {
+                updateVisitorNoteSlideshow(activeNoteIndex + 1);
+            }
+        }, 4200);
 
         function stripHtml(html) {
             const tmp = document.createElement("DIV");
@@ -3426,7 +3750,7 @@
             if (!user) return;
             currentUser = user;
 
-            // Messages & Hero Bubbles
+            // Messages Tile Grid + Slideshow + Sidebar Minimal Pill
             onSnapshot(collection(db, "messages"), (snapshot) => {
                 const grid = document.getElementById('messagesGrid');
                 if (!grid) return;
@@ -3434,26 +3758,30 @@
                 let recent = [];
                 snapshot.forEach(d => recent.push(d.data()));
                 recent.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-                recent.slice(0, 8).forEach(msg => {
+                visitorMessages = recent;
+
+                recent.slice(0, 8).forEach((msg, idx) => {
+                    const av = getAvatarForName(msg.name);
                     const card = document.createElement('div');
                     card.className = 'message-card';
-                    card.innerHTML = `<strong style="color:var(--accent); font-size:0.8rem;">${msg.name || 'Anonymous'}</strong><p style="font-size:0.84rem; margin:4px 0;">${msg.text}</p>`;
+                    card.innerHTML = `
+                        <div class="msg-card-header">
+                            <div class="msg-avatar-icon" style="background:${av.bg};">
+                                <i class="fas ${av.icon}"></i>
+                            </div>
+                            <div class="msg-author-meta">
+                                <strong>${msg.name || 'Anonymous'}</strong>
+                                <span>Verified Visitor</span>
+                            </div>
+                        </div>
+                        <p style="font-size:0.86rem; margin:0; color:var(--text-main); font-weight:600;">${msg.text}</p>
+                    `;
+                    card.addEventListener('click', () => updateVisitorNoteSlideshow(idx));
                     grid.appendChild(card);
                 });
 
-                const heroContainer = document.getElementById('heroMessages');
-                if (heroContainer) {
-                    heroContainer.innerHTML = '';
-                    if (typeof Draggable !== 'undefined') gsap.registerPlugin(Draggable);
-                    recent.slice(0, 3).forEach((msg, idx) => {
-                        const b = document.createElement('div');
-                        b.className = 'hero-msg-bubble';
-                        b.style.top = `${10 + idx * 28}%`;
-                        b.style.left = idx % 2 === 0 ? `5%` : `36%`;
-                        b.innerHTML = `<strong>${msg.name || 'Visitor'}</strong><p>${msg.text}</p>`;
-                        heroContainer.appendChild(b);
-                        if (typeof Draggable !== 'undefined') Draggable.create(b, { bounds: ".sidebar-photo-box" });
-                    });
+                if (visitorMessages.length > 0) {
+                    updateVisitorNoteSlideshow(0);
                 }
             });
 
