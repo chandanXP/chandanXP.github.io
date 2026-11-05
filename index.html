@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>Chandan Saroj — Welcome to my workspace</title>
+    <title>Chandan Saroj — Software Engineer (2.5+ Yrs) & Data Science Specialist (4+ Yrs)</title>
     <meta name="title" content="Chandan Saroj — Software Development Engineer & Data Science Specialist">
     <meta name="description" content="Chandan Saroj - Data Science Specialist at HYI.AI (4+ Yrs Exp) & Full-Stack MERN/.NET Engineer (2.5+ Yrs Exp). National Hackathon Winner (Paranox 2.0), Springer Author (6 Citations), NIELIT & IndiaAI.">
     <meta name="keywords" content="Chandan Saroj, Data Science Specialist, HYI.AI, BR TECHGEEKS, Webcreaters, NIELIT, MERN Stack, ASP.NET Core, YOLOv8, Diffusion Models, IndiaAI, NITI Aayog, PIET">
@@ -26,51 +26,72 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CLEAN, REALISTIC EDITORIAL / SAAS DESIGN TOKENS (NO AI NEON GRADIENTS) --- */
+        /* --- SPENCER GABOR STUDIO / EDITORIAL DESIGN TOKENS --- */
         :root {
-            --primary: #0f172a;          /* Crisp Slate Navy */
-            --accent: #2563eb;           /* Professional Royal Blue */
-            --accent-soft: #eff6ff;      /* Soft Blue Tint */
-            --accent-border: #bfdbfe;
-            --secondary: #475569;        /* Muted Slate */
+            --primary: #141413;          /* Deep Studio Ink */
+            --accent: #ff4d29;           /* Gabor Vibrant Vermilion */
+            --accent-soft: #fff0eb;      /* Warm Coral Tint */
+            --accent-border: #141413;
+            --secondary: #3d3d3a;        /* Warm Charcoal */
             
-            --bg-main: #f8fafc;          /* Realistic Paper/App Surface */
-            --bg-surface: #ffffff;       /* Crisp White Card */
-            --bg-subtle: #f1f5f9;        /* Subtle Gray Panel */
+            --bg-main: #f6f3ec;          /* Spencer Gabor Warm Cream Paper */
+            --bg-surface: #ffffff;       /* Crisp Gallery Card */
+            --bg-subtle: #ebe6db;        /* Tactile Warm Stone */
             
-            --text-main: #0f172a;        /* Deep Ink */
-            --text-muted: #475569;       /* Readable Body Gray */
-            --text-light: #64748b;       /* Caption Gray */
+            --text-main: #141413;        /* Bold Ink */
+            --text-muted: #3d3d3a;       /* Editorial Body */
+            --text-light: #6e6c64;       /* Caption Stone */
             
-            --border: #e2e8f0;           /* Hairline Divider */
-            --border-strong: #cbd5e1;
+            --border: #141413;           /* Bold Studio Ink Border */
+            --border-strong: #141413;
             
-            --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-            --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-            --shadow-lg: 0 12px 28px -6px rgba(15, 23, 42, 0.08);
+            --shadow-sm: 3px 3px 0px #141413;
+            --shadow-md: 5px 5px 0px #141413;
+            --shadow-lg: 8px 8px 0px #141413;
             
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
             
-            --header-h: 60px;
-            --sidebar-expanded-w: 290px;
-            --sidebar-collapsed-w: 68px;
+            --header-h: 66px;
+            --sidebar-expanded-w: 295px;
+            --sidebar-collapsed-w: 72px;
             
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+            --font-display: 'Syne', 'Plus Jakarta Sans', sans-serif;
             --font-code: 'Fira Code', monospace;
-            --transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Subtle shift when in Data Science mode (Professional Indigo/Teal accent, still clean light UI) */
+        /* Data Science Mode shifts the Gabor pop accent to Electric Cobalt */
         body[data-profession="datascience"] {
-            --accent: #4f46e5;
-            --accent-soft: #eef2ff;
-            --accent-border: #c7d2fe;
+            --accent: #2563eb;
+            --accent-soft: #e0e7ff;
+        }
+
+        /* Spencer Gabor Interactive Palette Themes */
+        body[data-palette="mint"] {
+            --bg-main: #e6f4ea;
+            --bg-subtle: #d1e9d8;
+            --accent: #0f9d58;
+        }
+        body[data-palette="butter"] {
+            --bg-main: #fef6d8;
+            --bg-subtle: #f5e8b8;
+            --accent: #d946ef;
+        }
+        body[data-palette="lavender"] {
+            --bg-main: #f1ecfe;
+            --bg-subtle: #e2d8fc;
+            --accent: #6d28d9;
+        }
+        body[data-palette="coral"] {
+            --bg-main: #ffeae5;
+            --bg-subtle: #fad5cc;
+            --accent: #e11d48;
         }
 
         * {
@@ -82,11 +103,12 @@
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* Click/Slide deck architecture - no endless page scroll */
+            overflow: hidden;
             font-family: var(--font-main);
             background-color: var(--bg-main);
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.35s ease, color 0.25s ease;
         }
 
         /* --- DUAL PROFESSION VISIBILITY RULES --- */
@@ -96,14 +118,16 @@
         h1, h2, h3, h4 {
             font-family: var(--font-display);
             color: var(--text-main);
-            letter-spacing: -0.02em;
-            line-height: 1.25;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
+            font-weight: 800;
         }
 
         p {
             color: var(--text-muted);
             line-height: 1.65;
             font-size: 0.96rem;
+            font-weight: 500;
         }
 
         a { text-decoration: none; color: inherit; transition: var(--transition); }
@@ -123,9 +147,9 @@
             flex: 0 0 var(--sidebar-expanded-w);
             height: 100vh;
             background: var(--bg-subtle);
-            border-right: 1px solid var(--border);
+            border-right: 2px solid var(--border);
             z-index: 1200;
-            transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1), flex-basis 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1), flex-basis 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s ease;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -144,32 +168,39 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--border);
             flex-shrink: 0;
         }
 
         .sidebar-trigger-btn {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            border: 1px solid transparent;
-            background: transparent;
+            border: 2px solid var(--border);
+            background: var(--bg-surface);
             color: var(--text-main);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: var(--transition);
             flex-shrink: 0;
+            box-shadow: 2px 2px 0px var(--border);
         }
         .sidebar-trigger-btn:hover {
-            background: rgba(15, 23, 42, 0.07);
+            background: var(--accent);
+            color: #fff;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--border);
         }
 
         .sidebar-brand-text {
+            font-family: var(--font-display);
             font-weight: 800;
-            font-size: 0.98rem;
+            font-size: 1.02rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
             color: var(--text-main);
             white-space: nowrap;
             overflow: hidden;
@@ -183,10 +214,10 @@
 
         /* --- RICH PROFILE PANEL AT TOP OF SIDEBAR --- */
         .sidebar-profile-showcase {
-            margin: 8px 10px 4px;
-            padding: 10px 12px;
+            margin: 10px 12px 6px;
+            padding: 12px;
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
             display: flex;
@@ -199,15 +230,15 @@
         }
 
         .sidebar-photo-box {
-            width: 112px;
-            height: 112px;
-            border-radius: 14px;
+            width: 108px;
+            height: 108px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
-            border: 1px solid var(--border-strong);
-            background: var(--bg-subtle);
+            border: 2px solid var(--border);
+            background: #ffcf40;
             margin-bottom: 8px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 3px 3px 0px var(--border);
             transition: var(--transition);
         }
 
@@ -225,14 +256,14 @@
         }
 
         .sidebar-profile-details h4 {
-            font-size: 0.94rem;
+            font-size: 1rem;
             font-weight: 800;
             margin-bottom: 2px;
             color: var(--text-main);
         }
 
         .sidebar-role-tag {
-            font-size: 0.68rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 8px;
@@ -242,8 +273,8 @@
 
         .sidebar-mini-banner {
             width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
             overflow: hidden;
             background: var(--bg-subtle);
             text-align: left;
@@ -251,24 +282,25 @@
 
         .sidebar-mini-banner img {
             width: 100%;
-            height: 42px;
+            height: 40px;
             object-fit: cover;
             display: block;
+            border-bottom: 1.5px solid var(--border);
         }
 
         .sidebar-mini-banner-foot {
             padding: 4px 8px;
-            font-size: 0.64rem;
-            color: var(--text-muted);
+            font-size: 0.65rem;
+            color: var(--text-main);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* Collapsed Sidebar State for Profile Panel */
         body.sidebar-collapsed .sidebar-profile-showcase {
-            padding: 4px;
+            padding: 0;
             margin: 10px auto 6px;
             width: 44px;
             height: 44px;
@@ -278,10 +310,11 @@
             box-shadow: none;
         }
         body.sidebar-collapsed .sidebar-photo-box {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             margin-bottom: 0;
+            box-shadow: 2px 2px 0px var(--border);
         }
         body.sidebar-collapsed .sidebar-profile-details,
         body.sidebar-collapsed #heroMessages {
@@ -289,28 +322,28 @@
         }
 
         .sidebar-nav-list {
-            padding: 6px 10px;
+            padding: 6px 12px;
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 5px;
         }
 
         .sidebar-nav-btn {
             width: 100%;
-            border: none;
+            border: 2px solid transparent;
             background: transparent;
             padding: 9px 12px;
-            border-radius: 20px;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: var(--text-muted);
+            color: var(--text-main);
             font-family: var(--font-main);
             font-size: 0.82rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             text-align: left;
@@ -326,14 +359,14 @@
         .sidebar-nav-btn .nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 11px;
             overflow: hidden;
         }
         .sidebar-nav-btn i {
             width: 20px;
             text-align: center;
-            font-size: 0.96rem;
-            color: var(--text-muted);
+            font-size: 0.95rem;
+            color: var(--text-main);
             flex-shrink: 0;
         }
         .sidebar-nav-label,
@@ -348,77 +381,85 @@
         .sidebar-nav-btn .slide-num {
             font-size: 0.68rem;
             font-family: var(--font-code);
-            color: var(--text-light);
+            font-weight: 700;
+            color: var(--text-main);
             background: var(--bg-surface);
-            padding: 2px 6px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
+            padding: 2px 7px;
+            border-radius: 999px;
+            border: 1.5px solid var(--border);
         }
 
         .sidebar-nav-btn:hover {
-            background: rgba(15, 23, 42, 0.06);
-            color: var(--text-main);
+            background: var(--bg-surface);
+            border-color: var(--border);
+            transform: translateX(2px);
         }
         .sidebar-nav-btn.prev-context-nav {
-            background: rgba(15, 23, 42, 0.04);
-            border: 1px dashed var(--border-strong);
+            background: rgba(20, 20, 19, 0.06);
+            border: 1.5px dashed var(--border);
         }
         .sidebar-nav-btn.active {
-            background: var(--accent-soft);
-            color: var(--accent);
-        }
-        .sidebar-nav-btn.active i { color: var(--accent); }
-        .sidebar-nav-btn.active .slide-num {
             background: var(--accent);
+            color: #ffffff;
+            border-color: var(--border);
+            box-shadow: 3px 3px 0px var(--border);
+        }
+        .sidebar-nav-btn.active i { color: #ffffff; }
+        .sidebar-nav-btn.active .slide-num {
+            background: var(--text-main);
             color: #fff;
-            border-color: var(--accent);
+            border-color: var(--text-main);
         }
 
         .sidebar-footer {
-            padding: 10px;
-            border-top: 1px solid var(--border);
+            padding: 10px 12px;
+            border-top: 2px solid var(--border);
             display: flex;
             flex-direction: column;
             gap: 8px;
             flex-shrink: 0;
+            background: var(--bg-subtle);
         }
         .sidebar-step-row {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
         .sidebar-step-btn {
             flex: 1;
-            border: 1px solid var(--border-strong);
+            border: 2px solid var(--border);
             background: var(--bg-surface);
             color: var(--text-main);
             padding: 7px 10px;
-            border-radius: 20px;
+            border-radius: 999px;
             font-size: 0.76rem;
-            font-weight: 600;
+            font-weight: 800;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             transition: var(--transition);
+            box-shadow: 2px 2px 0px var(--border);
         }
         .sidebar-step-btn:hover {
             background: var(--accent);
             color: #fff;
-            border-color: var(--accent);
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--border);
         }
         .sidebar-stats-row {
             display: flex;
             justify-content: space-between;
             font-size: 0.72rem;
-            color: var(--text-muted);
+            font-weight: 700;
+            color: var(--text-main);
             padding: 2px 4px;
         }
         .sidebar-resume-btn {
             width: 100%;
             justify-content: center;
-            padding: 0.52rem 0.8rem;
-            border-radius: 20px;
+            padding: 0.55rem 0.8rem;
+            border-radius: 999px;
             font-size: 0.8rem;
         }
 
@@ -435,9 +476,9 @@
             gap: 6px;
         }
         body.sidebar-collapsed .sidebar-step-btn {
-            width: 38px;
-            height: 38px;
-            flex: 0 0 38px;
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
             padding: 0;
             border-radius: 50%;
         }
@@ -447,13 +488,13 @@
             display: none !important;
         }
         body.sidebar-collapsed .sidebar-resume-btn {
-            width: 38px !important;
-            height: 38px !important;
+            width: 40px !important;
+            height: 40px !important;
             padding: 0 !important;
             border-radius: 50% !important;
         }
 
-        /* --- MAIN WORKSPACE AREA (PUSHED BY SIDEBAR, CONSUMES 100% REMAINING WIDTH) --- */
+        /* --- MAIN WORKSPACE AREA --- */
         .workspace-main {
             flex: 1;
             min-width: 0;
@@ -466,9 +507,8 @@
 
         #header {
             height: var(--header-h);
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+            background: var(--bg-main);
+            border-bottom: 2px solid var(--border);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -480,40 +520,47 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
+        }
+
+        .mobile-Drawer-btn {
+            display: none;
         }
 
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-family: var(--font-display);
             font-weight: 800;
-            font-size: 1.08rem;
+            font-size: 1.25rem;
+            letter-spacing: -0.03em;
             color: var(--text-main);
             cursor: pointer;
         }
 
-        /* --- MINIMAL SEGMENTED PROFILE TOGGLE --- */
+        /* --- SPENCER GABOR PILL SEGMENTED PROFILE TOGGLE --- */
         .minimal-mode-switch {
             display: inline-flex;
             align-items: center;
-            background: var(--bg-subtle);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 999px;
             padding: 3px;
-            gap: 2px;
+            gap: 3px;
+            box-shadow: 3px 3px 0px var(--border);
         }
 
         .mode-switch-btn {
             border: none;
             background: transparent;
-            color: var(--text-muted);
+            color: var(--text-main);
             font-family: var(--font-main);
             font-size: 0.76rem;
-            font-weight: 600;
-            padding: 5px 11px;
-            border-radius: 6px;
+            font-weight: 800;
+            padding: 6px 13px;
+            border-radius: 999px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -522,21 +569,39 @@
             white-space: nowrap;
         }
 
-        .mode-switch-btn i {
-            font-size: 0.75rem;
-        }
-
         .mode-switch-btn.active {
-            background: var(--bg-surface);
-            color: var(--accent);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        /* Spencer Gabor Bonus Feature: Interactive Color Palette Dots */
+        .gabor-palette-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 999px;
+            box-shadow: 2px 2px 0px var(--border);
+        }
+        .palette-swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.18s ease;
+        }
+        .palette-swatch:hover,
+        .palette-swatch.active {
+            transform: scale(1.25);
         }
 
         /* Compact Weather Pill in Header */
@@ -544,15 +609,16 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--bg-subtle);
-            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
             padding: 5px 12px;
-            border-radius: 6px;
+            border-radius: 999px;
             font-size: 0.76rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            color: var(--text-main);
+            font-weight: 700;
+            box-shadow: 2px 2px 0px var(--border);
         }
-        .weather-location { font-weight: 700; color: var(--text-main); }
+        .weather-location { font-weight: 800; color: var(--accent); }
         .weather-info { display: flex; align-items: center; gap: 8px; }
 
         /* --- DIRECTIONAL 30% / 70% HORIZONTAL SPLIT STAGE --- */
@@ -590,7 +656,7 @@
             flex: 0 0 30%;
             width: 30%;
             max-width: 30%;
-            opacity: 0.92;
+            opacity: 0.94;
             pointer-events: auto;
             padding: 20px 18px 36px;
             background: var(--bg-subtle);
@@ -599,7 +665,6 @@
         }
         .slide-panel.prev-slide:hover {
             opacity: 1;
-            background: #eef2f7;
         }
 
         /* 70% Main Active Content Pane */
@@ -610,31 +675,24 @@
             max-width: 70%;
             opacity: 1;
             pointer-events: auto;
-            padding: 26px 30px 44px;
+            padding: 28px 32px 48px;
             background: var(--bg-main);
             z-index: 5;
         }
 
-        /* Narrative Direction Consistency:
-           - Going Ahead (dir-forward): Main 70% on Left (order 1), Shrunk 30% on Right (order 2)
-           - Going Back (dir-backward): Shrunk 30% on Left (order 1), Main 70% on Right (order 2) */
-        .deck-viewport.dir-forward .slide-panel.active-slide {
-            order: 1;
-        }
+        .deck-viewport.dir-forward .slide-panel.active-slide { order: 1; }
         .deck-viewport.dir-forward .slide-panel.prev-slide {
             order: 2;
-            border-left: 2px solid var(--border-strong);
+            border-left: 2px solid var(--border);
             border-right: none;
         }
 
         .deck-viewport.dir-backward .slide-panel.prev-slide {
             order: 1;
-            border-right: 2px solid var(--border-strong);
+            border-right: 2px solid var(--border);
             border-left: none;
         }
-        .deck-viewport.dir-backward .slide-panel.active-slide {
-            order: 2;
-        }
+        .deck-viewport.dir-backward .slide-panel.active-slide { order: 2; }
 
         /* Banner shown only on the 30% Shrunk Pane */
         .prev-pane-indicator {
@@ -643,13 +701,13 @@
             justify-content: space-between;
             gap: 8px;
             background: var(--bg-surface);
-            border: 1px solid var(--border-strong);
-            padding: 7px 12px;
-            border-radius: var(--radius-sm);
-            margin-bottom: 14px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--text-muted);
+            border: 2px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            font-size: 0.74rem;
+            font-weight: 800;
+            color: var(--text-main);
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
@@ -659,21 +717,19 @@
             display: flex;
         }
 
-        /* When no previous slide exists yet, active slide consumes 100% */
         .deck-viewport.single-pane-mode .slide-panel.active-slide {
             flex: 1 1 100%;
             width: 100%;
             max-width: 100%;
         }
 
-        /* Consume the whole horizontal space inside each pane */
         .slide-inner {
             width: 100%;
             max-width: 100%;
             margin: 0;
         }
 
-        /* Container queries so the 30% Left Pane adapts all grids cleanly without horizontal overflow */
+        /* Container queries so the 30% Pane adapts all grids cleanly */
         @container (max-width: 560px) {
             .hero-bento-grid,
             .exp-visual-card,
@@ -696,51 +752,49 @@
                 grid-column: 1 / -1 !important;
             }
             .hero-main-card,
-            .hero-profile-card,
             .github-dashboard-wrapper {
-                padding: 16px !important;
+                padding: 18px !important;
             }
             .hero-headline {
-                font-size: 1.35rem !important;
+                font-size: 1.5rem !important;
             }
             .section-header-bar h2 {
-                font-size: 1.15rem !important;
+                font-size: 1.25rem !important;
             }
         }
 
-        /* --- BUTTONS & BADGES --- */
+        /* --- SPENCER GABOR STUDIO BUTTONS & PILLS --- */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: var(--text-main);
+            background: var(--accent);
             color: #ffffff;
-            padding: 0.68rem 1.35rem;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
+            padding: 0.72rem 1.45rem;
+            border-radius: 999px;
+            font-weight: 800;
             font-size: 0.88rem;
-            border: 1px solid var(--text-main);
+            border: 2px solid var(--border);
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
         }
         .btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--text-main);
             color: #ffffff;
-            transform: translateY(-1px);
+            transform: translate(-2px, -2px);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-outline {
             background: var(--bg-surface);
             color: var(--text-main);
-            border: 1px solid var(--border-strong);
+            border: 2px solid var(--border);
         }
         .btn-outline:hover {
-            background: var(--bg-subtle);
+            background: #ffcf40;
             color: var(--text-main);
-            border-color: var(--text-main);
         }
 
         .section-header-bar {
@@ -749,40 +803,59 @@
             align-items: flex-end;
             margin-bottom: 24px;
             padding-bottom: 16px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--border);
             flex-wrap: wrap;
             gap: 14px;
         }
 
         .section-eyebrow {
-            font-size: 0.74rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--accent);
+            color: var(--text-main);
+            background: #ffcf40;
+            border: 1.5px solid var(--border);
+            padding: 3px 10px;
+            border-radius: 999px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
+            box-shadow: 2px 2px 0px var(--border);
         }
 
-        /* --- SLIDE 1: OVERVIEW / HERO BENTO WORKSPACE --- */
+        /* --- SLIDE 1: SPENCER GABOR EDITORIAL HERO + "ORGANIZATIONS INCLUDE" STRIP --- */
         .hero-bento-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 22px;
             align-items: stretch;
         }
 
         .hero-main-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 32px;
-            box-shadow: var(--shadow-md);
+            padding: 34px;
+            box-shadow: var(--shadow-lg);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+        }
+
+        .gabor-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-bottom: 16px;
+            margin-bottom: 18px;
+            border-bottom: 2px dashed var(--border);
+            font-size: 0.85rem;
+            font-weight: 800;
         }
 
         .badge-strip {
@@ -796,36 +869,74 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 5px 11px;
-            border-radius: 6px;
+            padding: 6px 13px;
+            border-radius: 999px;
             font-size: 0.76rem;
-            font-weight: 600;
+            font-weight: 800;
             background: var(--bg-subtle);
             color: var(--text-main);
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
+            box-shadow: 2px 2px 0px var(--border);
         }
         .clean-badge.accent {
-            background: var(--accent-soft);
-            color: var(--accent);
-            border-color: var(--accent-border);
+            background: #ffcf40;
+            color: var(--text-main);
         }
 
         .hero-headline {
-            font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+            font-size: clamp(2.1rem, 3.8vw, 3.35rem);
             font-weight: 800;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             color: var(--text-main);
+            line-height: 1.06;
         }
         .hero-headline span {
             color: var(--accent);
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 6px;
+        }
+
+        /* Spencer Gabor "Clients / Organizations Include" Ticker Block */
+        .gabor-clients-bar {
+            margin-top: 22px;
+            padding: 14px 18px;
+            background: #ffcf40;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .gabor-clients-label {
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            background: var(--text-main);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+        .gabor-clients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.92rem;
+            color: var(--text-main);
         }
 
         /* Visual Architecture Graphic Strip inside Hero */
         .hero-visual-diagram {
-            margin: 18px 0;
+            margin: 18px 0 6px;
             padding: 14px 16px;
             background: var(--bg-subtle);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
@@ -838,13 +949,13 @@
             align-items: center;
             gap: 10px;
             background: var(--bg-surface);
-            padding: 8px 12px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1.5px solid var(--border);
             font-size: 0.78rem;
-            font-weight: 600;
+            font-weight: 800;
             color: var(--text-main);
-            box-shadow: var(--shadow-sm);
+            box-shadow: 2px 2px 0px var(--border);
         }
         .diagram-node img, .diagram-node svg {
             width: 22px;
@@ -856,73 +967,43 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-top: 22px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
         }
         .kpi-box {
             background: var(--bg-subtle);
-            border: 1px solid var(--border);
-            padding: 12px;
-            border-radius: var(--radius-sm);
+            border: 2px solid var(--border);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .kpi-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: var(--shadow-md);
+            background: var(--bg-surface);
         }
         .kpi-box h3 {
-            font-size: 1.45rem;
+            font-size: 1.55rem;
             color: var(--accent);
             margin-bottom: 2px;
         }
         .kpi-box p {
-            font-size: 0.75rem;
+            font-size: 0.76rem;
             margin: 0;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Right Column of Hero: Photo + Visual Graphic Card */
-        .hero-profile-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .profile-photo-frame {
-            width: 100%;
-            max-width: 250px;
-            aspect-ratio: 1/1;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-strong);
-            box-shadow: var(--shadow-md);
-            position: relative;
-            background: var(--bg-subtle);
-            margin-bottom: 16px;
-        }
-
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
+            color: var(--text-main);
+            font-weight: 700;
         }
 
         /* Draggable Bubbles on Hero Photo */
         .hero-msg-bubble {
             position: absolute;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid var(--border-strong);
-            border-left: 3px solid var(--accent);
-            border-radius: 6px;
-            padding: 6px 10px;
-            max-width: 155px;
-            box-shadow: var(--shadow-md);
+            background: #ffffff;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 5px 9px;
+            max-width: 145px;
+            box-shadow: 3px 3px 0px var(--border);
             z-index: 30;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             cursor: grab;
             user-select: none;
             text-align: left;
@@ -930,51 +1011,53 @@
         .hero-msg-bubble strong {
             color: var(--accent);
             display: block;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
+            font-weight: 800;
             text-transform: uppercase;
         }
         .hero-msg-bubble p {
             margin: 0;
             color: var(--text-main);
-            font-size: 0.72rem;
-            line-height: 1.25;
+            font-size: 0.7rem;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
-        /* --- SLIDE 2: EXPERIENCE CARDS WITH COMPANY LOGOS & MEDIA THUMBNAILS --- */
+        /* --- SLIDE 2: EXPERIENCE CARDS --- */
         .exp-filter-row {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
         .timeline-tab-btn {
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             background: var(--bg-surface);
-            color: var(--text-muted);
+            color: var(--text-main);
             padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
             cursor: pointer;
             transition: var(--transition);
+            box-shadow: 2px 2px 0px var(--border);
         }
         .timeline-tab-btn.active {
             background: var(--accent);
             color: #fff;
-            border-color: var(--accent);
         }
 
         .experience-cards-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
         .exp-visual-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             padding: 22px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             display: grid;
             grid-template-columns: 64px 1fr 240px;
             gap: 20px;
@@ -982,22 +1065,22 @@
             transition: var(--transition);
         }
         .exp-visual-card:hover {
-            border-color: var(--border-strong);
-            box-shadow: var(--shadow-md);
+            transform: translate(-3px, -3px);
+            box-shadow: var(--shadow-lg);
         }
 
         .exp-company-logo {
             width: 60px;
             height: 60px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            border-radius: 14px;
+            border: 2px solid var(--border);
             background: var(--bg-surface);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             padding: 6px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 3px 3px 0px var(--border);
         }
         .exp-company-logo img {
             width: 100%;
@@ -1006,12 +1089,12 @@
         }
 
         .exp-body h3 {
-            font-size: 1.12rem;
-            margin-bottom: 2px;
+            font-size: 1.18rem;
+            margin-bottom: 4px;
         }
         .exp-company-meta {
             font-size: 0.86rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-muted);
             margin-bottom: 8px;
             display: flex;
@@ -1020,17 +1103,18 @@
             gap: 8px;
         }
         .exp-date-pill {
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-family: var(--font-code);
-            background: var(--bg-subtle);
+            font-weight: 700;
+            background: #ffcf40;
             color: var(--text-main);
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
+            padding: 3px 10px;
+            border-radius: 999px;
+            border: 1.5px solid var(--border);
         }
 
         .exp-body ul {
-            padding-left: 16px;
+            padding-left: 18px;
             margin-top: 8px;
         }
         .exp-body li {
@@ -1041,40 +1125,35 @@
             line-height: 1.5;
         }
 
-        /* LinkedIn Style Sub-Roles Stepper for NIELIT */
         .nielit-subroles {
             margin-top: 14px;
             padding-left: 16px;
-            border-left: 2px solid var(--border-strong);
+            border-left: 3px solid var(--border);
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
-        .subrole-item {
-            position: relative;
-        }
+        .subrole-item { position: relative; }
         .subrole-item::before {
             content: '';
             position: absolute;
-            left: -21px;
+            left: -22px;
             top: 6px;
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--accent);
-            border: 2px solid var(--bg-surface);
+            border: 2px solid var(--border);
         }
-        .subrole-item h4 {
-            font-size: 0.96rem;
-            margin-bottom: 2px;
-        }
+        .subrole-item h4 { font-size: 0.96rem; margin-bottom: 2px; }
 
         .exp-Snapshot-thumb {
             width: 100%;
             border-radius: var(--radius-sm);
             overflow: hidden;
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             background: var(--bg-subtle);
+            box-shadow: 3px 3px 0px var(--border);
         }
         .exp-Snapshot-thumb img {
             width: 100%;
@@ -1085,80 +1164,80 @@
         .exp-Snapshot-caption {
             padding: 6px 10px;
             font-size: 0.72rem;
-            color: var(--text-light);
-            font-weight: 600;
-            background: var(--bg-subtle);
-            border-top: 1px solid var(--border);
+            color: var(--text-main);
+            font-weight: 800;
+            background: #ffcf40;
+            border-top: 2px solid var(--border);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* --- SLIDE 3: PROJECTS WITH VISUAL PREVIEWS & GRAPHICS --- */
+        /* --- SLIDE 3: SPENCER GABOR "FEATURED WORK" GALLERY CARDS --- */
         .projects-visual-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 22px;
         }
 
         .project-visual-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
             transition: var(--transition);
         }
         .project-visual-card:hover {
-            transform: translateY(-3px);
+            transform: translate(-4px, -4px) rotate(-0.4deg);
             box-shadow: var(--shadow-lg);
-            border-color: var(--border-strong);
         }
 
         .project-thumb-banner {
             position: relative;
-            height: 175px;
+            height: 195px;
             width: 100%;
             overflow: hidden;
             background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--border);
         }
         .project-thumb-banner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.35s ease;
+            transition: transform 0.4s ease;
         }
         .project-visual-card:hover .project-thumb-banner img {
-            transform: scale(1.04);
+            transform: scale(1.06);
         }
         .project-category-float {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(15, 23, 42, 0.85);
-            color: #fff;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 4px 9px;
-            border-radius: 4px;
-            backdrop-filter: blur(4px);
+            top: 12px;
+            left: 12px;
+            background: #ffcf40;
+            color: var(--text-main);
+            border: 2px solid var(--border);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 11px;
+            border-radius: 999px;
+            box-shadow: 2px 2px 0px var(--border);
         }
 
         .project-card-body {
-            padding: 18px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
         .project-card-body h3 {
-            font-size: 1.1rem;
+            font-size: 1.22rem;
             margin-bottom: 6px;
         }
         .project-card-body p {
-            font-size: 0.86rem;
+            font-size: 0.88rem;
             margin-bottom: 14px;
             flex: 1;
         }
@@ -1166,44 +1245,53 @@
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 6px;
             margin-bottom: 14px;
         }
         .tech-tags span {
             font-size: 0.72rem;
             font-family: var(--font-code);
+            font-weight: 700;
             background: var(--bg-subtle);
             color: var(--text-main);
-            padding: 3px 8px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1.5px solid var(--border);
         }
 
         .project-links {
             display: flex;
             gap: 12px;
             padding-top: 12px;
-            border-top: 1px solid var(--border);
+            border-top: 2px dashed var(--border);
             flex-wrap: wrap;
         }
         .link-btn {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--accent);
-            background: none;
-            border: none;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--text-main);
+            background: var(--bg-subtle);
+            border: 1.5px solid var(--border);
+            padding: 5px 12px;
+            border-radius: 999px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 5px;
             font-family: inherit;
+            box-shadow: 2px 2px 0px var(--border);
+            transition: var(--transition);
         }
-        .link-btn:hover { text-decoration: underline; }
+        .link-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translate(-1px, -1px);
+        }
 
-        /* --- SLIDE 4: GITHUB INTERACTIONS DASHBOARD (MATCHING USER SCREENSHOT) --- */
+        /* --- SLIDE 4: GITHUB INTERACTIONS DASHBOARD --- */
         .github-dashboard-wrapper {
-            background: #130d26; /* Exact dark purple-indigo theme from user screenshot */
-            border: 1px solid #2e1d59;
+            background: #130d26;
+            border: 2px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 26px;
             color: #f3e8ff;
@@ -1359,14 +1447,14 @@
         .skills-vector-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 28px;
         }
         .skill-vector-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px 10px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1376,79 +1464,86 @@
             transition: var(--transition);
         }
         .skill-vector-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
+            background: #ffcf40;
+            transform: translate(-3px, -3px) rotate(-1deg);
+            box-shadow: var(--shadow-md);
         }
         .skill-vector-card img {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             object-fit: contain;
         }
         .skill-vector-card span {
-            font-size: 0.78rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 800;
             color: var(--text-main);
         }
 
         .achievements-visual-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
+            gap: 18px;
         }
         .achievement-visual-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
         }
         .achievement-Visual-img {
-            height: 130px;
+            height: 140px;
             width: 100%;
             object-fit: cover;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--border);
         }
         .achievement-visual-body {
-            padding: 16px;
+            padding: 18px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- SLIDE 6 & 7: BLOG, SPOTIFY, SOCIALS & CONTACT --- */
+        /* --- SLIDE 6 & 7: BLOG, SPOTIFY, SOCIALS & SPENCER GABOR GIANT CONTACT FOOTER --- */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
+            gap: 18px;
         }
         .blog-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             overflow: hidden;
             display: flex;
             cursor: pointer;
             box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .blog-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: var(--shadow-md);
         }
         .vote-section {
-            background: var(--bg-subtle);
+            background: #ffcf40;
             padding: 12px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-right: 1px solid var(--border);
-            min-width: 46px;
+            border-right: 2px solid var(--border);
+            min-width: 48px;
         }
         .vote-btn {
             background: none;
             border: none;
-            color: var(--text-muted);
+            color: var(--text-main);
             cursor: pointer;
             padding: 4px;
+            font-weight: 800;
         }
-        .vote-count { font-weight: 700; font-size: 0.85rem; margin: 4px 0; }
+        .vote-count { font-weight: 800; font-size: 0.85rem; margin: 4px 0; }
         .blog-content { padding: 14px; flex: 1; }
         .blog-title { font-size: 1.05rem; margin-bottom: 4px; }
         .blog-image { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin: 8px 0; }
@@ -1456,50 +1551,50 @@
         .spotify-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 12px;
+            gap: 14px;
         }
         .spotify-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             padding: 10px 12px;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             gap: 12px;
             box-shadow: var(--shadow-sm);
         }
-        .track-art { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; }
-        .track-name { font-weight: 700; font-size: 0.86rem; display: block; }
-        .track-artist { font-size: 0.76rem; color: var(--text-muted); }
+        .track-art { width: 48px; height: 48px; border-radius: 8px; border: 1.5px solid var(--border); object-fit: cover; }
+        .track-name { font-weight: 800; font-size: 0.86rem; display: block; }
+        .track-artist { font-size: 0.76rem; color: var(--text-muted); font-weight: 600; }
 
         /* --- SOCIAL POST PREVIEW CARDS (SLIDE 07) --- */
         .social-hub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 18px;
+            margin-bottom: 28px;
         }
         .social-post-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-md);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             transition: var(--transition);
         }
         .social-post-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+            transform: translate(-4px, -4px);
+            box-shadow: var(--shadow-lg);
         }
         .social-post-header {
             padding: 12px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--border);
+            background: var(--bg-subtle);
         }
         .social-post-author {
             display: flex;
@@ -1510,40 +1605,43 @@
             width: 36px;
             height: 36px;
             border-radius: 9px;
+            border: 1.5px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.05rem;
             flex-shrink: 0;
+            box-shadow: 2px 2px 0px var(--border);
         }
         .social-post-author h4 {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             margin-bottom: 1px;
         }
         .social-post-author span {
             font-size: 0.72rem;
-            color: var(--text-light);
+            color: var(--text-muted);
+            font-weight: 700;
             display: block;
         }
         .social-post-badge {
             font-size: 0.68rem;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 12px;
-            background: var(--bg-subtle);
-            color: var(--text-muted);
-            border: 1px solid var(--border);
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: #ffcf40;
+            color: var(--text-main);
+            border: 1.5px solid var(--border);
         }
         .social-post-thumb {
             width: 100%;
-            height: 135px;
+            height: 140px;
             object-fit: cover;
             display: block;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--border);
             background: var(--bg-subtle);
         }
         .social-post-body {
-            padding: 12px 14px;
+            padding: 14px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -1551,7 +1649,7 @@
             gap: 10px;
         }
         .social-post-caption {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             line-height: 1.5;
             margin: 0;
@@ -1564,27 +1662,52 @@
             align-items: center;
             justify-content: space-between;
             padding-top: 8px;
-            border-top: 1px solid var(--border);
-            font-size: 0.73rem;
-            color: var(--text-light);
-            font-weight: 600;
+            border-top: 1.5px dashed var(--border);
+            font-size: 0.75rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        /* Spencer Gabor Expanding Giant Contact Banner */
+        .gabor-giant-contact {
+            margin-top: 24px;
+            background: var(--accent);
+            color: #ffffff;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            display: block;
+        }
+        .gabor-giant-contact:hover {
+            background: var(--text-main);
+            transform: translate(-3px, -3px);
+        }
+        .gabor-giant-contact h2 {
+            color: #ffffff;
+            font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+            margin-bottom: 6px;
         }
 
         input, textarea {
             width: 100%;
             background: var(--bg-surface);
-            border: 1px solid var(--border-strong);
+            border: 2px solid var(--border);
             padding: 0.75rem 1rem;
             border-radius: var(--radius-sm);
             color: var(--text-main);
             font-family: inherit;
             font-size: 0.9rem;
+            font-weight: 600;
             outline: none;
             margin-bottom: 10px;
+            box-shadow: 2px 2px 0px var(--border);
         }
         input:focus, textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-soft);
+            background: #fffdf7;
+            box-shadow: 4px 4px 0px var(--accent);
         }
 
         .messages-grid {
@@ -1595,7 +1718,7 @@
         }
         .message-card {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             padding: 12px 14px;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-sm);
@@ -1606,7 +1729,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.55);
+            background: rgba(20, 20, 19, 0.65);
             backdrop-filter: blur(4px);
             z-index: 2000;
             align-items: center;
@@ -1615,9 +1738,9 @@
         }
         .modal-content {
             background: var(--bg-surface);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 24px;
+            padding: 26px;
             width: 100%;
             max-width: 580px;
             max-height: 85vh;
@@ -1631,7 +1754,8 @@
             right: 18px;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-muted);
+            color: var(--text-main);
+            font-weight: 800;
         }
 
         .toast-notification {
@@ -1640,12 +1764,13 @@
             right: 20px;
             background: var(--text-main);
             color: #fff;
+            border: 2px solid var(--border);
             padding: 10px 18px;
-            border-radius: var(--radius-sm);
+            border-radius: 999px;
             font-size: 0.82rem;
-            font-weight: 600;
+            font-weight: 800;
             z-index: 3000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 4px 4px 0px var(--accent);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1659,20 +1784,110 @@
             transform: translateY(0);
         }
 
-        /* Responsive adjustments */
+        /* Mobile Drawer Backdrop */
+        .mobile-sidebar-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 19, 0.5);
+            z-index: 1150;
+        }
+
+        /* --- FULL MOBILE & TABLET RESPONSIVENESS --- */
         @media (max-width: 992px) {
-            .hero-bento-grid { grid-template-columns: 1fr; }
             .exp-visual-card { grid-template-columns: 52px 1fr; }
             .exp-Snapshot-thumb { grid-column: 1 / -1; }
             .gh-bottom-bento { grid-template-columns: 1fr; }
-            /* Stack 30/70 on smaller tablets if needed, or keep 30/70 */
         }
-        @media (max-width: 720px) {
-            .current-slide-indicator, .weather-widget { display: none !important; }
+
+        @media (max-width: 768px) {
+            .mobile-Drawer-btn {
+                display: inline-flex;
+            }
+            /* On mobile, sidebar becomes an off-canvas slide-over drawer so the content gets 100% width */
+            .app-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 285px !important;
+                flex: 0 0 285px !important;
+                transform: translateX(-105%);
+                box-shadow: var(--shadow-lg);
+            }
+            body.mobile-drawer-open .app-sidebar {
+                transform: translateX(0);
+            }
+            body.mobile-drawer-open .mobile-sidebar-backdrop {
+                display: block;
+            }
+            /* Disable collapsed icon-only rules on mobile drawer */
+            body.sidebar-collapsed .sidebar-brand-text,
+            body.sidebar-collapsed .sidebar-nav-label,
+            body.sidebar-collapsed .sidebar-nav-btn .slide-num,
+            body.sidebar-collapsed .sidebar-profile-details,
+            body.sidebar-collapsed .sidebar-step-btn span,
+            body.sidebar-collapsed .sidebar-stats-row,
+            body.sidebar-collapsed .resume-btn-text {
+                display: initial !important;
+                opacity: 1 !important;
+                width: auto !important;
+            }
+            body.sidebar-collapsed .sidebar-profile-showcase {
+                width: auto;
+                height: auto;
+                padding: 12px;
+                margin: 10px 12px 6px;
+                border-radius: var(--radius-md);
+                background: var(--bg-surface);
+                border: 2px solid var(--border);
+            }
+            body.sidebar-collapsed .sidebar-photo-box {
+                width: 96px;
+                height: 96px;
+                border-radius: 14px;
+                margin-bottom: 8px;
+            }
+            body.sidebar-collapsed .sidebar-nav-btn {
+                justify-content: space-between;
+                padding: 9px 12px;
+            }
+            body.sidebar-collapsed .sidebar-step-row {
+                flex-direction: row;
+            }
+            body.sidebar-collapsed .sidebar-step-btn,
+            body.sidebar-collapsed .sidebar-resume-btn {
+                width: 100% !important;
+                height: auto !important;
+                padding: 8px 12px !important;
+                border-radius: 999px !important;
+            }
+
+            #header {
+                padding: 0 12px;
+                height: auto;
+                min-height: 60px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            .weather-widget { display: none !important; }
+            .brand-logo span { font-size: 1.05rem; }
+            .mode-switch-btn { padding: 5px 9px; font-size: 0.7rem; }
+
+            /* Single 100% pane on mobile for clean reading & touch scrolling */
+            .slide-panel.prev-slide { display: none !important; }
+            .slide-panel.active-slide {
+                flex: 1 1 100% !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 16px 14px 70px !important;
+            }
+            .hero-main-card { padding: 20px 16px; }
             .hero-kpi-grid { grid-template-columns: repeat(2, 1fr); }
             .gh-metrics-2x2 { grid-template-columns: 1fr; }
-            .slide-panel.prev-slide { display: none; }
-            .slide-panel.active-slide { flex: 1 1 100%; width: 100%; max-width: 100%; padding: 18px 14px; }
+            .projects-visual-grid,
+            .social-hub-grid { grid-template-columns: 1fr; }
+            .contact-split-box { grid-template-columns: 1fr !important; padding: 18px !important; }
         }
     </style>
 </head>
@@ -1680,9 +1895,12 @@
 
     <!-- Toast Notification -->
     <div id="toastNotification" class="toast-notification">
-        <i class="fas fa-check-circle" style="color: #38bdf8;"></i>
+        <i class="fas fa-check-circle" style="color: #ffcf40;"></i>
         <span id="toastMessage">Switched Mode</span>
     </div>
+
+    <!-- Mobile Backdrop when Drawer is Open -->
+    <div class="mobile-sidebar-backdrop" id="mobileSidebarBackdrop"></div>
 
     <!-- ==================== GEMINI-STYLE PUSH LAYOUT SHELL ==================== -->
     <div class="app-shell">
@@ -1774,14 +1992,17 @@
         <!-- RIGHT WORKSPACE AREA -->
         <div class="workspace-main">
 
-            <!-- MINIMAL TOP HEADER (TOGGLE MOVED DIRECTLY NEXT TO NAME, 30%/70% PILL REMOVED) -->
+            <!-- SPENCER GABOR STUDIO HEADER (WITH BONUS COLOR PALETTE SWITCHER & MOBILE DRAWER BUTTON) -->
             <header id="header">
                 <div class="header-left">
+                    <button class="sidebar-trigger-btn mobile-Drawer-btn" id="mobileMenuBtn" title="Open Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     <div class="brand-logo" onclick="window.goToSlide(0)">
-                        <span>Chandan Saroj</span>
+                        <span>ChandanSaroj</span>
                     </div>
 
-                    <!-- MINIMAL DUAL-MODE SEGMENTED SWITCH REPLACING THE OLD STATUS PILL -->
+                    <!-- MINIMAL DUAL-MODE SEGMENTED SWITCH -->
                     <div class="minimal-mode-switch" role="group" aria-label="Profile Mode Switch">
                         <button type="button" class="mode-switch-btn active" data-target-mode="developer">
                             <i class="fas fa-code"></i>
@@ -1795,16 +2016,25 @@
                 </div>
 
                 <div class="header-right">
+                    <!-- Spencer Gabor Signature Palette Switcher -->
+                    <div class="gabor-palette-bar" title="Switch Studio Color Palette">
+                        <span class="palette-swatch active" style="background:#f6f3ec;" data-palette="cream" title="Warm Paper"></span>
+                        <span class="palette-swatch" style="background:#b9f6ca;" data-palette="mint" title="Studio Mint"></span>
+                        <span class="palette-swatch" style="background:#ffe57f;" data-palette="butter" title="Butter Yellow"></span>
+                        <span class="palette-swatch" style="background:#d1c4e9;" data-palette="lavender" title="Soft Lavender"></span>
+                        <span class="palette-swatch" style="background:#ffab91;" data-palette="coral" title="Warm Coral"></span>
+                    </div>
+
                     <div id="weather-widget" class="weather-widget" style="display:none;">
                         <span class="weather-location" id="weatherLocation"><i class="fas fa-location-dot"></i> <span>Delhi</span></span>
                         <div class="weather-info">
                             <span id="weatherTemp">--°C</span>
                             <span id="weatherCondition" style="display:none;"></span>
-                            <span id="weatherAQI" style="border-left:1px solid var(--border); padding-left:8px;">AQI: --</span>
+                            <span id="weatherAQI" style="border-left:1.5px solid var(--border); padding-left:8px;">AQI: --</span>
                         </div>
                     </div>
 
-                    <button class="sidebar-trigger-btn" id="likeBtn" title="Like Portfolio" style="width: auto; border-radius: 20px; border: 1px solid var(--border); padding: 0 12px; gap: 6px; font-size: 0.8rem; font-weight: 600;">
+                    <button class="sidebar-trigger-btn" id="likeBtn" title="Like Portfolio" style="width: auto; border-radius: 999px; padding: 0 12px; gap: 6px; font-size: 0.8rem; font-weight: 800;">
                         <i class="fas fa-heart" style="color: #e11d48;"></i>
                         <span id="likeCount">0</span>
                     </button>
@@ -1819,9 +2049,15 @@
             <div class="slide-inner">
                 <div class="hero-bento-grid">
                     
-                    <!-- Main Content Card (Profile Panel now lives permanently in the Top Sidebar) -->
+                    <!-- Main Spencer Gabor Studio Card -->
                     <div class="hero-main-card">
                         <div>
+                            <!-- Spencer Gabor Top Editorial Location & Email Bar -->
+                            <div class="gabor-meta-row">
+                                <span><i class="fas fa-asterisk" style="color:var(--accent);"></i> SDE & Data Science Specialist • Bengaluru / Delhi, India</span>
+                                <a href="mailto:imjunior471@gmail.com" style="text-decoration:underline;">imjunior471@gmail.com ↗</a>
+                            </div>
+
                             <div class="badge-strip">
                                 <span class="clean-badge accent dev-only"><i class="fas fa-code"></i> Software Development Engineer • 2.5+ Years Exp.</span>
                                 <span class="clean-badge accent ds-only"><i class="fas fa-brain"></i> Data Science Specialist • 4+ Years Exp.</span>
@@ -1833,7 +2069,7 @@
                             <div class="dev-only">
                                 <h1 class="hero-headline">Full-Stack <span>Software Engineer</span> & Systems Architect</h1>
                                 <p>
-                                    With <strong>2.5+ years of dedicated Software Development experience</strong> across <strong>Webcreaters_</strong> and <strong>NIELIT (Govt. of India)</strong>, I build production MERN applications, high-concurrency ASP.NET Core gateways, and SHA-256 encrypted platforms. Use the minimal switcher above or click through the slides below to explore my engineering work.
+                                    I am a Software Development Engineer specializing in full-stack web architecture and cloud-based solutions. My engineering practice focuses on building scalable enterprise applications using the <strong>MERN stack</strong>. I create high-performance RESTful APIs and responsive UIs, actively managing server infrastructure on <strong>AWS and Ubuntu</strong>, alongside CI/CD pipelines and database optimization to ensure system reliability and speed.
                                 </p>
                             </div>
 
@@ -1841,7 +2077,7 @@
                             <div class="ds-only">
                                 <h1 class="hero-headline"><span>Data Science Specialist</span> & Applied AI Researcher</h1>
                                 <p>
-                                    With <strong>4+ years of practical experience in Data Science, Machine Learning & AI</strong>—currently serving as <strong>Data Science Specialist at HYI.AI (Bengaluru)</strong>, alongside roles at <strong>BR TECHGEEKS</strong>, <strong>IndiaAI (1.5 Yrs)</strong>, <strong>NITI Aayog (Shahdol)</strong>, and <strong>PIET College</strong>—I architect scalable ML pipelines, Computer Vision (YOLOv8) systems, and Springer-published Generative AI models.
+                                    Bridging scalable systems with Applied AI, my tenure as an SDE at <strong>NIELIT Ropar</strong> involved designing high-traffic admission portals and integrating machine learning models into administrative workflows. My research on automated systems—specifically <strong>Resume Classification (RNN)</strong> and <strong>Object Detection</strong>—has been published in <strong>Springer</strong> journals and recognized with the <strong>"Best Project in AI/ML"</strong> award at NICEDT 2025.
                                 </p>
                             </div>
 
@@ -1890,46 +2126,46 @@
                                 <button class="btn btn-outline" onclick="window.goToSlide(3)">
                                     <i class="fab fa-github"></i> GitHub Heatmap & Radar
                                 </button>
+                            <!-- Data Science KPIs -->
+                            <div class="hero-kpi-grid ds-only">
+                                <div class="kpi-box">
+                                    <h3>4+ Yrs</h3>
+                                    <p>Data Science Specialist</p>
+                                </div>
+                                <div class="kpi-box">
+                                    <h3>1.5 Yrs</h3>
+                                    <p>IndiaAI (MeitY) Program</p>
+                                </div>
+                                <div class="kpi-box">
+                                    <h3>99.2%</h3>
+                                    <p>YOLOv8 Model Accuracy</p>
+                                </div>
+                                <div class="kpi-box">
+                                    <h3>6 Citations</h3>
+                                    <p>4+ Springer Papers</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Developer KPIs -->
-                        <div class="hero-kpi-grid dev-only">
-                            <div class="kpi-box">
-                                <h3>2.5+ Yrs</h3>
-                                <p>Developer Experience</p>
-                            </div>
-                            <div class="kpi-box">
-                                <h3>30,000+</h3>
-                                <p>SHA-256 Files Secured</p>
-                            </div>
-                            <div class="kpi-box">
-                                <h3>500+</h3>
-                                <p>Concurrent Req/Sec</p>
-                            </div>
-                            <div class="kpi-box">
-                                <h3>50+</h3>
-                                <p>GitHub Repositories</p>
-                            </div>
-                        </div>
-
-                        <!-- Data Science KPIs -->
-                        <div class="hero-kpi-grid ds-only">
-                            <div class="kpi-box">
-                                <h3>4+ Yrs</h3>
-                                <p>Data Science Specialist</p>
-                            </div>
-                            <div class="kpi-box">
-                                <h3>1.5 Yrs</h3>
-                                <p>IndiaAI (MeitY) Program</p>
-                            </div>
-                            <div class="kpi-box">
-                                <h3>99.2%</h3>
-                                <p>YOLOv8 Model Accuracy</p>
-                            </div>
-                            <div class="kpi-box">
-                                <h3>6 Citations</h3>
-                                <p>4+ Springer Papers</p>
+                            <!-- Spencer Gabor "Clients Include" Style Banner -->
+                            <div class="gabor-clients-bar">
+                                <span class="gabor-clients-label">Organizations & Programs Include</span>
+                                <div class="gabor-clients-list">
+                                    <span>HYI.AI</span>
+                                    <span>•</span>
+                                    <span>NIELIT (Govt. of India)</span>
+                                    <span>•</span>
+                                    <span>IndiaAI (MeitY)</span>
+                                    <span>•</span>
+                                    <span>NITI Aayog (Shahdol)</span>
+                                    <span>•</span>
+                                    <span>Webcreaters_</span>
+                                    <span>•</span>
+                                    <span>BR TECHGEEKS</span>
+                                    <span>•</span>
+                                    <span>PIET College</span>
+                                    <span>•</span>
+                                    <span>Springer</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2541,6 +2777,14 @@
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
                         <span>Docker & Git</span>
                     </div>
+                    <div class="skill-vector-card">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
+                        <span>AWS Cloud</span>
+                    </div>
+                    <div class="skill-vector-card">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" alt="Ubuntu">
+                        <span>Ubuntu Server</span>
+                    </div>
                 </div>
 
                 <!-- Data Science Vector Icons Grid -->
@@ -2807,17 +3051,17 @@
                     </a>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-sm);">
+                <div class="contact-split-box" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-md);">
                     <div>
                         <h3>Get in Touch Directly</h3>
                         <p style="margin-top: 8px;">Available for Senior Data Science / AI Specialist initiatives, enterprise MERN/.NET consulting, and technical training programs.</p>
-                        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem;">
+                        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; font-weight: 700;">
                             <div><i class="fas fa-envelope" style="color:var(--accent); width:22px;"></i> imjunior471@gmail.com</div>
                             <div><i class="fas fa-phone" style="color:var(--accent); width:22px;"></i> +91 9315632708</div>
                             <div><i class="fas fa-location-dot" style="color:var(--accent); width:22px;"></i> Bengaluru / Delhi / Chandigarh, India</div>
                         </div>
-                        <div style="margin-top: 18px; display: flex; gap: 10px;">
-                            <a href="https://wa.me/919315632708" target="_blank" rel="noopener" class="btn" style="background:#16a34a; border-color:#16a34a;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <div style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://wa.me/919315632708" target="_blank" rel="noopener" class="btn" style="background:#16a34a;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                             <a href="mailto:imjunior471@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Email</a>
                         </div>
                     </div>
@@ -2831,6 +3075,13 @@
                         <button type="submit" class="btn" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
+
+                <!-- Spencer Gabor Signature Expanding Giant Contact Footer Link -->
+                <a href="mailto:imjunior471@gmail.com" class="gabor-giant-contact">
+                    <span style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;">Take a click, stay a while • Let's Collaborate</span>
+                    <h2>imjunior471@gmail.com ↗</h2>
+                    <span style="font-size:0.82rem; font-weight:700;">All rights reserved 2026 © Chandan Saroj • LinkedIn · GitHub · YouTube · Spotify</span>
+                </a>
             </div>
         </section>
 
@@ -3036,6 +3287,7 @@
             btn.addEventListener('click', () => {
                 const target = parseInt(btn.getAttribute('data-slide'), 10);
                 window.goToSlide(target);
+                document.body.classList.remove('mobile-drawer-open');
             });
         });
 
@@ -3046,10 +3298,39 @@
             if (e.key === 'ArrowLeft') window.goToSlide(currentSlide - 1, 'backward');
         });
 
-        // --- GEMINI-STYLE PUSH SIDEBAR TOGGLE (EXPANDED <-> MINIMAL ICON RAIL) ---
+        // --- GEMINI-STYLE PUSH SIDEBAR TOGGLE + MOBILE DRAWER ---
         const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileSidebarBackdrop = document.getElementById('mobileSidebarBackdrop');
+
         toggleSidebarBtn?.addEventListener('click', () => {
-            document.body.classList.toggle('sidebar-collapsed');
+            if (window.innerWidth <= 768) {
+                document.body.classList.toggle('mobile-drawer-open');
+            } else {
+                document.body.classList.toggle('sidebar-collapsed');
+            }
+        });
+
+        mobileMenuBtn?.addEventListener('click', () => {
+            document.body.classList.toggle('mobile-drawer-open');
+        });
+
+        mobileSidebarBackdrop?.addEventListener('click', () => {
+            document.body.classList.remove('mobile-drawer-open');
+        });
+
+        // --- SPENCER GABOR STUDIO COLOR PALETTE SWITCHER ---
+        document.querySelectorAll('.palette-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                document.querySelectorAll('.palette-swatch').forEach(s => s.classList.remove('active'));
+                swatch.classList.add('active');
+                const pal = swatch.getAttribute('data-palette');
+                if (pal === 'cream') {
+                    document.body.removeAttribute('data-palette');
+                } else {
+                    document.body.setAttribute('data-palette', pal);
+                }
+            });
         });
 
         // --- DUAL PROFESSION MODE SWITCHER (2.5+ YRS DEV VS 4+ YRS DATA SCIENCE) ---
