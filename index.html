@@ -208,43 +208,40 @@
         /* --- RICH PROFILE PANEL AT TOP OF SIDEBAR --- */
         .sidebar-profile-showcase {
             margin: 10px 12px 6px;
-            padding: 14px 12px;
+            padding: 0;
             background: #ffffff;
             border: 1px solid var(--border);
             border-radius: 20px;
             box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
             align-items: center;
             text-align: center;
             transition: var(--transition);
             flex-shrink: 0;
             overflow: hidden;
-        }
-
-        .sidebar-photo-box {
-            width: 112px;
-            height: 112px;
-            border-radius: 20px;
-            overflow: hidden;
             position: relative;
-            background: #f4f4f5;
-            margin-bottom: 10px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
+            min-height: 260px;
         }
 
-        .sidebar-photo-box img.profile-photo {
+        .sidebar-photo-bg {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: top center;
-            display: block;
+            z-index: 0;
         }
 
         .sidebar-profile-details {
             width: 100%;
             transition: opacity 0.2s ease;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 0.85) 75%, transparent 100%);
+            padding: 40px 12px 14px;
         }
 
         .sidebar-profile-details h4 {
@@ -267,8 +264,9 @@
         /* Minimal Single-Note Slideshow Pill below Sidebar Photo */
         .sidebar-msg-pill {
             width: 100%;
-            background: #f4f4f5;
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 12px;
             padding: 6px 10px;
             display: flex;
@@ -280,7 +278,7 @@
             transition: var(--transition);
         }
         .sidebar-msg-pill:hover {
-            background: #e4e4e7;
+            background: rgba(255, 255, 255, 0.85);
         }
         .sidebar-msg-avatar {
             width: 24px;
@@ -323,16 +321,11 @@
             margin: 10px auto 6px;
             width: 44px;
             height: 44px;
+            min-height: 44px;
             border-radius: 50%;
             background: transparent;
             border: none;
             box-shadow: none;
-        }
-        body.sidebar-collapsed .sidebar-photo-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            margin-bottom: 0;
         }
         body.sidebar-collapsed .sidebar-profile-details,
         body.sidebar-collapsed .sidebar-msg-pill {
@@ -534,9 +527,8 @@
 
         #header {
             height: var(--header-h);
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            background: transparent;
+            border-bottom: none;
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -576,29 +568,6 @@
             border-radius: 999px;
             padding: 4px;
             gap: 4px;
-        }
-
-        . header-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .mobile-Drawer-btn {
-            display: none;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.55rem;
-            letter-spacing: 0.01em;
-            color: var(--text-main);
-            cursor: pointer;
         }
 
         .header-right {
@@ -2059,17 +2028,15 @@
                 <button class="sidebar-trigger-btn" id="toggleSidebarBtn" title="Collapse / Expand Sidebar">
                     <i class="fas fa-bars"></i>
                 </button>
-                <span class="sidebar-brand-text">CHANDAN SAROJ</span>
+                <span class="sidebar-brand-text">MY WORKSPACE</span>
             </div>
 
             <!-- MINIMAL CLEAN PROFILE PANEL AT TOP OF SIDEBAR -->
             <div class="sidebar-profile-showcase">
-                <div class="sidebar-photo-box">
-                    <img src="assets/img/chandan-saroj.png" 
-                         onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'" 
-                         alt="Chandan Saroj" 
-                         class="profile-photo">
-                </div>
+                <img src="assets/img/chandan-saroj.png" 
+                     onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'" 
+                     alt="Chandan Saroj" 
+                     class="sidebar-photo-bg">
                 <div class="sidebar-profile-details">
                     <h4>CHANDAN SAROJ</h4>
                     <span class="sidebar-role-tag dev-only">MERN & .NET Engineer • 2.5+ Yrs</span>
